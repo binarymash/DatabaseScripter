@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter", "Bluejam.Utils.DatabaseScripter\Bluejam.Utils.DatabaseScripter.csproj", "{9C90713C-9E9D-47F1-9118-00CBBE7713DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Tests", "Bluejam.Utils.DatabaseScripter.Tests\Bluejam.Utils.DatabaseScripter.Tests.csproj", "{CC03B955-5258-46E4-A7B5-63E9001B71AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F8960503-6C85-46FB-9B5A-8B776F453AB0}"
+	ProjectSection(SolutionItems) = preProject
+		Database\manifest.xml = Database\manifest.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schema", "Schema", "{5F5C3D5E-1E00-4DC0-A42E-9F4ABE9E45B8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{07BCD2DD-CA30-4238-9403-EB3B1309B048}"
+	ProjectSection(SolutionItems) = preProject
+		Database\Scripts\create.sql = Database\Scripts\create.sql
+		Database\Scripts\drop.sql = Database\Scripts\drop.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Increments", "Increments", "{D6CE52C4-ACEB-4AB2-A9FE-2F4145A0EC01}"
+	ProjectSection(SolutionItems) = preProject
+		Database\Increments\0.0.1.sql = Database\Increments\0.0.1.sql
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.DbAdapter", "Bluejam.Utils.DatabaseScripter.DbAdapter\Bluejam.Utils.DatabaseScripter.DbAdapter.csproj", "{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Core", "Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj", "{DC9732C5-68AE-4252-81D5-C999BA824B4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer", "Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer\Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.csproj", "{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC03B955-5258-46E4-A7B5-63E9001B71AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC03B955-5258-46E4-A7B5-63E9001B71AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC03B955-5258-46E4-A7B5-63E9001B71AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC03B955-5258-46E4-A7B5-63E9001B71AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC9732C5-68AE-4252-81D5-C999BA824B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC9732C5-68AE-4252-81D5-C999BA824B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC9732C5-68AE-4252-81D5-C999BA824B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC9732C5-68AE-4252-81D5-C999BA824B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5F5C3D5E-1E00-4DC0-A42E-9F4ABE9E45B8} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
+		{07BCD2DD-CA30-4238-9403-EB3B1309B048} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
+		{D6CE52C4-ACEB-4AB2-A9FE-2F4145A0EC01} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
+	EndGlobalSection
+EndGlobal

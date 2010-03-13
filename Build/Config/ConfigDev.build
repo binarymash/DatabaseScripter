@@ -1,0 +1,3 @@
+<project name="ConfigBuild" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  <include buildfile="ConfigGlobal.build" />
+</project>

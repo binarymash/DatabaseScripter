@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CC03B955-5258-46E4-A7B5-63E9001B71AA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bluejam.Utils.DatabaseScripter.Tests</RootNamespace>
+    <AssemblyName>Bluejam.Utils.DatabaseScripter.Tests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.5.3.9345, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\NUnit-2.5.3.9345\bin\net-2.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TestVersion.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer\Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.csproj">
+      <Project>{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter\Bluejam.Utils.DatabaseScripter.DbAdapter.csproj">
+      <Project>{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.DbAdapter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter\Bluejam.Utils.DatabaseScripter.csproj">
+      <Project>{9C90713C-9E9D-47F1-9118-00CBBE7713DE}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\" />
+    <Folder Include="SqlServer\" />
+    <Folder Include="TestFiles\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

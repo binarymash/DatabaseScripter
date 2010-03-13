@@ -1,0 +1,3 @@
+<project name="Package" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  <target name="Package" />
+</project>

@@ -1,0 +1,15 @@
+<project name="DatabvaseScripter" default="build" xmlns="http://nant.sf.net/schemas/nant.xsd" basedir=".">
+
+  <property name="stages" value="Compile,NUnit,Package,Deploy" />
+  <property name="projects" value="Bluejam.Utils.DatabaseScripter.DbAdapter,Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer,Bluejam.Utils.DatabaseScripter.Core,Bluejam.Utils.DatabaseScripter,Bluejam.Utils.DatabaseScripter.Tests" />
+  <include buildfile="Config\ConfigDev.build" />
+
+  <target name="build" description="Main build target">
+    <foreach item="String" in="${stages}" delim="," property="stage">
+      <do>
+        <nant buildfile="${build.stages.dir}${stage}.build" target="${stage}" inheritall="true" inheritrefs="false" />
+      </do>
+    </foreach>
+  </target>
+  
+</project>

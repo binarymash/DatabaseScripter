@@ -1,0 +1,32 @@
+<project name="MediaLibrary" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <target name="CopyToBuildArea" description="Copies the codebase to the build area" >
+    <echo />
+    <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>
+    <copy todir="${buildarea.solution.dir}" >
+      <fileset basedir="${code.solution.dir}">
+        <exclude name="deployed\**" />
+        <exclude name="*\bin\**" />
+        <exclude name="*\obj\**" />
+        <exclude name="*\.svn\**" />
+        <include name="**\*" />   
+      </fileset>        
+    </copy>    
+  </target>
+  
+  <target name="Compile" depends="CopyToBuildArea">
+    <foreach item="String" in="${projects}" delim="," property="project">    
+      <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}\" />
+      <property name="buildarea.project.file" value="${buildarea.project.dir}${project}.csproj" />
+      <echo />
+      <echo>Compiling ${project} ...</echo>
+      <exec basedir="${buildarea.solution.dir}" program="${MsBuildExe}">
+        <arg value="${buildarea.project.file}" />
+        <arg value="/t:Rebuild" />
+        <arg value="/v:quiet" />
+        <arg value="/p:Configuration=${msbuild.configuration}" />
+      </exec>
+    </foreach>
+  </target>
+  
+</project>

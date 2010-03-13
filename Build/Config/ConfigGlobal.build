@@ -1,0 +1,13 @@
+<project name="ConfigGlobal" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  <property name="BaseDir" value="D:\development\code.google\databasescripter\" />
+  <property name="code.solution.dir" value="${BaseDir}\Development\" />
+  <property name="build.dir" value="${BaseDir}build\" />
+  <property name="build.stages.dir" value="${build.dir}stages\" />  
+  <property name="buildarea.dir" value="${BaseDir}BuildWorkspace\" />
+  <property name="buildarea.solution.dir" value="${buildarea.dir}databasescripter\" />
+  <property name="BuildResourcesDir" value="${BaseDir}Build\Resources\" />
+  <property name="artifacts.dir" value="${BaseDir}Artifacts\" />
+  <property name="ThirdPartyDir" value="${BaseDir}ThirdParty\" />
+  <property name="MsBuildExe" value="G:\Windows\Microsoft.NET\Framework\v3.5\msbuild.exe" />
+  <property name="msbuild.configuration" value="Release" />
+</project>
