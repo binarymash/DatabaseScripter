@@ -5,12 +5,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScrip
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Tests", "Bluejam.Utils.DatabaseScripter.Tests\Bluejam.Utils.DatabaseScripter.Tests.csproj", "{CC03B955-5258-46E4-A7B5-63E9001B71AA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{F8960503-6C85-46FB-9B5A-8B776F453AB0}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{F8960503-6C85-46FB-9B5A-8B776F453AB0}"
 	ProjectSection(SolutionItems) = preProject
 		Database\manifest.xml = Database\manifest.xml
 	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Schema", "Schema", "{5F5C3D5E-1E00-4DC0-A42E-9F4ABE9E45B8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{07BCD2DD-CA30-4238-9403-EB3B1309B048}"
 	ProjectSection(SolutionItems) = preProject
@@ -60,7 +58,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{5F5C3D5E-1E00-4DC0-A42E-9F4ABE9E45B8} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
 		{07BCD2DD-CA30-4238-9403-EB3B1309B048} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
 		{D6CE52C4-ACEB-4AB2-A9FE-2F4145A0EC01} = {F8960503-6C85-46FB-9B5A-8B776F453AB0}
 	EndGlobalSection
