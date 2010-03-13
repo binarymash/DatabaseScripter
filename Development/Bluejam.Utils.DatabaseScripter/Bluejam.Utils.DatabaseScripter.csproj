@@ -67,7 +67,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy /Y /E /I "$(SolutionDir)Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer\bin\$(ConfigurationName)\*" "$(TargetDir)"
+    <PostBuildEvent>
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
