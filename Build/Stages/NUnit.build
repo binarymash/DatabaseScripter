@@ -1,3 +1,0 @@
-<project name="NUnit" xmlns="http://nant.sf.net/schemas/nant.xsd">
-  <target name="NUnit" />
-</project>

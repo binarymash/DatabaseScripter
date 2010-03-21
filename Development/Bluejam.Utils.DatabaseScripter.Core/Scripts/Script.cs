@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -63,14 +64,14 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="connectionString">The connection string.</param>
         /// <param name="command">The command.</param>
-        public Script(Config.ScriptConfig config, Manifest.ScriptManifest manifest)
+        public Script(Config.ScriptConfig config, Config.ScriptManifest manifest)
         {
             Name = config.Name;
             Description = manifest.Description;
             DatabaseName = ScriptConfigManager.GetConfig(config, "databaseName");
             ConnectionString = ScriptConfigManager.GetConnectionString(config);
             WrapInTransaction = manifest.WrapInTransaction;
-            var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(Config.Configuration.Instance.Manifest.FilePath), manifest.Path));
+            var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(Config.DatabaseScripterConfig.Instance.Manifest.FilePath), manifest.Path));
             Command = ScriptConfigInjector.InjectConfig(command, config);
         }
 
@@ -83,21 +84,21 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public bool Run()
+        public ErrorCode Run()
         {
-            bool succeeded = false;
+            var errorCode = ErrorCode.Ok;
 
             var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
             using (var databaseAdapter = (IDatabaseAdapter)container["databaseAdapter"])
             {
-                databaseAdapter.Initialise(ConnectionString);
+                databaseAdapter.Initialize(ConnectionString);
 
                 System.Console.Write(this.ToString() + "... ");
-                succeeded = RunImplementation(databaseAdapter);
-                System.Console.WriteLine("..." + (succeeded ? "OK" : "ERROR"));
+                errorCode = RunImplementation(databaseAdapter);
+                System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
             }
 
-            return succeeded;
+            return errorCode;
         }
 
         public override string ToString()
@@ -109,7 +110,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         #region Non-public methods
 
-        protected virtual bool RunImplementation(IDatabaseAdapter databaseAdapter)
+        protected virtual ErrorCode RunImplementation(IDatabaseAdapter databaseAdapter)
         {
             try
             {
@@ -125,7 +126,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                     databaseAdapter.CommitTransaction();
                 }
             }
-            catch (Exception ex)
+            catch (DbException ex)
             {
                 System.Console.WriteLine(ex.Message);
                 if (WrapInTransaction)
@@ -133,10 +134,10 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                     databaseAdapter.RollBackTransaction();
                     System.Console.WriteLine("Transaction rolled back");
                 }
-                return false;
+                return ErrorCode.ScriptExecutionException;
             }
 
-            return true;
+            return ErrorCode.Ok;
         }
 
         #endregion

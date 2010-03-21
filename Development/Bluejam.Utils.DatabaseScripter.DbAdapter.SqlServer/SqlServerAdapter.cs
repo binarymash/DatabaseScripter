@@ -30,7 +30,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
 
         #region IDatabaseAdapter implementation
 
-        public void Initialise(string connectionString)
+        public void Initialize(string connectionString)
         {
             _connection = new SqlConnection(connectionString);
             _connection.Open();

@@ -52,33 +52,33 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         {
             if (string.IsNullOrEmpty(version))
             {
-                throw new ArgumentException("Null or empty version parameter");
+                throw new ArgumentException("Null or empty version parameter", "version");
             }
 
             var versionArray = version.Split('.');
             if (versionArray.Length != 3)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Format is not n.n.n", "version");
             }
 
             int major;
             if (!int.TryParse(versionArray[0], out major))
             {
-                throw new ArgumentException("Major is not an integer");
+                throw new ArgumentException("Major is not an integer", "version");
             }
             Major = major;
 
             int minor;
             if (!int.TryParse(versionArray[1], out minor))
             {
-                throw new ArgumentException("Minor is not an integer");
+                throw new ArgumentException("Minor is not an integer", "version");
             }
             Minor = minor;
 
             int revision;
             if (!int.TryParse(versionArray[2], out revision))
             {
-                throw new ArgumentException("Revision is not an integer");
+                throw new ArgumentException("Revision is not an integer", "version");
             }
             Revision = revision;
         }
@@ -116,80 +116,106 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         /// <summary>
         /// Implements the operator &gt;.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator >(Version v1, Version v2)
+        public static bool operator >(Version version1, Version version2)
         {
-            return (v1.CompareTo(v2) > 0);
+            return (version1.CompareTo(version2) > 0);
         }
 
         /// <summary>
         /// Implements the operator &gt;=.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator >=(Version v1, Version v2)
+        public static bool operator >=(Version version1, Version version2)
         {
-            return (v1.CompareTo(v2) >= 0);
+            return (version1.CompareTo(version2) >= 0);
         }
 
         /// <summary>
         /// Implements the operator &lt;.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator <(Version v1, Version v2)
+        public static bool operator <(Version version1, Version version2)
         {
-            return (v1.CompareTo(v2) < 0);
+            return (version1.CompareTo(version2) < 0);
         }
 
         /// <summary>
         /// Implements the operator &lt;=.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator <=(Version v1, Version v2)
+        public static bool operator <=(Version version1, Version version2)
         {
-            return (v1.CompareTo(v2) <= 0);
+            return (version1.CompareTo(version2) <= 0);
         }
 
         /// <summary>
         /// Implements the operator ==.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator ==(Version v1, Version v2)
+        public static bool operator ==(Version version1, Version version2)
         {
             // If both are null, or both are same instance, return true.
-            if (System.Object.ReferenceEquals(v1, v2))
+            if (System.Object.ReferenceEquals(version1, version2))
             {
                 return true;
             }
 
             // If one is null, but not both, return false.
-            if (((object)v1 == null) || ((object)v2 == null))
+            if (((object)version1 == null) || ((object)version2 == null))
             {
                 return false;
             }
 
-            return (v1.CompareTo(v2) == 0);
+            return (version1.CompareTo(version2) == 0);
         }
 
         /// <summary>
         /// Implements the operator !=.
         /// </summary>
-        /// <param name="v1">The v1.</param>
-        /// <param name="v2">The v2.</param>
+        /// <param name="version1">The version1.</param>
+        /// <param name="version2">The version2.</param>
         /// <returns>The result of the operator.</returns>
-        public static bool operator !=(Version v1, Version v2)
+        public static bool operator !=(Version version1, Version version2)
         {
-            return !(v1 == v2);
+            return !(version1 == version2);
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// </summary>
+        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+        /// <returns>
+        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// </returns>
+        /// <exception cref="T:System.NullReferenceException">
+        /// The <paramref name="obj"/> parameter is null.
+        /// </exception>
+        public override bool Equals(object obj)
+        {
+            return (this == (Version)obj);
+        }
+
+        /// <summary>
+        /// Serves as a hash function for a particular type.
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object"/>.
+        /// </returns>
+        public override int GetHashCode()
+        {
+
+            return base.GetHashCode();
+        }
     }
 }

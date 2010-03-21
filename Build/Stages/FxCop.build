@@ -1,0 +1,27 @@
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  
+  <property name="artifacts.fxcop.dir" value="${artifacts.dir}FxCop\" />
+  <property name="artifacts.fxcop.file" value="${artifacts.fxcop.dir}DatabaseScripter.xml" />
+
+  <target name="FxCop">
+
+    <echo />
+    <echo message="Running FxCop against the compiled code..."/>
+    
+		<delete dir="${artifacts.fxcop.dir}" />
+    <mkdir dir="${artifacts.fxcop.dir}" /> 
+    
+    <exec program="${FxCopExe}" basedir="${buildarea.solution.dir}" failonerror="false" resultproperty="artifacts.fxcop.result">
+      <arg value="/project:&quot;${buildarea.solution.dir}DatabaseScripter.fxcop&quot;" />
+      <arg value="/out:&quot;${artifacts.fxcop.file}&quot;" />
+    </exec>
+
+    <echo>FxCop result: ${artifacts.fxcop.result}</echo>
+    <fail if="${int::parse(artifacts.fxcop.result) != 0}">FxCop encountered errors.</fail>
+
+    <xmlpeek file="${artifacts.fxcop.file}" property="artifacts.fxcop.issue" xpath="//Issue" failonerror="false"/>
+    <fail if="${property::exists('artifacts.fxcop.issue')}">FxCop detected errors, see ${artifacts.fxcop.file} for details.</fail>
+
+    </target>
+
+  </project>

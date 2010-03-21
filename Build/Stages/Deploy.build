@@ -1,3 +1,0 @@
-<project name="Deploy" xmlns="http://nant.sf.net/schemas/nant.xsd">
-  <target name="Deploy" />
-</project>

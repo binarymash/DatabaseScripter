@@ -20,23 +20,24 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// Creates this instance.
         /// </summary>
         /// <returns></returns>
-        public static List<Script> Create()
+        public static ICollection<Script> Create()
         {
-            var config = Config.Configuration.Instance;
+            var config = Config.DatabaseScripterConfig.Instance;
 
             var scripts = new List<Script>();
 
-            foreach (var scriptConfig in Config.Configuration.Instance.Scripts)
+            foreach (var scriptConfig in Config.DatabaseScripterConfig.Instance.Scripts)
             {
                 var scriptManifest = config.Manifest.GetManifest(scriptConfig.Name);
                 if (scriptManifest == null)
                 {
-                    //TODO: log script not found in manifest
+                    throw new DatabaseScripterException(ErrorCode.CouldNotFindScript, scriptConfig.Name);
                 }
 
-                if (scriptManifest is Manifest.VersionedScriptManifest)
+                var versionedScriptManifest = scriptManifest as Config.VersionedScriptManifest;
+                if (versionedScriptManifest != null)
                 {
-                    scripts.Add(CreateVersionedScript(scriptConfig, scriptManifest as Manifest.VersionedScriptManifest));
+                    scripts.Add(CreateVersionedScript(scriptConfig, versionedScriptManifest));
                     continue;
                 }
                 
@@ -50,12 +51,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         #region Non-public methods
 
-        private static Script CreateScript(Config.ScriptConfig scriptConfig, Manifest.ScriptManifest scriptManifest)
+        private static Script CreateScript(Config.ScriptConfig scriptConfig, Config.ScriptManifest scriptManifest)
         {
             return new Script(scriptConfig, scriptManifest);
         }
 
-        private static VersionedScript CreateVersionedScript(Config.ScriptConfig scriptConfig, Manifest.VersionedScriptManifest scriptManifest)
+        private static VersionedScript CreateVersionedScript(Config.ScriptConfig scriptConfig, Config.VersionedScriptManifest scriptManifest)
         {
             return new VersionedScript(scriptConfig, scriptManifest);
         }

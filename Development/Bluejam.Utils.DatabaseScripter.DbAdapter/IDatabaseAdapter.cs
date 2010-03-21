@@ -9,10 +9,10 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
     {
 
         /// <summary>
-        /// Initialises the specified connection string.
+        /// Initializes the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        void Initialise(string connectionString);
+        void Initialize(string connectionString);
             
         /// <summary>
         /// Begins the transaction.

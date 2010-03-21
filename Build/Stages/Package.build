@@ -1,3 +1,54 @@
-<project name="Package" xmlns="http://nant.sf.net/schemas/nant.xsd">
-  <target name="Package" />
-</project>
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+	<target name="Package">
+  
+    <echo />
+    <echo message="Creating package directory..."/>
+		<delete dir="${package.dir}" />
+		<mkdir dir="${package.dir}" />				
+
+    <echo />
+		<echo message="Creating package/temp directory..."/>
+		<delete dir="${package.dir}temp" />
+		<mkdir dir="${package.dir}temp" />				
+        
+    <echo />
+		<echo message="Copying main output..."/>
+		<copy todir="${package.dir}temp" >
+			<fileset basedir="${buildarea.output.dir}">
+				<include name="**\*" />
+				<exclude name="**\*.pdb" />
+			</fileset>
+		</copy>
+				    
+    <echo />
+		<echo message="Copying example data..."/>
+		<copy todir="${package.dir}temp\Example" >
+			<fileset basedir="${buildarea.output.dir}..\Example">
+				<include name="**\*" />
+				<exclude name="**\*.pdb" />
+			</fileset>
+		</copy>
+
+    <echo />
+		<echo message="Tweaking app.config for example..."/>
+		<xmlpoke file="${package.dir}temp\Bluejam.Utils.DatabaseScripter.exe.config"
+				xpath="./configuration/databaseScripter/manifestPath"
+				value="Example\manifest.xml" />					
+		
+    <echo />
+		<echo message="Creating Package Zip Files"/>		
+		<exec program="${ZipExe}" >
+			<arg value="-tzip"/>
+			<arg value="a"/>
+			<arg value="-r"/>
+			<arg value="${package.dir}DatabaseScripter.zip"/>
+			<arg value="${package.dir}temp\*"/>
+		</exec>
+
+    <echo />		
+		<echo message="Deleting package/temp directory..."/>
+		<delete dir="${package.dir}temp" />
+    
+	</target>
+
+ </project>

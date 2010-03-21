@@ -7,18 +7,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScrip
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{F8960503-6C85-46FB-9B5A-8B776F453AB0}"
 	ProjectSection(SolutionItems) = preProject
-		Database\manifest.xml = Database\manifest.xml
+		Example\manifest.xml = Example\manifest.xml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{07BCD2DD-CA30-4238-9403-EB3B1309B048}"
 	ProjectSection(SolutionItems) = preProject
-		Database\Scripts\create.sql = Database\Scripts\create.sql
-		Database\Scripts\drop.sql = Database\Scripts\drop.sql
+		Example\Scripts\create.sql = Example\Scripts\create.sql
+		Example\Scripts\drop.sql = Example\Scripts\drop.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Increments", "Increments", "{D6CE52C4-ACEB-4AB2-A9FE-2F4145A0EC01}"
 	ProjectSection(SolutionItems) = preProject
-		Database\Increments\0.0.1.sql = Database\Increments\0.0.1.sql
+		Example\Increments\0.0.1.sql = Example\Increments\0.0.1.sql
+		Example\Increments\0.0.2.sql = Example\Increments\0.0.2.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.DbAdapter", "Bluejam.Utils.DatabaseScripter.DbAdapter\Bluejam.Utils.DatabaseScripter.DbAdapter.csproj", "{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}"
@@ -26,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Core", "Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj", "{DC9732C5-68AE-4252-81D5-C999BA824B4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer", "Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer\Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.csproj", "{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Output", "Output", "{5C13FA8D-C47B-4EBC-8C06-B5DBC044F7BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

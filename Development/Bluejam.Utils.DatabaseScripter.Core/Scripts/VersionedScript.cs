@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -35,7 +37,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// Initializes a new instance of the <see cref="VersionedScript"/> class.
         /// </summary>
         /// <param name="path">The path.</param>
-        public VersionedScript(Config.ScriptConfig config, Manifest.VersionedScriptManifest manifest) : base(config, manifest)
+        public VersionedScript(Config.ScriptConfig config, Config.VersionedScriptManifest manifest) : base(config, manifest)
         {            
             CurrentVersion = (manifest.CurrentVersion == null) ? null : new DbAdapter.Version(manifest.CurrentVersion);
             NewVersion = (manifest.NewVersion == null) ? null : new DbAdapter.Version(manifest.NewVersion);
@@ -47,7 +49,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         public override string ToString()
         {
-            return String.Format("{0}: Increment database {1} from {2} to {3}",
+            return String.Format(CultureInfo.InvariantCulture, "{0}: Increment database {1} from {2} to {3}",
                 Name,
                 DatabaseName,
                 (CurrentVersion == null) ? "current" : CurrentVersion.ToString(),
@@ -63,7 +65,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        protected override bool RunImplementation(IDatabaseAdapter databaseAdapter)
+        protected override ErrorCode RunImplementation(IDatabaseAdapter databaseAdapter)
         {
             try
             {
@@ -76,7 +78,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 {
                     if (databaseAdapter.GetVersion(DatabaseName) != CurrentVersion)
                     {
-                        return false;
+                        return ErrorCode.IncorrectCurrentVersion;
                     }
                 };
 
@@ -92,7 +94,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                     databaseAdapter.CommitTransaction();
                 }
             }
-            catch (Exception ex)
+            catch (DbException ex)
             {
                 System.Console.WriteLine(ex.Message);
                 if (WrapInTransaction)
@@ -100,10 +102,10 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                     databaseAdapter.RollBackTransaction();
                     System.Console.WriteLine("Transaction rolled back");
                 }
-                return false;
+                return ErrorCode.ScriptExecutionException;
             }
 
-            return true;
+            return ErrorCode.Ok;
         }
 
         #endregion

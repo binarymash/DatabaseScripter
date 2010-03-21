@@ -23,26 +23,25 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 switch (child.Name)
                 {
                     case "globalScriptProperties":
-                        Configuration.Instance.GlobalScriptProperties = GetScriptProperties(child);
+                        DatabaseScripterConfig.Instance.GlobalScriptProperties = GetScriptProperties(child);
                         break;
                     case "scripts":
-                        Configuration.Instance.Scripts = GetScripts(child);
+                        DatabaseScripterConfig.Instance.Scripts = GetScripts(child);
                         break;
                     case "manifestPath":
-                        Configuration.Instance.Manifest = GetManifest(child.InnerText);
+                        DatabaseScripterConfig.Instance.Manifest = GetManifest(child.InnerText);
                         break;
                 }
             }
 
-            return Configuration.Instance;
+            return DatabaseScripterConfig.Instance;
         }
 
-        private string GetConnection(XmlNode node)
-        {
-            return ConfigurationManager.ConnectionStrings[node.InnerText].ConnectionString;
-        }
+        #endregion
 
-        private List<ScriptConfig> GetScripts(XmlNode node)
+        #region Non-public 
+
+        private static List<ScriptConfig> GetScripts(XmlNode node)
         {
             var scripts = new List<ScriptConfig>();
 
@@ -59,7 +58,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             return scripts;
         }
 
-        private Dictionary<string, string> GetScriptProperties(XmlNode node)
+        private static Dictionary<string, string> GetScriptProperties(XmlNode node)
         {
             var properties = new Dictionary<string, string>();
 
@@ -77,7 +76,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             return properties;
         }
 
-        private ScriptConfig GetScript(XmlNode node)
+        private static ScriptConfig GetScript(XmlNode node)
         {
             var script = new ScriptConfig();
             foreach (XmlAttribute attribute in node.Attributes)
@@ -102,7 +101,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             return script;
         }
 
-        private KeyValuePair<string, string> GetProperty(XmlNode node)
+        private static KeyValuePair<string, string> GetProperty(XmlNode node)
         {
             string name = null;
             string value = null;
@@ -122,7 +121,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             return new KeyValuePair<string, string>(name, value);
         }
 
-        private Manifest.Manifest GetManifest(string path)
+        private static Manifest GetManifest(string path)
         {
             if (!File.Exists(path))
             {
@@ -131,17 +130,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             }
 
             var xmlReader = XmlReader.Create(path);
-            var xmlSerializer = new XmlSerializer(typeof(Manifest.Manifest));
-            var manifest = (Manifest.Manifest)xmlSerializer.Deserialize(xmlReader);
+            var xmlSerializer = new XmlSerializer(typeof(Manifest));
+            var manifest = (Manifest)xmlSerializer.Deserialize(xmlReader);
             manifest.FilePath = path;
             //TODO: log bad xml
 
             return manifest;
-        }
-
-        private Version GetVersion(XmlNode node)
-        {
-            return new Version(node.InnerText);
         }
 
         #endregion

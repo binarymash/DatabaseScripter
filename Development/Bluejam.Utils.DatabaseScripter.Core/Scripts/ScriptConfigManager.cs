@@ -22,7 +22,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 return scriptConfig.Properties[propertyName];
             }
 
-            return Config.Configuration.Instance.GlobalScriptProperties[propertyName];
+            if (Config.DatabaseScripterConfig.Instance.GlobalScriptProperties.ContainsKey(propertyName))
+            {
+                return Config.DatabaseScripterConfig.Instance.GlobalScriptProperties[propertyName];
+            }
+
+            throw new DatabaseScripterException(ErrorCode.CouldNotFindPropertyForScript, propertyName);
         }
 
         public static string GetConnectionString(Config.ScriptConfig scriptConfig)

@@ -1,0 +1,14 @@
+<project name="DatabaseScripter" default="compile" xmlns="http://nant.sf.net/schemas/nant.xsd">
+  <target name="Simian">
+      
+    <mkdir dir="${artifacts.dir}\duplication\" failonerror="false" />
+    
+    <exec program="${SimianExe}" output="${artifacts.dir}\duplication\duplication.txt">
+      <arg value="-threshold=10" />
+      <arg value="-includes=${code.solution.dir}**\*.cs" />
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests\*.cs" />      
+      <arg value="-excludes=${ThirdPartyDir}**\*.cs" />
+    </exec>
+    
+  </target>
+</project>

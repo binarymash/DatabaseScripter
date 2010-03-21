@@ -1,0 +1,23 @@
+<project name="run-unit-tests">
+	<target name="RunUnitTests">
+  
+		<nunit2>
+			<formatter type="Xml" usefile="true" extension=".xml" outputdir="${artifacts.dir}UnitTests" />
+			<test haltonfailure="true">
+				<assemblies basedir="${buildarea.output.dir}">
+					<include name="Bluejam.Utils.DatabaseScripter.Tests.dll" />
+				</assemblies>
+			</test>
+		</nunit2>
+		
+    <!--
+		<nunit2report format="NoFrames" todir="${artifacts.dir}\UnitTests" failonerror="true" >
+			<fileset>
+				<include name="${artifacts.dir}\UnitTests\Bluejam.Utils.DatabaseScripter.Tests.dll-results.xml" />
+			</fileset>
+		</nunit2report>
+    -->
+    
+    </target>
+</project>
+

@@ -24,7 +24,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         #endregion
 
-        #region Constructor
+        #region Constructors
 
         public ScriptConfig()
         {
@@ -32,6 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         }
 
         #endregion
+
 
     }
 }
