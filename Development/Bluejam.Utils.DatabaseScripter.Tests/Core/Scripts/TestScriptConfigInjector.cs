@@ -77,7 +77,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
         }
 
         [Test]
-        [Ignore("TODO: fix this")]
         public void Test_InjectConfig_WhenNested()
         {
             var command = "This is a {global{thing}} command";
