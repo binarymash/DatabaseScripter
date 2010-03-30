@@ -24,27 +24,16 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// Gets or sets the scripts.
         /// </summary>
         /// <value>The scripts.</value>
-        public List<ScriptManifest> UnversionedScripts { get; set; }
-
-        /// <summary>
-        /// Gets or sets the versioned scripts.
-        /// </summary>
-        /// <value>The versioned scripts.</value>
-        public List<VersionedScriptManifest> VersionedScripts { get; set; }
+        public List<ScriptManifest> ScriptManifests { get; set; }
 
         /// <summary>
         /// Gets the manifest.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="name">The name of the script.</param>
         /// <returns></returns>
         public ScriptManifest GetManifest(string name)
         {
-            var script = UnversionedScripts.ToList().Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
-            if (script == null)
-            {
-                script = VersionedScripts.ToList().Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
-            }
-            return script;
+            return ScriptManifests.ToList().Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion

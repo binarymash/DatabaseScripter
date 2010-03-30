@@ -33,13 +33,6 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 {
                     throw new DatabaseScripterException(ErrorCode.CouldNotFindScript, scriptConfig.Name);
                 }
-
-                var versionedScriptManifest = scriptManifest as Config.VersionedScriptManifest;
-                if (versionedScriptManifest != null)
-                {
-                    scripts.Add(CreateVersionedScript(scriptConfig, versionedScriptManifest));
-                    continue;
-                }
                 
                 scripts.Add(CreateScript(scriptConfig, scriptManifest));
             }
@@ -54,11 +47,6 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         private static Script CreateScript(Config.ScriptConfig scriptConfig, Config.ScriptManifest scriptManifest)
         {
             return new Script(scriptConfig, scriptManifest);
-        }
-
-        private static VersionedScript CreateVersionedScript(Config.ScriptConfig scriptConfig, Config.VersionedScriptManifest scriptManifest)
-        {
-            return new VersionedScript(scriptConfig, scriptManifest);
         }
 
         #endregion

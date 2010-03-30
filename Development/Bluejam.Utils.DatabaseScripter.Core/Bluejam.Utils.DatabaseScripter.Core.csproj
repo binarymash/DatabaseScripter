@@ -69,14 +69,12 @@
     <Compile Include="Config\ScriptConfig.cs" />
     <Compile Include="Config\DatabaseScripterConfig.cs" />
     <Compile Include="Config\ScriptManifest.cs" />
-    <Compile Include="Config\VersionedScriptManifest.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\Script.cs" />
     <Compile Include="Scripts\ScriptConfigInjector.cs" />
     <Compile Include="Scripts\ScriptConfigManager.cs" />
     <Compile Include="Scripts\ScriptFactory.cs" />
-    <Compile Include="Scripts\VersionedScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter\Bluejam.Utils.DatabaseScripter.DbAdapter.csproj">
