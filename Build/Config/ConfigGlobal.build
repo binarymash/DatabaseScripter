@@ -1,12 +1,15 @@
 <project name="ConfigGlobal" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
+  <!-- svn -->
+  <property name="svn.repo" value="https://databasescripter.googlecode.com/svn/trunk" />
+  
   <!-- base path of the checked out code -->
   <property name="BaseDir" value="D:\development\code.google\databasescripter\" />
   
   <!-- build inputs path configuration -->
   <property name="build.dir" value="${BaseDir}build\" />
   <property name="build.stages.dir" value="${build.dir}stages\" />  
-  <property name="code.solution.dir" value="${BaseDir}\Development\" />
+  <property name="code.solution.dir" value="${BaseDir}Development\" />
   
   <!-- paths to third party tools used in build process -->
   <property name="ThirdPartyDir" value="${code.solution.dir}ThirdParty\" />

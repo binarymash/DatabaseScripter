@@ -2,8 +2,6 @@
   
   <target name="UpdateVersion" failonerror="false" if="${property::exists('IncrementVersion')}">
 
-    <property name="svn.repo" value="https://databasescripter.googlecode.com/svn/trunk" />
-
     <if test="${bool::parse(IncrementVersion)}"> 
       <echo>Getting current revision from ${svn.repo}</echo>    
       
