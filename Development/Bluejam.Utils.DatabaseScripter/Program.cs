@@ -8,9 +8,10 @@ namespace Bluejam.Utils.DatabaseScripter
 {
     class Program
     {
-        static void Main()
+
+        static void Main(string[] args)
         {
-            Core.Processor.Run();
+            Core.Processor.Run(args);
         }
 
     }

@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		DatabaseScripter.FxCop = DatabaseScripter.FxCop
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter", "Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter\Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter.csproj", "{550F30DF-BF78-4308-BFFC-F95E78605BF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{550F30DF-BF78-4308-BFFC-F95E78605BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{550F30DF-BF78-4308-BFFC-F95E78605BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{550F30DF-BF78-4308-BFFC-F95E78605BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{550F30DF-BF78-4308-BFFC-F95E78605BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

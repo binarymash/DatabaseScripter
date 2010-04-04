@@ -22,6 +22,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             {
                 switch (child.Name)
                 {
+                    case "preview":
+                        DatabaseScripterConfig.Instance.Preview = Boolean.Parse(child.InnerText);
+                        break;
                     case "globalScriptProperties":
                         DatabaseScripterConfig.Instance.GlobalScriptProperties = GetScriptProperties(child);
                         break;

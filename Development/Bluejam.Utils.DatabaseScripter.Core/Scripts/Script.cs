@@ -6,10 +6,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-using Castle.Core.Resource;
-using Castle.Windsor;
-using Castle.Windsor.Configuration.Interpreters;
-
 using Bluejam.Utils.DatabaseScripter.DbAdapter;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
@@ -99,21 +95,17 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public ErrorCode Run()
+        public ErrorCode Run(IDatabaseAdapter databaseAdapter)
         {
+            System.Console.Write(this.ToString() + "... ");
+
             var errorCode = ErrorCode.Ok;
 
-            var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-            using (var databaseAdapter = (IDatabaseAdapter)container["databaseAdapter"])
-            {
-                databaseAdapter.Initialize(ConnectionString);
+            databaseAdapter.Connect(ConnectionString);
+            errorCode = RunImplementation(databaseAdapter);
+            databaseAdapter.Disconnect();
 
-                System.Console.Write(this.ToString() + "... ");
-
-                errorCode = RunImplementation(databaseAdapter);
-
-                System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
-            }
+            System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
 
             return errorCode;
         }
@@ -152,7 +144,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
                 if (null != CurrentVersion)
                 {
-                    if (databaseAdapter.GetVersion(DatabaseName) != CurrentVersion)
+                    if (!databaseAdapter.ConfirmVersion(DatabaseName, CurrentVersion))
                     {
                         return ErrorCode.IncorrectCurrentVersion;
                     }

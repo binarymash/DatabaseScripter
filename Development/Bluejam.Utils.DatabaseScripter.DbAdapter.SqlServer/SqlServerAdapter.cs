@@ -30,12 +30,31 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
 
         #region IDatabaseAdapter implementation
 
-        public void Initialize(string connectionString)
+        /// <summary>
+        /// Initializes the adapter.
+        /// </summary>
+        public void Initialize()
+        {
+        }
+
+        /// <summary>
+        /// Connects the specified connection string.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        public void Connect(string connectionString)
         {
             _connection = new SqlConnection(connectionString);
             _connection.Open();
 
             _server = new Server(new ServerConnection(_connection));
+        }
+
+        /// <summary>
+        /// Disconnects this instance.
+        /// </summary>
+        public void Disconnect()
+        {
+            _connection.Close();
         }
 
         /// <summary>
@@ -68,12 +87,14 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
         }
 
         /// <summary>
-        /// Gets the version.
+        /// Confirms the current version of the database matches the specified version.
         /// </summary>
+        /// <param name="databaseName">Name of the database.</param>
+        /// <param name="version">The version.</param>
         /// <returns></returns>
-        public Version GetVersion(string databaseName)
+        public bool ConfirmVersion(string databaseName, Version version)
         {
-            return new Version(_server.Databases[databaseName].ExtendedProperties["SCHEMA_VERSION"].Value as string);
+            return (version == new Version(_server.Databases[databaseName].ExtendedProperties["SCHEMA_VERSION"].Value as string));
         }
 
         /// <summary>

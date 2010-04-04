@@ -36,6 +36,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// <value>The file path.</value>
         public Manifest Manifest { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether the scripter will run in preview mode.
+        /// </summary>
+        /// <value><c>true</c> if running in preview mode; otherwise, <c>false</c>.</value>
+        public bool Preview { get; set; }
+
         #endregion
 
         #region Singleton implementation

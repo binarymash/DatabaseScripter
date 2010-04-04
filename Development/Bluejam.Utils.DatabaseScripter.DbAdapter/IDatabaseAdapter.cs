@@ -9,11 +9,22 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
     {
 
         /// <summary>
-        /// Initializes the specified connection string.
+        /// Initializes the adapter.
+        /// </summary>
+        void Initialize();
+
+        /// <summary>
+        /// Connects to the database using the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        void Initialize(string connectionString);
-            
+        void Connect(string connectionString);
+
+        /// <summary>
+        /// Disconnects from the database
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        void Disconnect();
+
         /// <summary>
         /// Begins the transaction.
         /// </summary>
@@ -37,11 +48,12 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         void RunCommand(string databaseName, string command);
 
         /// <summary>
-        /// Gets the version.
+        /// Confirms the current version of the database matches the specified version.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
+        /// <param name="version">The version.</param>
         /// <returns></returns>
-        Version GetVersion(string databaseName);
+        bool ConfirmVersion(string databaseName, Version version);
 
         /// <summary>
         /// Sets the version.
