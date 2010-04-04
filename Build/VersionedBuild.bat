@@ -1,1 +1,1 @@
-nant -D:AssemblyVersion=%1
+nant -D:IncrementVersion="true"

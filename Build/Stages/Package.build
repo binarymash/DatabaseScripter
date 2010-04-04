@@ -37,12 +37,14 @@
 		
     <echo />
 		<echo message="Creating Package Zip Files"/>		
-    <if test="${property::exists('AssemblyVersion')}">
-      <property name="package.file" value="${package.dir}DatabaseScripter_${AssemblyVersion}.zip" />
-    </if>
-    <if test="${not property::exists('AssemblyVersion')}">
-      <property name="package.file" value="${package.dir}DatabaseScripter.zip" />
-    </if>    
+
+    <xmlpeek file="Version.xml" xpath="/version/major" property="version.major" />
+    <xmlpeek file="Version.xml" xpath="/version/minor" property="version.minor" />
+    <xmlpeek file="Version.xml" xpath="/version/build" property="version.build" />
+    <xmlpeek file="Version.xml" xpath="/version/revision" property="version.revision" />
+    <property name="package.version" value="${version.major}.${version.minor}.${version.build}.${version.revision}" />
+    
+    <property name="package.file" value="${package.dir}DatabaseScripter_${package.version}.zip" />
 		<exec program="${ZipExe}" >
 			<arg value="-tzip"/>
 			<arg value="a"/>
