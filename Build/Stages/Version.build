@@ -1,0 +1,25 @@
+<project name="Version" default="compile" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <target name="Version">
+
+    <if test="${property::exists('AssemblyVersion')}"> 
+      <echo>Setting assembly versions to ${AssemblyVersion}</echo>    
+      <asminfo output="${code.solution.dir}AssemblyVersion.cs" language="CSharp">
+          <imports>
+              <import namespace="System.Reflection" />
+          </imports>
+          <attributes>
+              <attribute type="AssemblyVersionAttribute" value="${AssemblyVersion}" />
+              <attribute type="AssemblyFileVersionAttribute" value="${AssemblyVersion}" />
+          </attributes>
+      </asminfo>
+    </if>
+
+    <if test="${not property::exists('AssemblyVersion')}"> 
+      <echo>Assembly version not changing.</echo>        
+    </if> 
+    
+
+  </target>
+
+</project>

@@ -1,0 +1,1 @@
+nant -D:AssemblyVersion=%1

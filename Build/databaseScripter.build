@@ -1,6 +1,6 @@
 <project name="DatabaseScripter" default="build" xmlns="http://nant.sf.net/schemas/nant.xsd" basedir=".">
 
-  <property name="stages" value="Compile,Simian,RunUnitTests,FxCop,Package" />
+  <property name="stages" value="Version,Compile,Simian,RunUnitTests,FxCop,Package" />
   <property name="projects" value="Bluejam.Utils.DatabaseScripter.DbAdapter,Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer,Bluejam.Utils.DatabaseScripter.Core,Bluejam.Utils.DatabaseScripter,Bluejam.Utils.DatabaseScripter.Tests" />
   <include buildfile="Config\ConfigDev.build" />
 

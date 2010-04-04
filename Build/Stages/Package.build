@@ -37,13 +37,21 @@
 		
     <echo />
 		<echo message="Creating Package Zip Files"/>		
+    <if test="${property::exists('AssemblyVersion')}">
+      <property name="package.file" value="${package.dir}DatabaseScripter_${AssemblyVersion}.zip" />
+    </if>
+    <if test="${not property::exists('AssemblyVersion')}">
+      <property name="package.file" value="${package.dir}DatabaseScripter.zip" />
+    </if>    
 		<exec program="${ZipExe}" >
 			<arg value="-tzip"/>
 			<arg value="a"/>
 			<arg value="-r"/>
-			<arg value="${package.dir}DatabaseScripter.zip"/>
+			<arg value="${package.file}"/>
 			<arg value="${package.dir}temp\*"/>
 		</exec>
+
+    <echo message="Created ${package.file}"/>		
 
     <echo />		
 		<echo message="Deleting package/temp directory..."/>
