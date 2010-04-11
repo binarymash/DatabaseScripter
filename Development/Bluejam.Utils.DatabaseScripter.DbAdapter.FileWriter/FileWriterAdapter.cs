@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
+using System.IO;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
@@ -28,7 +30,8 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         public FileWriterAdapter()
         {
-            FileName = "preview.txt";
+            var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            FileName = Path.Combine(execPath.Directory.FullName, "preview.txt");
         }
 
         #endregion
@@ -37,6 +40,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         public void Initialize()
         {
+
             fileWriter = System.IO.File.CreateText(FileName);
             fileWriter.AutoFlush = true;
         }

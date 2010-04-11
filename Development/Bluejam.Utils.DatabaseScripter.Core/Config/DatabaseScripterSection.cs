@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
-using System.Collections;
-using System.IO;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
@@ -126,6 +124,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         private static Manifest GetManifest(string path)
         {
+            if (!Path.IsPathRooted(path))
+            {
+                var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
+                path = Path.Combine(execPath.Directory.FullName, path);
+            }
+
             if (!File.Exists(path))
             {
                 //TODO: log missing manifest
