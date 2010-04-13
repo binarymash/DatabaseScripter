@@ -31,8 +31,6 @@ namespace Bluejam.Utils.DatabaseScripter.Core
             }
 
             System.Console.WriteLine("Done.");
-            System.Console.ReadLine();
-
             return errorCode;
         }
 

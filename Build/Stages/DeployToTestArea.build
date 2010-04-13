@@ -1,0 +1,31 @@
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+	<target name="DeployToTestArea">
+  
+    <echo />
+    <echo message="Cleaning test deployment directory..."/>
+		<delete dir="${testarea.dir}" />
+		<mkdir dir="${testarea.dir}" />
+		
+    <echo />
+		<echo message="Unzipping Package"/>		
+
+    <xmlpeek file="Version.xml" xpath="/version/major" property="version.major" />
+    <xmlpeek file="Version.xml" xpath="/version/minor" property="version.minor" />
+    <xmlpeek file="Version.xml" xpath="/version/build" property="version.build" />
+    <xmlpeek file="Version.xml" xpath="/version/revision" property="version.revision" />
+    <property name="package.version" value="${version.major}.${version.minor}.${version.build}.${version.revision}" />
+    
+    <property name="package.file" value="${package.dir}DatabaseScripter_${package.version}.zip" />
+    
+		<exec program="${ZipExe}" >
+			<arg value="-tzip"/>
+			<arg value="x"/>
+			<arg value="-o${testarea.dir}"/>
+			<arg value="${package.file}"/>
+		</exec>
+
+    <echo message="Unzipped ${package.file} to ${testarea.dir}"/>		
+    
+	</target>
+
+ </project>

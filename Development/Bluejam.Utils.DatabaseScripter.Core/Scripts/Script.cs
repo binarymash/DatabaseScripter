@@ -19,37 +19,37 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
-        public string Name { get; private set; }
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
-        public string Description { get; private set; }
+        public string Description { get; protected set; }
 
         /// <summary>
         /// Gets or sets the connection string.
         /// </summary>
         /// <value>The connection string.</value>
-        public string ConnectionString { get; private set; }
+        public string ConnectionString { get; protected set; }
 
         /// <summary>
         /// Gets or sets the name of the database.
         /// </summary>
         /// <value>The name of the database.</value>
-        public string DatabaseName { get; private set; }
+        public string DatabaseName { get; protected set; }
 
         /// <summary>
         /// Gets or sets the command.
         /// </summary>
         /// <value>The command.</value>
-        public string Command { get; private set; }
+        public string Command { get; protected set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [wrap in transaction].
         /// </summary>
         /// <value><c>true</c> if [wrap in transaction]; otherwise, <c>false</c>.</value>
-        public bool WrapInTransaction { get; private set; }
+        public bool WrapInTransaction { get; protected set; }
 
         /// <summary>
         /// Gets or sets the current version.

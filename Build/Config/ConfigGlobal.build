@@ -26,6 +26,9 @@
   <property name="buildarea.solution.dir" value="${buildarea.dir}databasescripter\" />
   <property name="buildarea.output.dir" value="${buildarea.solution.dir}\Output\" />
 
+  <!-- system test configuration -->
+  <property name="testarea.dir" value="${BaseDir}TestDeployment\" />
+  
   <!-- build artifacts configuration -->  
   <property name="artifacts.dir" value="${BaseDir}Artifacts\" />
   

@@ -1,0 +1,16 @@
+<project name="run-system-tests"  xmlns="http://nant.sf.net/schemas/nant.xsd">
+	<target name="RunSystemTests">
+  
+    
+		<nunit2>
+			<formatter type="Xml" usefile="true" extension=".xml" outputdir="${artifacts.dir}SystemTests" />
+			<test haltonfailure="true">
+				<assemblies basedir="${testarea.dir}">
+					<include name="Bluejam.Utils.DatabaseScripter.SystemTests.dll" />
+				</assemblies>
+			</test>
+		</nunit2>
+    
+    </target>
+</project>
+

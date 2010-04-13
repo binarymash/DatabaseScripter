@@ -15,95 +15,99 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
 
         #region Tests
 
-        //[Test]
-        //public void Test_Constructor_WhenInts()
-        //{
-        //    var version = new DbAdapter.Version(5,4,3);
-        //    Assert.AreEqual(5, version.Major);
-        //    Assert.AreEqual(4, version.Minor);
-        //    Assert.AreEqual(3, version.Revision);
-        //}
+        [Test]
+        public void Test_Constructor_WhenInts()
+        {
+            var version = new DbAdapter.Version(5, 4, 3);
+            Assert.AreEqual(5, version.Major);
+            Assert.AreEqual(4, version.Minor);
+            Assert.AreEqual(3, version.Revision);
+        }
 
-        //[Test]
-        //public void Test_Constructor_WhenGoodString()
-        //{
-        //    var version = new DbAdapter.Version("10.2.1");
-        //    Assert.AreEqual(10, version.Major);
-        //    Assert.AreEqual(2, version.Minor);
-        //    Assert.AreEqual(1, version.Revision);
-        //}
+        [Test]
+        public void Test_Constructor_WhenGoodString()
+        {
+            var version = new DbAdapter.Version("10.2.1");
+            Assert.AreEqual(10, version.Major);
+            Assert.AreEqual(2, version.Minor);
+            Assert.AreEqual(1, version.Revision);
+        }
 
-        //[Test]
-        //public void Test_Constructor_WhenStringContainsBadData()
-        //{
-        //    try
-        //    {
-        //        var version = new DbAdapter.Version("10.v.1");
-        //        Assert.Fail();
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        Assert.Pass();
-        //    }
-        //    catch
-        //    {
-        //        Assert.Fail();
-        //    }
-        //}
+        [Test]
+        [Ignore("fix")]
+        public void Test_Constructor_WhenStringContainsBadData()
+        {
+            try
+            {
+                var version = new DbAdapter.Version("10.v.1");
+                Assert.Fail();
+            }
+            catch (ArgumentException)
+            {
+                Assert.Pass();
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
-        //[Test]
-        //public void Test_Constructor_WhenStringIsTooShort()
-        //{
-        //    try
-        //    {
-        //        var version = new DbAdapter.Version("1.5");
-        //        Assert.Fail();
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        Assert.Pass();
-        //    }
-        //    catch
-        //    {
-        //        Assert.Fail();
-        //    }
-        //}
+        [Test]
+        [Ignore("fix")]
+        public void Test_Constructor_WhenStringIsTooShort()
+        {
+            try
+            {
+                var version = new DbAdapter.Version("1.5");
+                Assert.Fail();
+            }
+            catch (ArgumentException)
+            {
+                Assert.Pass();
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
-        //[Test]
-        //public void Test_Constructor_WhenNullString()
-        //{
-        //    try
-        //    {
-        //        var version = new DbAdapter.Version(null);
-        //        Assert.Fail();
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        Assert.Pass();
-        //    }
-        //    catch
-        //    {
-        //        Assert.Fail();
-        //    }
-        //}
+        [Test]
+        [Ignore("fix")]
+        public void Test_Constructor_WhenNullString()
+        {
+            try
+            {
+                var version = new DbAdapter.Version(null);
+                Assert.Fail();
+            }
+            catch (ArgumentException)
+            {
+                Assert.Pass();
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
-        //[Test]
-        //public void Test_Constructor_WhenEmptyString()
-        //{
-        //    try
-        //    {
-        //        var version = new DbAdapter.Version(string.Empty);
-        //        Assert.Fail();
-        //    }
-        //    catch (ArgumentException)
-        //    {
-        //        Assert.Pass();
-        //    }
-        //    catch
-        //    {
-        //        Assert.Fail();
-        //    }
-        //}
+        [Test]
+        [Ignore("fix")]
+        public void Test_Constructor_WhenEmptyString()
+        {
+            try
+            {
+                var version = new DbAdapter.Version(string.Empty);
+                Assert.Fail();
+            }
+            catch (ArgumentException)
+            {
+                Assert.Pass();
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
 
         [Test]
         public void Test_GreaterThanOperator()
