@@ -19,22 +19,7 @@
 				<exclude name="**\*.pdb" />
 			</fileset>
 		</copy>
-				    
-    <echo />
-		<echo message="Copying example data..."/>
-		<copy todir="${package.dir}temp\Example" >
-			<fileset basedir="${buildarea.output.dir}..\Example">
-				<include name="**\*" />
-				<exclude name="**\*.pdb" />
-			</fileset>
-		</copy>
-
-    <echo />
-		<echo message="Tweaking app.config for example..."/>
-		<xmlpoke file="${package.dir}temp\Bluejam.Utils.DatabaseScripter.exe.config"
-				xpath="./configuration/databaseScripter/manifestPath"
-				value="Example\manifest.xml" />					
-		
+				    		
     <echo />
 		<echo message="Creating Package Zip Files"/>		
 

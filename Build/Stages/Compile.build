@@ -11,7 +11,7 @@
     <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>
     <copy todir="${buildarea.solution.dir}" >
       <fileset basedir="${code.solution.dir}">
-        <exclude name="output\**" />
+        <exclude name="output\*.*" />
         <exclude name="deployed\**" />
         <exclude name="*\bin\**" />
         <exclude name="*\obj\**" />
