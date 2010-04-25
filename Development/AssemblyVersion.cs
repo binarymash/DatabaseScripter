@@ -10,6 +10,6 @@ using System.Reflection;
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: AssemblyVersionAttribute("0.9.0.20")]
-[assembly: AssemblyFileVersionAttribute("0.9.0.20")]
+[assembly: AssemblyVersionAttribute("0.9.0.21")]
+[assembly: AssemblyFileVersionAttribute("0.9.0.21")]
 
