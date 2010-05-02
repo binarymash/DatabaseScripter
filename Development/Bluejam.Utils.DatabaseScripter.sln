@@ -28,8 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{1A7C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{622D5E61-9A8B-4249-B4B0-117DE5CE1605}"
 	ProjectSection(SolutionItems) = preProject
-		Output\Example\Increments\0.0.1.sql = Output\Example\Increments\0.0.1.sql
-		Output\Example\Increments\0.0.2.sql = Output\Example\Increments\0.0.2.sql
+		Output\Example\Scripts\0.0.1.sql = Output\Example\Scripts\0.0.1.sql
+		Output\Example\Scripts\0.0.2.sql = Output\Example\Scripts\0.0.2.sql
 		Output\Example\Scripts\create.sql = Output\Example\Scripts\create.sql
 		Output\Example\Scripts\drop.sql = Output\Example\Scripts\drop.sql
 	EndProjectSection
