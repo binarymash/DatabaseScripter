@@ -30,7 +30,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         DatabaseScripterConfig.Instance.Scripts = GetScripts(child);
                         break;
                     case "manifestPath":
-                        DatabaseScripterConfig.Instance.Manifest = GetManifest(child.InnerText);
+                        DatabaseScripterConfig.Instance.Manifest = ManifestFactory.Create(child.InnerText);
                         break;
                 }
             }
@@ -120,29 +120,6 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             value = node.InnerText;
 
             return new KeyValuePair<string, string>(name, value);
-        }
-
-        private static Manifest GetManifest(string path)
-        {
-            if (!Path.IsPathRooted(path))
-            {
-                var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
-                path = Path.Combine(execPath.Directory.FullName, path);
-            }
-
-            if (!File.Exists(path))
-            {
-                //TODO: log missing manifest
-                return null;
-            }
-
-            var xmlReader = XmlReader.Create(path);
-            var xmlSerializer = new XmlSerializer(typeof(Manifest));
-            var manifest = (Manifest)xmlSerializer.Deserialize(xmlReader);
-            manifest.FilePath = path;
-            //TODO: log bad xml
-
-            return manifest;
         }
 
         #endregion

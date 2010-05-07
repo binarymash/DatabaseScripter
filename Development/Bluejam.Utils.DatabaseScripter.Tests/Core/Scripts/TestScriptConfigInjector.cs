@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 
 using Bluejam.Utils.DatabaseScripter;
+using Bluejam.Utils.DatabaseScripter.Core;
+using Bluejam.Utils.DatabaseScripter.Core.Config;
+using Bluejam.Utils.DatabaseScripter.Core.Scripts;
+
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.Tests
@@ -12,21 +16,21 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
     public class TestScriptConfigInjector
     {
 
-        Core.Config.ScriptConfig _config;
+        ScriptConfig _config;
 
         #region Setup/teardown
 
         [SetUp]
         public void SetUp()
         {
-            _config = new Core.Config.ScriptConfig();
+            _config = new ScriptConfig();
             _config.Name = "myScript";
             _config.Properties = new Dictionary<string, string>();
             _config.Properties.Add("scriptkey1", "scriptvalue1");
             _config.Properties.Add("foo", "scriptbar");
             _config.Properties.Add("thing", "key1");
 
-            var globalConfig = Core.Config.DatabaseScripterConfig.Instance;
+            var globalConfig = DatabaseScripterConfig.Instance;
             globalConfig.GlobalScriptProperties = new Dictionary<string, string>();
             globalConfig.GlobalScriptProperties.Add("foo", "globalbar");
             globalConfig.GlobalScriptProperties.Add("globalkey1", "globalvalue1");
@@ -39,14 +43,14 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
         public void Test_InjectConfig_WhenInScriptConfig()
         {
             var command = "This is a {scriptkey1} command";
-            Assert.AreEqual("This is a scriptvalue1 command", Core.Scripts.ScriptConfigInjector.InjectConfig(command, _config));
+            Assert.AreEqual("This is a scriptvalue1 command", ScriptConfigInjector.InjectConfig(command, _config));
         }
 
         [Test]
         public void Test_InjectConfig_WhenInGlobalConfig()
         {
             var command = "This is a {globalkey1} command";
-            Assert.AreEqual("This is a globalvalue1 command", Core.Scripts.ScriptConfigInjector.InjectConfig(command, _config));
+            Assert.AreEqual("This is a globalvalue1 command", ScriptConfigInjector.InjectConfig(command, _config));
         }
 
         [Test]
@@ -56,12 +60,12 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
 
             try
             {
-                Core.Scripts.ScriptConfigInjector.InjectConfig(command, _config);
+                ScriptConfigInjector.InjectConfig(command, _config);
                 Assert.Fail();
             }
-            catch (Core.DatabaseScripterException exception)
+            catch (DatabaseScripterException exception)
             {
-                Assert.AreEqual(Core.ErrorCode.CouldNotFindPropertyForScript, exception.ErrorCode);
+                Assert.AreEqual(ErrorCode.CouldNotFindPropertyForScript, exception.ErrorCode);
             }
             catch
             {
@@ -73,14 +77,14 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
         public void Test_InjectConfig_WhenInBothScriptConfigAndGlobalConfig()
         {
             var command = "This is a {foo} command";
-            Assert.AreEqual("This is a scriptbar command", Core.Scripts.ScriptConfigInjector.InjectConfig(command, _config));
+            Assert.AreEqual("This is a scriptbar command", ScriptConfigInjector.InjectConfig(command, _config));
         }
 
         [Test]
         public void Test_InjectConfig_WhenNested()
         {
             var command = "This is a {global{thing}} command";
-            Assert.AreEqual("This is a globalvalue1 command", Core.Scripts.ScriptConfigInjector.InjectConfig(command, _config));
+            Assert.AreEqual("This is a globalvalue1 command", ScriptConfigInjector.InjectConfig(command, _config));
         }
 
     }

@@ -35,8 +35,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// <summary>
         /// Gets or sets a value indicating whether the script should be wrapped in a transaction.
         /// </summary>
-        /// <value><c>true</c> if the script should NOT be wrapped in a transaction; otherwise, <c>false</c>.</value>
-        [XmlAttribute("transaction")]
+        /// <value><c>true</c> if the script should be wrapped in a transaction; otherwise, <c>false</c>.</value>
+        [XmlAttribute("transactional")]
         public bool WrapInTransaction { get; set; }
 
         /// <summary>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Bluejam.Utils.DatabaseScripter.Core;
+using Bluejam.Utils.DatabaseScripter.Core.Scripts;
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.Tests
@@ -15,7 +15,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests
         [Test]
         public void Test_Create_WhenNoScripts()
         {
-            var scripts = Core.Scripts.ScriptFactory.Create();
+            var scripts = ScriptFactory.Create();
             Assert.AreEqual(0, scripts.Count);
         }
     }

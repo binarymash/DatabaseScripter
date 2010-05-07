@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="Manifest" 
+           targetNamespace="http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema" 
+           xmlns="http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema" 
+           xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:element name="Manifest">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="ScriptManifests">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ScriptManifest" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Description" type="xs:string" minOccurs="0" />
+                    <xs:element name="CurrentVersion" type="xs:string" minOccurs="0" />
+                    <xs:element name="NewVersion" type="xs:string" minOccurs="0" />
+                  </xs:sequence>
+                  <xs:attribute name="name" form="unqualified" type="xs:string" />
+                  <xs:attribute name="path" form="unqualified" type="xs:string" />
+                  <xs:attribute name="transactional" form="unqualified" type="xs:boolean" use="optional" default="false"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

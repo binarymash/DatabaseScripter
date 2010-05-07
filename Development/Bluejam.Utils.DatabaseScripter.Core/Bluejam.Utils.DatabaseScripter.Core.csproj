@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Config\ConfigurationFactory.cs" />
     <Compile Include="Config\DatabaseScripterSection.cs" />
+    <Compile Include="Config\ManifestFactory.cs" />
     <Compile Include="DatabaseScripterException.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Config\Manifest.cs" />
@@ -86,6 +87,18 @@
       <Project>{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.DbAdapter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ConfigSchema.xsd">
+      <LastGenOutput>manifest.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ManifestSchema.xsd">
+      <SubType>
+      </SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <LastGenOutput>manifest.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

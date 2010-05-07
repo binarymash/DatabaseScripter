@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
     [Serializable]
+    [XmlRoot(Namespace = "http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema")]
     public class Manifest
     {
 

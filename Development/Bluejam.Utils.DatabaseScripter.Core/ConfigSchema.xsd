@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://code.google.com/p/databasescripter/2010/04/25/ConfigSchema"
+           targetNamespace="http://code.google.com/p/databasescripter/2010/04/25/ConfigSchema"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:element name="databaseScripter" type="databaseScripterType" />
+  
+  <xs:complexType name="databaseScripterType">
+    <xs:sequence>
+      <xs:element name="manifestPath" type="xs:string" />
+      <xs:element name="globalScriptProperties" type="propertiesType" minOccurs="0" />
+      <xs:element name="scripts" type="scriptsType" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="propertiesType">
+    <xs:sequence>
+      <xs:element name="property" type="propertyType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="scriptsType">
+    <xs:sequence>
+      <xs:element name="script" type="scriptType" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="scriptType">
+    <xs:sequence>
+      <xs:element name="properties" type="propertiesType" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" form="unqualified"/>
+  </xs:complexType>
+
+  <xs:complexType name="propertyType">
+    <xs:sequence>
+      <xs:element name="property" type="xs:string" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" form="unqualified"/>
+  </xs:complexType>
+
+</xs:schema>
