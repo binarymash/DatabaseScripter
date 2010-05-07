@@ -95,19 +95,25 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public ErrorCode Run(IDatabaseAdapter databaseAdapter)
+        public void Run(IDatabaseAdapter databaseAdapter)
         {
-            System.Console.Write(this.ToString() + "... ");
+            try
+            {
+                System.Console.Write(this.ToString() + "... ");
 
-            var errorCode = ErrorCode.Ok;
+                var errorCode = ErrorCode.Ok;
 
-            databaseAdapter.Connect(ConnectionString);
-            errorCode = RunImplementation(databaseAdapter);
-            databaseAdapter.Disconnect();
+                databaseAdapter.Connect(ConnectionString);
+                RunImplementation(databaseAdapter);
+                databaseAdapter.Disconnect();
 
-            System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
-
-            return errorCode;
+                System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
+            }
+            catch (DatabaseScripterException)
+            {
+                //TODO: log failed to run script
+                throw;
+            }
         }
 
         public override string ToString()
@@ -129,11 +135,11 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         #region Non-public methods
 
         /// <summary>
-        /// Runs the implementation.
+        /// Runs the script against the database
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        private ErrorCode RunImplementation(IDatabaseAdapter databaseAdapter)
+        private void RunImplementation(IDatabaseAdapter databaseAdapter)
         {
             try
             {
@@ -146,7 +152,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 {
                     if (!databaseAdapter.ConfirmVersion(DatabaseName, CurrentVersion))
                     {
-                        return ErrorCode.IncorrectCurrentVersion;
+                        throw new DatabaseScripterException(ErrorCode.IncorrectCurrentVersion);
                     }
                 };
 
@@ -170,10 +176,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                     databaseAdapter.RollBackTransaction();
                     System.Console.WriteLine("Transaction rolled back");
                 }
-                return ErrorCode.ScriptExecutionException;
+                throw new DatabaseScripterException(ErrorCode.ScriptExecutionException, "An exception occurred when running the script against the database. The script content may be invalid.", ex);
             }
-
-            return ErrorCode.Ok;
         }
 
         #endregion

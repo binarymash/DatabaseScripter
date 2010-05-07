@@ -19,49 +19,58 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         {
             lock (syncLock)
             {
-                isValid = true;
-                var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
-                if (!Path.IsPathRooted(manifestFilePath))
+                try
                 {
-                    manifestFilePath = Path.Combine(execPath.Directory.FullName, manifestFilePath);
+                    isValid = true;
+                    var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
+                    if (!Path.IsPathRooted(manifestFilePath))
+                    {
+                        manifestFilePath = Path.Combine(execPath.Directory.FullName, manifestFilePath);
+                    }
+
+                    if (!File.Exists(manifestFilePath))
+                    {
+                        //TODO: log missing manifest path
+                        throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest);
+                    }
+
+                    var schemaPath = Path.Combine(execPath.DirectoryName, "ManifestSchema.xsd");
+                    if (!File.Exists(schemaPath))
+                    {
+                        //TODO: log missing schema path
+                        throw new DatabaseScripterException(ErrorCode.InvalidManifestSchema, "Could not find manifest schema");
+                    }
+
+                    XmlSchema xmlSchema = null;
+                    using (var stream = new FileStream(schemaPath, FileMode.Open, FileAccess.Read))
+                    {
+                        var schemaStream = new StreamReader(schemaPath);
+                        var schemaReader = XmlReader.Create(schemaStream);
+                        xmlSchema = XmlSchema.Read(schemaReader, ValidationCallback);
+                    }
+
+                    var xmlReaderSettings = new XmlReaderSettings();
+                    xmlReaderSettings.Schemas.Add(xmlSchema);
+                    xmlReaderSettings.ValidationType = ValidationType.Schema;
+                    xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
+
+                    var manifestReader = XmlReader.Create(manifestFilePath, xmlReaderSettings);
+                    while (manifestReader.Read()) ;
+
+                    return isValid;
                 }
-
-                if (!File.Exists(manifestFilePath))
+                catch (XmlException ex)
                 {
-                    //TODO: log missing manifest path
-                    return false;
+                    //TODO: log xml exception
+                    throw new DatabaseScripterException(ErrorCode.InvalidManifestSchema, "An exception occurred when validating the manifest schema.", ex);
                 }
-
-                var schemaPath = Path.Combine(execPath.DirectoryName, "ManifestSchema.xsd");
-                if (!File.Exists(schemaPath))
-                {
-                    //TODO: log missing schema path
-                    return false;
-                } 
-                
-                XmlSchema xmlSchema = null;
-                using (var stream = new FileStream(schemaPath, FileMode.Open, FileAccess.Read))
-                {
-                    var schemaStream = new StreamReader(schemaPath);
-                    var schemaReader = XmlReader.Create(schemaStream);
-                    xmlSchema = XmlSchema.Read(schemaReader, ValidationCallback);
-                }
-
-                var xmlReaderSettings = new XmlReaderSettings();
-                xmlReaderSettings.Schemas.Add(xmlSchema);
-                xmlReaderSettings.ValidationType = ValidationType.Schema;
-                xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-
-                var manifestReader = XmlReader.Create(manifestFilePath, xmlReaderSettings);
-                while (manifestReader.Read()) ;
-
-                return isValid;
             }
         }
 
         private static void ValidationCallback(object sender, ValidationEventArgs e)
         {
             //TODO: log validation errors
+            //TODO: store errors in collection on this.
             isValid = false;
             Console.WriteLine("Validation Error: {0}", e.Message);
         }

@@ -30,6 +30,14 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// <summary>
         /// A script property could not be found
         /// </summary>
-        CouldNotFindPropertyForScript = 5
+        CouldNotFindPropertyForScript = 5,
+        /// <summary>
+        /// The manifest does not validate against the manifest schema
+        /// </summary>
+        InvalidManifestSchema = 6,
+        /// <summary>
+        /// The configuration contains errors
+        /// </summary>
+        InvalidConfig = 7
     }
 }
