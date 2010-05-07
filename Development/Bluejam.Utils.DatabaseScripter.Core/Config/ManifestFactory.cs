@@ -22,32 +22,21 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         {
 
             var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
-            var schemaPath = Path.Combine(execPath.DirectoryName, "ManifestSchema.xsd");
-
             if (!Path.IsPathRooted(path))
             {
                 path = Path.Combine(execPath.Directory.FullName, path);
-            }
-
+            } 
+            
             if (!File.Exists(path))
             {
                 //TODO: log missing manifest
                 return null;
             }
 
-            //full validation
-            using (var stream = new FileStream(path, FileMode.Open))
+            if (!ManifestValidator.IsValid(path))
             {
-                var schemaStream = new StreamReader(Path.Combine(execPath.Directory.FullName, "ManifestSchema.xsd"));
-                var schemaReader = XmlReader.Create(schemaStream);
-                var xmlSchema = XmlSchema.Read(schemaReader, ValidationCallback);
-
-                var validatingReader = new XmlValidatingReader(stream, XmlNodeType.Document, null);
-                validatingReader.Schemas.Add(xmlSchema);
-                validatingReader.ValidationType = ValidationType.Schema;
-                validatingReader.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
-
-                while (validatingReader.Read()) ;
+                //TODO: log invalid schema
+                return null;
             }
 
             //deserialize
@@ -57,12 +46,6 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             manifest.FilePath = path;
 
             return manifest;
-        }
-
-        private static void ValidationCallback(object sender, ValidationEventArgs e)
-        {
-            //TODO: log validation errors
-            Console.WriteLine("Validation Error: {0}", e.Message);
         }
 
     }

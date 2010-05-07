@@ -68,6 +68,7 @@
     <Compile Include="Config\ConfigurationFactory.cs" />
     <Compile Include="Config\DatabaseScripterSection.cs" />
     <Compile Include="Config\ManifestFactory.cs" />
+    <Compile Include="Config\ManifestValidator.cs" />
     <Compile Include="DatabaseScripterException.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Config\Manifest.cs" />
