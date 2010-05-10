@@ -90,16 +90,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ConfigSchema.xsd">
+    <EmbeddedResource Include="ConfigSchema.xsd">
       <LastGenOutput>manifest.Designer.cs</LastGenOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="ManifestSchema.xsd">
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManifestSchema.xsd">
       <SubType>
       </SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <LastGenOutput>manifest.Designer.cs</LastGenOutput>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

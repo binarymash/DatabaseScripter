@@ -21,8 +21,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             {
                 try
                 {
+                    var assembly = Assembly.GetExecutingAssembly();
                     isValid = true;
-                    var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
+                    var execPath = new FileInfo(assembly.Location);
                     if (!Path.IsPathRooted(manifestFilePath))
                     {
                         manifestFilePath = Path.Combine(execPath.Directory.FullName, manifestFilePath);
@@ -34,17 +35,10 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest);
                     }
 
-                    var schemaPath = Path.Combine(execPath.DirectoryName, "ManifestSchema.xsd");
-                    if (!File.Exists(schemaPath))
-                    {
-                        //TODO: log missing schema path
-                        throw new DatabaseScripterException(ErrorCode.InvalidManifestSchema, "Could not find manifest schema");
-                    }
-
                     XmlSchema xmlSchema = null;
-                    using (var stream = new FileStream(schemaPath, FileMode.Open, FileAccess.Read))
+                    using (var schemaResourceStream = assembly.GetManifestResourceStream("Bluejam.Utils.DatabaseScripter.Core.ManifestSchema.xsd"))
                     {
-                        var schemaStream = new StreamReader(schemaPath);
+                        var schemaStream = new StreamReader(schemaResourceStream);
                         var schemaReader = XmlReader.Create(schemaStream);
                         xmlSchema = XmlSchema.Read(schemaReader, ValidationCallback);
                     }
