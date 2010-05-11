@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
@@ -10,12 +11,16 @@ using System.Xml.Serialization;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
-    public static class ManifestValidator
+    public class ManifestValidator : SchemaValidatorBase
     {
-        static object syncLock = new Object();
-        static bool isValid;
+        private static object syncLock = new Object();
+        private static bool isValid;
 
-        public static bool IsValid(string manifestFilePath)
+        public ManifestValidator() : base("Bluejam.Utils.DatabaseScripter.Core.ManifestSchema.xsd")
+        {
+        }
+
+        public bool IsValid(string manifestFilePath)
         {
             lock (syncLock)
             {
@@ -35,16 +40,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest);
                     }
 
-                    XmlSchema xmlSchema = null;
-                    using (var schemaResourceStream = assembly.GetManifestResourceStream("Bluejam.Utils.DatabaseScripter.Core.ManifestSchema.xsd"))
-                    {
-                        var schemaStream = new StreamReader(schemaResourceStream);
-                        var schemaReader = XmlReader.Create(schemaStream);
-                        xmlSchema = XmlSchema.Read(schemaReader, ValidationCallback);
-                    }
-
                     var xmlReaderSettings = new XmlReaderSettings();
-                    xmlReaderSettings.Schemas.Add(xmlSchema);
+                    xmlReaderSettings.Schemas.Add(Schema);
                     xmlReaderSettings.ValidationType = ValidationType.Schema;
                     xmlReaderSettings.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
 
@@ -56,7 +53,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 catch (XmlException ex)
                 {
                     //TODO: log xml exception
-                    throw new DatabaseScripterException(ErrorCode.InvalidManifestSchema, "An exception occurred when validating the manifest schema.", ex);
+                    throw new DatabaseScripterException(ErrorCode.InvalidManifest, "An exception occurred when validating the manifest schema.", ex);
                 }
             }
         }

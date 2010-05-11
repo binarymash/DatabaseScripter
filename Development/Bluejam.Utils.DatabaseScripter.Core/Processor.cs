@@ -16,6 +16,13 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         {
             try
             {
+                if (args.ToList().Exists(arg => string.Equals(arg, "-manifestschema", StringComparison.OrdinalIgnoreCase)))
+                {
+                    var manifestValidator = new Config.ManifestValidator();
+                    Console.WriteLine(manifestValidator.SchemaString);
+                    return ErrorCode.Ok;
+                }
+
                 Config.ConfigurationFactory.Create(args);
 
                 var adapter = Scripts.AdapterFactory.Create();

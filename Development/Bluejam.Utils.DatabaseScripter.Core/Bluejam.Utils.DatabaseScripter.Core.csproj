@@ -66,6 +66,7 @@
       <Link>AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="Config\ConfigurationFactory.cs" />
+    <Compile Include="Config\ConfigurationValidator.cs" />
     <Compile Include="Config\DatabaseScripterSection.cs" />
     <Compile Include="Config\ManifestFactory.cs" />
     <Compile Include="Config\ManifestValidator.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Config\ScriptManifest.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SchemaValidatorBase.cs" />
     <Compile Include="Scripts\AdapterFactory.cs" />
     <Compile Include="Scripts\Script.cs" />
     <Compile Include="Scripts\ScriptConfigInjector.cs" />

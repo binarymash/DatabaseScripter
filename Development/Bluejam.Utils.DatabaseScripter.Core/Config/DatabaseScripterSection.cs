@@ -14,7 +14,14 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         #region IConfigurationSectionHandler Members
 
         public object Create(object parent, object configContext, XmlNode section)
-        {            
+        {
+            var configurationValidator = new ConfigurationValidator();
+            if (!configurationValidator.IsValid(section))
+            {
+                //TODO: log invalid configuration
+                throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.");
+            }
+
             // Gets the child element names and attributes.
             foreach (XmlNode child in section.ChildNodes)
             {

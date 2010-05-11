@@ -1,42 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns="http://code.google.com/p/databasescripter/2010/04/25/ConfigSchema"
+<xs:schema id="Config"
            targetNamespace="http://code.google.com/p/databasescripter/2010/04/25/ConfigSchema"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  
-  <xs:element name="databaseScripter" type="databaseScripterType" />
-  
-  <xs:complexType name="databaseScripterType">
-    <xs:sequence>
-      <xs:element name="manifestPath" type="xs:string" />
-      <xs:element name="globalScriptProperties" type="propertiesType" minOccurs="0" />
-      <xs:element name="scripts" type="scriptsType" />
-    </xs:sequence>
-  </xs:complexType>
+           xmlns="http://code.google.com/p/databasescripter/2010/04/25/ConfigSchema"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="qualified" elementFormDefault="qualified">
 
-  <xs:complexType name="propertiesType">
-    <xs:sequence>
-      <xs:element name="property" type="propertyType" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
+  <xs:element name="databaseScripter">
+    <xs:complexType>
+      <xs:all>
+        <xs:element name="manifestPath" type="xs:string" />
+        <xs:element name="globalScriptProperties" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>              
+              <xs:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="scripts">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="script" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:all>
+                    <xs:element name="properties" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element ref="property" minOccurs="0" maxOccurs="unbounded" />
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:all>
+                  <xs:attribute name="name" form="unqualified" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:all>
+    </xs:complexType>
+  </xs:element>
 
-  <xs:complexType name="scriptsType">
-    <xs:sequence>
-      <xs:element name="script" type="scriptType" maxOccurs="unbounded" />
-    </xs:sequence>
-  </xs:complexType>
-
-  <xs:complexType name="scriptType">
-    <xs:sequence>
-      <xs:element name="properties" type="propertiesType" minOccurs="0"/>
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" form="unqualified"/>
-  </xs:complexType>
-
-  <xs:complexType name="propertyType">
-    <xs:sequence>
-      <xs:element name="property" type="xs:string" maxOccurs="unbounded"/>
-    </xs:sequence>
-    <xs:attribute name="name" type="xs:string" form="unqualified"/>
-  </xs:complexType>
+  <xs:element name="property">
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="xs:string">
+          <xs:attribute name="name" form="unqualified" type="xs:string" />
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
 
 </xs:schema>

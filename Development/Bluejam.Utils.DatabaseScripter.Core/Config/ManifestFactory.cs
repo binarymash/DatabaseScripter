@@ -34,10 +34,11 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest, path);
                 }
 
-                if (!ManifestValidator.IsValid(path))
+                var manifestValidator = new ManifestValidator();
+                if (!manifestValidator.IsValid(path))
                 {
                     //TODO: log invalid schema
-                    throw new DatabaseScripterException(ErrorCode.InvalidManifestSchema);
+                    throw new DatabaseScripterException(ErrorCode.InvalidManifest);
                 }
 
                 //deserialize

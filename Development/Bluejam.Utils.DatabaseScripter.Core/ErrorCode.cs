@@ -34,7 +34,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// <summary>
         /// The manifest does not validate against the manifest schema
         /// </summary>
-        InvalidManifestSchema = 6,
+        InvalidManifest = 6,
         /// <summary>
         /// The configuration contains errors
         /// </summary>
