@@ -5,11 +5,13 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
     public class DatabaseScripterSection : IConfigurationSectionHandler
     {
+
 
         #region IConfigurationSectionHandler Members
 
@@ -18,7 +20,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             var configurationValidator = new ConfigurationValidator();
             if (!configurationValidator.IsValid(section))
             {
-                //TODO: log invalid configuration
+                log.Error("The configuration contains errors.");
                 throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.");
             }
 
@@ -48,6 +50,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         #endregion
 
         #region Non-public 
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(DatabaseScripterSection));
 
         private static List<ScriptConfig> GetScripts(XmlNode node)
         {

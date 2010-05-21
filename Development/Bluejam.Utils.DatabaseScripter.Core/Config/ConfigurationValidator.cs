@@ -8,11 +8,14 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
+using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
     public class ConfigurationValidator : SchemaValidatorBase
     {
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationValidator));
         private static object syncLock = new Object();
         private static bool isValid;
 
@@ -22,6 +25,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         public bool IsValid(IXPathNavigable configSectionNode)
         {
+            log.Debug("Validating the configuration");
+
             lock (syncLock)
             {
                 try
@@ -35,22 +40,30 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     doc.Schemas.Add(Schema);
                     doc.Validate(ValidationCallback);
 
+                    if (isValid)
+                    {
+                        log.Debug("The configuration is valid");
+                    }
+                    else
+                    {
+                        log.Error("The configuration is invalid");
+                    }
+
                     return isValid;
                 }
                 catch (XmlException ex)
                 {
-                    //TODO: log xml exception
-                    throw new DatabaseScripterException(ErrorCode.InvalidManifest, "An exception occurred when validating the manifest schema.", ex);
+                    log.Error("An error occurred when validating the configuration", ex);
+                    throw new DatabaseScripterException(ErrorCode.InvalidConfig, "An exception occurred when validating the configuration schema.", ex);
                 }
             }
         }
 
         private static void ValidationCallback(object sender, ValidationEventArgs e)
         {
-            //TODO: log validation errors
             //TODO: store errors in collection on this.
             isValid = false;
-            Console.WriteLine("Validation Error: {0}", e.Message);
+            log.ErrorFormat(CultureInfo.InvariantCulture, "The configuration contains an error: {0}", e.Message);
         }
 
     }

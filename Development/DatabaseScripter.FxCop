@@ -279,6 +279,15 @@
         <Types>
          <Type Name="IDatabaseAdapter">
           <Members>
+           <Member Name="#ConfirmVersion(System.String,Bluejam.Utils.DatabaseScripter.DbAdapter.Version,System.Boolean&amp;)">
+            <Messages>
+             <Message Id="2#" TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021" Status="Excluded" Created="2010-05-21 20:51:24Z">
+              <Issue>
+               <Item>'confirmed'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
            <Member Name="#RollBackTransaction()">
             <Messages>
              <Message Id="RollBack" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Excluded" Created="2010-03-18 20:50:36Z">
@@ -350,6 +359,9 @@
    </Rule>
    <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
     <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021">
+    <Resolution Name="Default">Consider a design that does not require that {0} be an out parameter.</Resolution>
    </Rule>
    <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
     <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>

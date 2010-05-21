@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.IO;
+using log4net;
 
 using Bluejam.Utils.DatabaseScripter.DbAdapter;
 
@@ -95,25 +96,34 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public void Run(IDatabaseAdapter databaseAdapter)
+        public ErrorCode Run(IDatabaseAdapter databaseAdapter)
         {
-            try
+            log.InfoFormat(CultureInfo.InvariantCulture, "{0} : running...", this);
+
+            var errorCode = ErrorCode.Ok;
+
+            if (!databaseAdapter.Connect(ConnectionString))
             {
-                System.Console.Write(this.ToString() + "... ");
+                log.Error("Failed to connect to the database");
+                errorCode = ErrorCode.DatabaseAdapterFailureAtConnect;
+            }
 
-                var errorCode = ErrorCode.Ok;
-
-                databaseAdapter.Connect(ConnectionString);
-                RunImplementation(databaseAdapter);
+            if (errorCode == ErrorCode.Ok)
+            {
+                errorCode = RunImplementation(databaseAdapter);
                 databaseAdapter.Disconnect();
+            }
 
-                System.Console.WriteLine("..." + (errorCode == ErrorCode.Ok ? "OK" : "ERROR"));
-            }
-            catch (DatabaseScripterException)
+            if (errorCode == ErrorCode.Ok)
             {
-                //TODO: log failed to run script
-                throw;
+                log.InfoFormat(CultureInfo.InvariantCulture, "{0} : succeeded", this);
             }
+            else
+            {
+                log.ErrorFormat(CultureInfo.InvariantCulture, "{0} : FAILED.", this);
+            }
+
+            return errorCode;
         }
 
         public override string ToString()
@@ -123,7 +133,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 return Name;
             }
 
-            return String.Format(CultureInfo.InvariantCulture, "{0}: Increment database {1} from {2} to {3}",
+            return String.Format(CultureInfo.InvariantCulture, "Script \"{0}\": Increment database {1} from {2} to {3}",
                 Name,
                 DatabaseName,
                 (CurrentVersion == null) ? "current" : CurrentVersion.ToString(),
@@ -134,50 +144,91 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         #region Non-public methods
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(Script));
+
         /// <summary>
         /// Runs the script against the database
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        private void RunImplementation(IDatabaseAdapter databaseAdapter)
+        private ErrorCode RunImplementation(IDatabaseAdapter databaseAdapter)
         {
-            try
+            var errorCode = ErrorCode.Ok;
+
+            if (WrapInTransaction)
+            {
+                if (!databaseAdapter.BeginTransaction())
+                {
+                    log.Error("Failed to begin the transaction on the database.");
+                    return ErrorCode.DatabaseAdapterFailureAtBeginTransaction;
+                }
+            }
+
+            if (null != CurrentVersion)
+            {
+                bool versionConfirmed;
+                if (!databaseAdapter.ConfirmVersion(DatabaseName, CurrentVersion, out versionConfirmed))
+                {
+                    log.Error("Failed to check the current version of the database.");
+                    return ErrorCode.DatabaseAdapterFailureAtConfirmVersion;
+                }
+
+                if (versionConfirmed)
+                {
+                    log.Info("The current version of the database is compatible with the script");
+                }
+                else
+                {
+                    log.Error("The current version of the database is not compatible with the script.");
+                    return ErrorCode.IncorrectCurrentVersion;
+                }
+            };
+
+            if (!databaseAdapter.RunCommand(DatabaseName, Command))
+            {
+                log.Error("Failed to execute the command on the database.");
+                errorCode = ErrorCode.DatabaseAdapterFailureAtRunCommand;
+            }
+
+            if ((errorCode == ErrorCode.Ok) && (NewVersion != null))
+            {
+                if (!databaseAdapter.SetVersion(DatabaseName, NewVersion))
+                {
+                    log.Error("Failed to set the new version on the database.");
+                    errorCode = ErrorCode.DatabaseAdapterFailureAtSetVersion;
+                }
+            }
+
+            if ((errorCode == ErrorCode.Ok) && WrapInTransaction)
+            {
+                if (!databaseAdapter.CommitTransaction())
+                {
+                    log.Error("Failed to commit the transaction on the database.");
+                    errorCode = ErrorCode.DatabaseAdapterFailureAtCommitTransaction;
+                }
+            }
+
+            if (errorCode != ErrorCode.Ok)
             {
                 if (WrapInTransaction)
                 {
-                    databaseAdapter.BeginTransaction();
-                }
+                    log.Warn("Rolling back the script transaction.");
 
-                if (null != CurrentVersion)
-                {
-                    if (!databaseAdapter.ConfirmVersion(DatabaseName, CurrentVersion))
+                    if (!databaseAdapter.RollBackTransaction())
                     {
-                        throw new DatabaseScripterException(ErrorCode.IncorrectCurrentVersion);
+                        log.Error("An error occurred when rolling back the script transaction. You must check the database is in the correct state.");
+                        errorCode = ErrorCode.DatabaseAdapterFailureAtRollbackTransaction;
                     }
-                };
 
-                databaseAdapter.RunCommand(DatabaseName, Command);
-
-                if (null != NewVersion)
-                {
-                    databaseAdapter.SetVersion(DatabaseName, NewVersion);
+                    log.Warn("The script transaction rolled back successfully");
                 }
-
-                if (WrapInTransaction)
+                else
                 {
-                    databaseAdapter.CommitTransaction();
+                    log.Warn("The script will not be rolled back. You must check the database is in the correct state.");
                 }
             }
-            catch (DbException ex)
-            {
-                System.Console.WriteLine(ex.Message);
-                if (WrapInTransaction)
-                {
-                    databaseAdapter.RollBackTransaction();
-                    System.Console.WriteLine("Transaction rolled back");
-                }
-                throw new DatabaseScripterException(ErrorCode.ScriptExecutionException, "An exception occurred when running the script against the database. The script content may be invalid.", ex);
-            }
+
+            return errorCode;
         }
 
         #endregion

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
+using System.Globalization;
 using System.IO;
+using System.Reflection;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
@@ -38,76 +36,93 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         #region IDatabaseAdapter Members
 
-        public void Initialize()
+        public bool Initialize()
         {
-
             fileWriter = System.IO.File.CreateText(FileName);
             fileWriter.AutoFlush = true;
+
+            return true;
         }
 
         /// <summary>
         /// Connects to the database using the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        public void Connect(string connectionString)
+        public bool Connect(string connectionString)
         {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Connect to {0}", connectionString));
-            fileWriter.WriteLine(String.Format("--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Connect to {0}", connectionString));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
         }
 
         /// <summary>
         /// Disconnects from the database
         /// </summary>
-        public void Disconnect()
+        public bool Disconnect()
         {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Disconnect from database"));
-            fileWriter.WriteLine(String.Format("--"));
-        }
-
-        public void BeginTransaction()
-        {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Begin transaction"));
-            fileWriter.WriteLine(String.Format("--"));
-        }
-
-        public void CommitTransaction()
-        {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Commit transaction"));
-            fileWriter.WriteLine(String.Format("--"));
-        }
-
-        public void RollBackTransaction()
-        {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Roll back transaction"));
-            fileWriter.WriteLine(String.Format("--"));
-        }
-
-        public void RunCommand(string databaseName, string command)
-        {
-            fileWriter.WriteLine();
-            fileWriter.WriteLine(command);
-            fileWriter.WriteLine();
-        }
-
-        public bool ConfirmVersion(string databaseName, Version version)
-        {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Confirm current database version is {0}", version));
-            fileWriter.WriteLine(String.Format("--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Disconnect from database"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
 
             return true;
         }
 
-        public void SetVersion(string databaseName, Version version)
+        public bool BeginTransaction()
         {
-            fileWriter.WriteLine(String.Format("--"));
-            fileWriter.WriteLine(String.Format("-- Set database version - {0}", version.ToString()));
-            fileWriter.WriteLine(String.Format("--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Begin transaction"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
+        }
+
+        public bool CommitTransaction()
+        {
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Commit transaction"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
+        }
+
+        public bool RollBackTransaction()
+        {
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Roll back transaction"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
+        }
+
+        public bool RunCommand(string databaseName, string command)
+        {
+            fileWriter.WriteLine();
+            fileWriter.WriteLine(command);
+            fileWriter.WriteLine();
+
+            return true;
+        }
+
+        public bool ConfirmVersion(string databaseName, Version version, out bool confirmed)
+        {
+            confirmed = true;
+
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Confirm current database version is {0}", version));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
+        }
+
+        public bool SetVersion(string databaseName, Version version)
+        {
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Set database version - {0}", version.ToString()));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
+
+            return true;
         }
 
         #endregion

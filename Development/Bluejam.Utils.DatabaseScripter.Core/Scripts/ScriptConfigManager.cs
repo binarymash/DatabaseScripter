@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using System.Configuration;
+﻿using System.Configuration;
+using System.Globalization;
+using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 {
@@ -27,6 +24,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 return Config.DatabaseScripterConfig.Instance.GlobalScriptProperties[propertyName];
             }
 
+            log.ErrorFormat(CultureInfo.InvariantCulture, "Could not find script key \"{0}\" property in the configuration", propertyName);
             throw new DatabaseScripterException(ErrorCode.CouldNotFindPropertyForScript, propertyName);
         }
 
@@ -34,5 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         {
             return ConfigurationManager.ConnectionStrings[GetConfig(scriptConfig, "connection")].ConnectionString;
         }
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(ScriptConfigManager));
     }
 }

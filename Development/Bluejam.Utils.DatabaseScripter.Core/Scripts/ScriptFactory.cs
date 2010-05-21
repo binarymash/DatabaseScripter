@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Configuration;
-using System.IO;
-using System.Xml;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Globalization;
+using log4net;
 
-using Bluejam.Utils.DatabaseScripter.DbAdapter;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 {
@@ -31,6 +25,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
                 var scriptManifest = config.Manifest.GetManifest(scriptConfig.Name);
                 if (scriptManifest == null)
                 {
+                    log.ErrorFormat(CultureInfo.InvariantCulture, "Could not find script \"{0}\" in the manifest file.");
                     throw new DatabaseScripterException(ErrorCode.CouldNotFindScript, scriptConfig.Name);
                 }
                 
@@ -43,6 +38,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         #endregion
 
         #region Non-public methods
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(ScriptFactory));
 
         private static Script CreateScript(Config.ScriptConfig scriptConfig, Config.ScriptManifest scriptManifest)
         {

@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
     public static class ConfigurationFactory
     {
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationFactory));
 
         public static void Create(string[] args)
         {
@@ -27,6 +30,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             }
             catch (ConfigurationErrorsException ex)
             {
+                log.Error("An unexpected error occurred when reading the configuration", ex);  
                 throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
             }
         }

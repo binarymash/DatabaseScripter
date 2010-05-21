@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Configuration;
+using log4net;
 
-using Bluejam.Utils.DatabaseScripter.DbAdapter;
 
 namespace Bluejam.Utils.DatabaseScripter.Core
 {
@@ -12,10 +10,13 @@ namespace Bluejam.Utils.DatabaseScripter.Core
     public sealed class Processor
     {
 
+        private static readonly ILog log = LogManager.GetLogger(typeof(Processor));
+
         public static ErrorCode Run(string[] args)
         {
             try
             {
+
                 if (args.ToList().Exists(arg => string.Equals(arg, "-manifestschema", StringComparison.OrdinalIgnoreCase)))
                 {
                     var manifestValidator = new Config.ManifestValidator();
@@ -31,16 +32,21 @@ namespace Bluejam.Utils.DatabaseScripter.Core
                 var scripts = Scripts.ScriptFactory.Create();
                 foreach (var script in scripts)
                 {
-                    script.Run(adapter);
+                    var errorCode = script.Run(adapter);
+                    if (ErrorCode.Ok != errorCode)
+                    {
+                        log.ErrorFormat(CultureInfo.InvariantCulture, "Script \"{0}\" failed; subsequent scripts will not run.", script.Name);
+                        return errorCode;
+                    }
                 }
-
-                System.Console.WriteLine("Done.");
-                return ErrorCode.Ok;
             }
             catch (DatabaseScripterException ex)
             {
+                log.Error("An error occurred. Check the debug information that follows.", ex);
                 return ex.ErrorCode;
             }
+
+            return ErrorCode.Ok;            
         }
 
         private Processor()

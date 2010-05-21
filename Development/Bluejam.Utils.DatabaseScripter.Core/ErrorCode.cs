@@ -38,6 +38,46 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// <summary>
         /// The configuration contains errors
         /// </summary>
-        InvalidConfig = 7
+        InvalidConfig = 7,
+        /// <summary>
+        /// The preview adapter could not be created
+        /// </summary>
+        FailedToCreatePreviewAdapter = 8,
+        /// <summary>
+        /// The database adapter could not be created
+        /// </summary>
+        FailedToCreateDatabaseAdapter = 9,
+
+
+
+        /// <summary>
+        /// The database adapter failed when connecting to the database
+        /// </summary>
+        DatabaseAdapterFailureAtConnect = 100,
+        /// <summary>
+        /// The database adapter failed when beginning the transaction
+        /// </summary>
+        DatabaseAdapterFailureAtBeginTransaction = 101,
+        /// <summary>
+        /// The database adapter failed when confirming the database version
+        /// </summary>
+        DatabaseAdapterFailureAtConfirmVersion = 102,
+        /// <summary>
+        /// The database adapter failed when executing the command
+        /// </summary>
+        DatabaseAdapterFailureAtRunCommand = 103,
+        /// <summary>
+        /// The database adapter failed when setting the schema version
+        /// </summary>
+        DatabaseAdapterFailureAtSetVersion = 104,
+        /// <summary>
+        /// The database adapter failed when committing the transaction
+        /// </summary>
+        DatabaseAdapterFailureAtCommitTransaction = 105,
+        /// <summary>
+        /// The database adapter failed when rolling back the transaction
+        /// </summary>
+        DatabaseAdapterFailureAtRollbackTransaction = 106,
+
     }
 }

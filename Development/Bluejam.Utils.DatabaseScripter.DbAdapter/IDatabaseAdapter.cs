@@ -11,56 +11,64 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         /// <summary>
         /// Initializes the adapter.
         /// </summary>
-        void Initialize();
+        /// <returns></returns>
+        bool Initialize();
 
         /// <summary>
         /// Connects to the database using the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        void Connect(string connectionString);
+        /// <returns></returns>
+        bool Connect(string connectionString);
 
         /// <summary>
         /// Disconnects from the database
         /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        void Disconnect();
+        /// <returns></returns>
+        bool Disconnect();
 
         /// <summary>
         /// Begins the transaction.
         /// </summary>
-        void BeginTransaction();
+        /// <returns></returns>
+        bool BeginTransaction();
 
         /// <summary>
         /// Commits the transaction.
         /// </summary>
-        void CommitTransaction();
+        /// <returns></returns>
+        bool CommitTransaction();
 
         /// <summary>
         /// Rolls the back transaction.
         /// </summary>
-        void RollBackTransaction();
+        /// <returns></returns>
+        bool RollBackTransaction();
 
         /// <summary>
         /// Runs the command.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="command">The command.</param>
-        void RunCommand(string databaseName, string command);
+        /// <returns></returns>
+        bool RunCommand(string databaseName, string command);
 
         /// <summary>
         /// Confirms the current version of the database matches the specified version.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="version">The version.</param>
+        /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
         /// <returns></returns>
-        bool ConfirmVersion(string databaseName, Version version);
+        bool ConfirmVersion(string databaseName, Version version, out bool confirmed);
 
         /// <summary>
         /// Sets the version.
         /// </summary>
         /// <param name="databaseName">Name of the database.</param>
         /// <param name="version">The version.</param>
-        void SetVersion(string databaseName, Version version);
+        /// <returns></returns>
+        bool SetVersion(string databaseName, Version version);
 
     }
 

@@ -8,13 +8,20 @@ using System.Text;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
+using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Core.Config
 {
     public class ManifestValidator : SchemaValidatorBase
     {
+
+        #region Non-public
+
+        private static readonly ILog log = LogManager.GetLogger(typeof(ManifestValidator));
         private static object syncLock = new Object();
         private static bool isValid;
+
+        #endregion
 
         public ManifestValidator() : base("Bluejam.Utils.DatabaseScripter.Core.ManifestSchema.xsd")
         {
@@ -22,21 +29,23 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         public bool IsValid(string manifestFilePath)
         {
+            log.DebugFormat(CultureInfo.InvariantCulture, "Validating manifest file at {0}", manifestFilePath);
             lock (syncLock)
             {
                 try
                 {
-                    var assembly = Assembly.GetExecutingAssembly();
                     isValid = true;
+                    var assembly = Assembly.GetExecutingAssembly();
                     var execPath = new FileInfo(assembly.Location);
                     if (!Path.IsPathRooted(manifestFilePath))
                     {
                         manifestFilePath = Path.Combine(execPath.Directory.FullName, manifestFilePath);
+                        log.DebugFormat(CultureInfo.InvariantCulture, "The manifest path is relative; expanded to {0}", manifestFilePath);
                     }
 
                     if (!File.Exists(manifestFilePath))
                     {
-                        //TODO: log missing manifest path
+                        log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", manifestFilePath);
                         throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest);
                     }
 
@@ -48,11 +57,19 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     var manifestReader = XmlReader.Create(manifestFilePath, xmlReaderSettings);
                     while (manifestReader.Read()) ;
 
+                    if (isValid)
+                    {
+                        log.Debug("The manifest is valid");
+                    }
+                    else
+                    {
+                        log.Error("The manifest is invalid");
+                    }
                     return isValid;
                 }
                 catch (XmlException ex)
                 {
-                    //TODO: log xml exception
+                    log.Error("An error occurred when validating the manifest", ex); 
                     throw new DatabaseScripterException(ErrorCode.InvalidManifest, "An exception occurred when validating the manifest schema.", ex);
                 }
             }
@@ -60,10 +77,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         private static void ValidationCallback(object sender, ValidationEventArgs e)
         {
-            //TODO: log validation errors
             //TODO: store errors in collection on this.
             isValid = false;
-            Console.WriteLine("Validation Error: {0}", e.Message);
+            log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest contains an error: {0}", e.Message);
         }
 
     }
