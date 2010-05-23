@@ -195,7 +195,14 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
 
             try
             {
-                var currentDatabaseVersion = new Version(_server.Databases[databaseName].ExtendedProperties["SCHEMA_VERSION"].Value as string);
+                var database = _server.Databases[databaseName];
+                if (null == database)
+                {
+                    log.ErrorFormat("There is no database called '{0}' on the server.", databaseName);
+                    return false;
+                }
+
+                var currentDatabaseVersion = new Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
                 log.InfoFormat(CultureInfo.InvariantCulture, "Current database version is {0}", currentDatabaseVersion);
                 confirmed = (version == currentDatabaseVersion);
             }
