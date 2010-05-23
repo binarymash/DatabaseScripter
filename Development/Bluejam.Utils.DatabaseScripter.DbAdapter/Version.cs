@@ -26,6 +26,12 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         public int Minor { get; set; }
 
         /// <summary>
+        /// Gets or sets the build.
+        /// </summary>
+        /// <value>The build.</value>
+        public int Build { get; set; }
+
+        /// <summary>
         /// Gets or sets the revision.
         /// </summary>
         /// <value>The revision.</value>
@@ -40,11 +46,13 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         /// </summary>
         /// <param name="major">The major.</param>
         /// <param name="minor">The minor.</param>
+        /// <param name="build">The build.</param>
         /// <param name="revision">The revision.</param>
-        public Version(int major, int minor, int revision)
+        public Version(int major, int minor, int build, int revision)
         {
             Major = major;
             Minor = minor;
+            Build = build;
             Revision = revision;
         }
 
@@ -56,9 +64,9 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
             }
 
             var versionArray = version.Split('.');
-            if (versionArray.Length != 3)
+            if (versionArray.Length != 4)
             {
-                throw new ArgumentException("Format is not n.n.n", "version");
+                throw new ArgumentException("Format is not n.n.n.n", "version");
             }
 
             int major;
@@ -75,8 +83,15 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
             }
             Minor = minor;
 
+            int build;
+            if (!int.TryParse(versionArray[2], out build))
+            {
+                throw new ArgumentException("Build is not an integer", "version");
+            }
+            Build = build;
+
             int revision;
-            if (!int.TryParse(versionArray[2], out revision))
+            if (!int.TryParse(versionArray[3], out revision))
             {
                 throw new ArgumentException("Revision is not an integer", "version");
             }
@@ -97,6 +112,11 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
                 return this.Minor.CompareTo(other.Minor);
             }
 
+            if (this.Build != other.Build)
+            {
+                return this.Build.CompareTo(other.Build);
+            }
+
             return this.Revision.CompareTo(other.Revision);
         }
 
@@ -110,7 +130,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter
         /// </returns>
         public override string ToString()
         {
-            return this.Major + "." + this.Minor + "." + this.Revision;
+            return this.Major + "." + this.Minor + "." + this.Build + "." + this.Revision;
         }
 
         /// <summary>

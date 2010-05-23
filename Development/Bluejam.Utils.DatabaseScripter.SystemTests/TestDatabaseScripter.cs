@@ -93,7 +93,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
                     //database should exist
                     Assert.IsTrue(server.Databases.Contains("MediaLibrary"));
                     var database = server.Databases["MediaLibrary"];
-                    Assert.AreEqual("0.0.1", database.ExtendedProperties["SCHEMA_VERSION"].Value);
+                    Assert.AreEqual("0.0.0.1", database.ExtendedProperties["SCHEMA_VERSION"].Value);
                     Assert.IsTrue(database.Tables.Contains("CodecType"));
                     Assert.IsTrue(database.Tables.Contains("Encoding"));
                 }
