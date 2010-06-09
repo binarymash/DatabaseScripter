@@ -24,8 +24,8 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         [SetUp]
         public virtual void SetUp()
         {
-            ConfigFileFactory.SetUpConfig("Bluejam.Utils.DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Nominal.config");
-            ConfigFileFactory.SetUpConfig(@"Example\manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Nominal.xml");
+            ConfigFileFactory.SetUpConfig("Bluejam.Utils.DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.Nominal.config");
+            ConfigFileFactory.SetUpConfig(@"Example\manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.Nominal.xml");
 
             connection = new SqlConnection(ConfigurationManager.ConnectionStrings["medialibrary"].ConnectionString);
             connection.Open();

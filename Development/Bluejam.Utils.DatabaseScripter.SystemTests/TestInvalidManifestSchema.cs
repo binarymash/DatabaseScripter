@@ -11,14 +11,14 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestIncorrectManifestNamespace : TestBase
+    public class TestInvalidManifestSchema : TestBase
     {
 
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
-            ConfigFileFactory.SetUpConfig(@"Example\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.InvalidManifest.xml");
+            ConfigFileFactory.SetUpConfig(@"Example\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.InvalidSchema.xml");
         }
 
         [Test]
