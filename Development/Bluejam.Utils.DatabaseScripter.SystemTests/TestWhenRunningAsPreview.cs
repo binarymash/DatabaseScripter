@@ -15,13 +15,14 @@ using NUnit.Framework;
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
     [TestFixture]
-    public class TestWhenRunningAsPreview : TestBase
+    public class TestWhenRunningAsPreview : AbstractTestBase
     {
 
         [SetUp]
         public override void SetUp()
         {
             base.SetUp();
+            ConfigFileFactory.SetUpConfig("test.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.Nominal.config");
         }
 
         [Test]

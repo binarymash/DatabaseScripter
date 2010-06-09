@@ -11,7 +11,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestInvalidManifestSchema : TestBase
+    public class TestInvalidManifestSchema : AbstractTestBase
     {
 
         [SetUp]

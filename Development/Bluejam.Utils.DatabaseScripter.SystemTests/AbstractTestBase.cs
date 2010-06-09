@@ -18,7 +18,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     /// <summary>
     /// Base class for system test cases
     /// </summary>
-    public abstract class TestBase
+    public abstract class AbstractTestBase
     {
 
         [SetUp]

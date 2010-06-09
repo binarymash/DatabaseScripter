@@ -10,7 +10,7 @@ using NUnit.Framework;
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
     [TestFixture]
-    public class TestNominalWhenNotRunningInExeDir : TestBase
+    public class TestNominalWhenNotRunningInExeDir : AbstractTestBase
     {
 
         [Test]

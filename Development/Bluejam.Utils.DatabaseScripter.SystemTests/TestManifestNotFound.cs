@@ -11,7 +11,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestManifestNotFound : TestBase
+    public class TestManifestNotFound : AbstractTestBase
     {
 
         [SetUp]

@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
     [TestFixture]
-    public class TestNominal : TestBase
+    public class TestNominal : AbstractTestBase
     {
 
         [Test]
