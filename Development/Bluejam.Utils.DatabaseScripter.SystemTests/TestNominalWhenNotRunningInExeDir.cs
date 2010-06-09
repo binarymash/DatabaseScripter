@@ -13,13 +13,6 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     public class TestNominalWhenNotRunningInExeDir : TestBase
     {
 
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-            ConfigFileFactory.SetUpConfig("Bluejam.Utils.DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Nominal.config");
-        }
-
         [Test]
         public void Run()
         {

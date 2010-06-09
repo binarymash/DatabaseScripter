@@ -38,12 +38,8 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 }
 
                 var manifestValidator = new ManifestValidator();
-                var result = manifestValidator.IsValid(path);
+                var result = manifestValidator.Validate(path);
                 if (result.ErrorCode != ErrorCode.Ok)
-                {
-                    return new ManifestFactoryResult(result.ErrorCode, null);
-                }
-                if (!result.IsValid)
                 {
                     log.Error("The manifest file is invalid");
                     return new ManifestFactoryResult(ErrorCode.InvalidManifest, null);

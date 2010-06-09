@@ -27,7 +27,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         {
         }
 
-        public ManifestValidatorResult IsValid(string manifestFilePath)
+        public Result Validate(string manifestFilePath)
         {
             log.DebugFormat(CultureInfo.InvariantCulture, "Validating manifest file at {0}", manifestFilePath);
             lock (syncLock)
@@ -46,7 +46,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     if (!File.Exists(manifestFilePath))
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", manifestFilePath);
-                        return new ManifestValidatorResult(ErrorCode.CouldNotFindManifest, false);
+                        return new Result(ErrorCode.CouldNotFindManifest);
                     }
 
                     var xmlReaderSettings = new XmlReaderSettings();
@@ -65,14 +65,14 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     {
                         log.Error("The manifest is invalid");
                     }
-
-                    return new ManifestValidatorResult(ErrorCode.Ok, isValid);
                 }
                 catch (XmlException ex)
                 {
-                    log.Error("An error occurred when validating the manifest", ex); 
-                    throw new DatabaseScripterException(ErrorCode.InvalidManifest, "An exception occurred when validating the manifest schema.", ex);
+                    log.Error("An error occurred when validating the manifest", ex);
+                    isValid = false;
                 }
+
+                return new Result(isValid ? ErrorCode.Ok : ErrorCode.InvalidManifest);
             }
         }
 

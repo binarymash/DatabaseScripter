@@ -22,7 +22,6 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         public override void SetUp()
         {
             base.SetUp();
-            ConfigFileFactory.SetUpConfig("test.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Nominal.config");
         }
 
         [Test]

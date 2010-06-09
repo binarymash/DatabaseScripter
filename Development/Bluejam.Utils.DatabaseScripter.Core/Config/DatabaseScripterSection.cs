@@ -18,10 +18,11 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         public object Create(object parent, object configContext, XmlNode section)
         {
             var configurationValidator = new ConfigurationValidator();
-            if (!configurationValidator.IsValid(section))
+            var configValidatorResult = configurationValidator.Validate(section);
+            if (configValidatorResult.ErrorCode != ErrorCode.Ok)
             {
                 log.Error("The configuration contains errors.");
-                throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.");
+                throw new DatabaseScripterException(configValidatorResult.ErrorCode, "The configuration is invalid.");
             }
 
             // Gets the child element names and attributes.
@@ -39,12 +40,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         DatabaseScripterConfig.Instance.Scripts = GetScripts(child);
                         break;
                     case "manifestPath":
-                        var result = ManifestFactory.Create(child.InnerText);
-                        if (result.ErrorCode != ErrorCode.Ok)
+                        var manifestFactoryResult = ManifestFactory.Create(child.InnerText);
+                        if (manifestFactoryResult.ErrorCode != ErrorCode.Ok)
                         {
-                            throw new DatabaseScripterException(result.ErrorCode, "Failed to read manifest");
+                            throw new DatabaseScripterException(manifestFactoryResult.ErrorCode, "Failed to read manifest");
                         }
-                        DatabaseScripterConfig.Instance.Manifest = result.Manifest;
+                        DatabaseScripterConfig.Instance.Manifest = manifestFactoryResult.Manifest;
                         break;
                 }
             }

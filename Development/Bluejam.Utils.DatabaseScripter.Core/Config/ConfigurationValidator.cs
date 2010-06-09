@@ -23,7 +23,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         {
         }
 
-        public bool IsValid(IXPathNavigable configSectionNode)
+        public Result Validate(IXPathNavigable configSectionNode)
         {
             log.Debug("Validating the configuration");
 
@@ -48,14 +48,14 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     {
                         log.Error("The configuration is invalid");
                     }
-
-                    return isValid;
                 }
                 catch (XmlException ex)
                 {
                     log.Error("An error occurred when validating the configuration", ex);
-                    throw new DatabaseScripterException(ErrorCode.InvalidConfig, "An exception occurred when validating the configuration schema.", ex);
+                    isValid = false;
                 }
+
+                return new Result(isValid ? ErrorCode.Ok : ErrorCode.InvalidConfig);
             }
         }
 
