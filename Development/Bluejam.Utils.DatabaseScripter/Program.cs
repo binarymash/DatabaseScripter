@@ -13,7 +13,7 @@ namespace Bluejam.Utils.DatabaseScripter
 
         private static readonly ILog log = LogManager.GetLogger(typeof(Program));
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             var errorCode = Core.Processor.Run(args);
             if (errorCode == Core.ErrorCode.Ok)
@@ -24,6 +24,8 @@ namespace Bluejam.Utils.DatabaseScripter
             {
                 log.ErrorFormat(CultureInfo.InvariantCulture, "The database scripter exited with error code {0} ({1})", (int)errorCode, errorCode);
             }
+
+            return (int)errorCode;
         }
 
     }

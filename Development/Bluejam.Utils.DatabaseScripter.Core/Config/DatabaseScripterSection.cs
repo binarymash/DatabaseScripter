@@ -39,7 +39,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         DatabaseScripterConfig.Instance.Scripts = GetScripts(child);
                         break;
                     case "manifestPath":
-                        DatabaseScripterConfig.Instance.Manifest = ManifestFactory.Create(child.InnerText);
+                        var result = ManifestFactory.Create(child.InnerText);
+                        if (result.ErrorCode != ErrorCode.Ok)
+                        {
+                            throw new DatabaseScripterException(result.ErrorCode, "Failed to read manifest");
+                        }
+                        DatabaseScripterConfig.Instance.Manifest = result.Manifest;
                         break;
                 }
             }

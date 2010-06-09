@@ -18,7 +18,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        public static Manifest Create(string path)
+        public static ManifestFactoryResult Create(string path)
         {
             log.DebugFormat(CultureInfo.InvariantCulture, "Reading manifest at {0}", path);
 
@@ -34,14 +34,19 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 if (!File.Exists(path))
                 {
                     log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", path);
-                    throw new DatabaseScripterException(ErrorCode.CouldNotFindManifest, path);
+                    return new ManifestFactoryResult(ErrorCode.CouldNotFindManifest, null);
                 }
 
                 var manifestValidator = new ManifestValidator();
-                if (!manifestValidator.IsValid(path))
+                var result = manifestValidator.IsValid(path);
+                if (result.ErrorCode != ErrorCode.Ok)
+                {
+                    return new ManifestFactoryResult(result.ErrorCode, null);
+                }
+                if (!result.IsValid)
                 {
                     log.Error("The manifest file is invalid");
-                    throw new DatabaseScripterException(ErrorCode.InvalidManifest);
+                    return new ManifestFactoryResult(ErrorCode.InvalidManifest, null);
                 }
 
                 //deserialize
@@ -50,12 +55,12 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 var manifest = (Manifest)xmlSerializer.Deserialize(xmlReader);
                 manifest.FilePath = path;
 
-                return manifest;
+                return new ManifestFactoryResult(ErrorCode.Ok, manifest);
             }
             catch (DatabaseScripterException ex)
             {
                 log.Error("An unexpected error occurred when reading the manifest file.", ex);
-                throw;
+                return new ManifestFactoryResult(ErrorCode.UnknownError, null);
             }
         }
 

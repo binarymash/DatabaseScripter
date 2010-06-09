@@ -30,8 +30,19 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             }
             catch (ConfigurationErrorsException ex)
             {
-                log.Error("An unexpected error occurred when reading the configuration", ex);  
-                throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
+                log.Error("An unexpected error occurred when reading the configuration", ex);
+                if (ex.InnerException != null)
+                {
+                    if (ex.InnerException is DatabaseScripterException)
+                    {
+                        //we do this so that we can get a better error code to return to the user
+                        throw ex.InnerException;
+                    }
+                }
+                else
+                {
+                    throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
+                }
             }
         }
     }

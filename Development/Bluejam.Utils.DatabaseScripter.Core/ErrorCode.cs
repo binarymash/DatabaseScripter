@@ -47,6 +47,10 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// The database adapter could not be created
         /// </summary>
         FailedToCreateDatabaseAdapter = 9,
+        /// <summary>
+        /// An unknown error occurred
+        /// </summary>
+        UnknownError = 10,
 
 
 

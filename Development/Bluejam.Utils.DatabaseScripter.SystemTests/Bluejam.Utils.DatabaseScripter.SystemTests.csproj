@@ -53,11 +53,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigFileFactory.cs" />
+    <Compile Include="TestManifestNotFound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDatabaseScripter.cs" />
+    <Compile Include="StreamExtensions.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestNominal.cs" />
+    <Compile Include="TestNominalWhenNotRunningInExeDir.cs" />
+    <Compile Include="TestWhenRunningAsPreview.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Files\Nominal.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\ManifestNotFound.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
