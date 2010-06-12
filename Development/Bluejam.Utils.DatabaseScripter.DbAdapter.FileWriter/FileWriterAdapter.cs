@@ -51,7 +51,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
         public bool Connect(string connectionString)
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
-            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Connect to {0}", connectionString));
+            fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Connect to database"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
 
             return true;

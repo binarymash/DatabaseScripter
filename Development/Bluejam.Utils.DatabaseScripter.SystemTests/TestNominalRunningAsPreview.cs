@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
+using System.Reflection;
 using Bluejam.Utils.DatabaseScripter.Core;
 
 using Microsoft.SqlServer.Management.Common;
@@ -33,7 +34,16 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             //database should still not exist
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
 
-            //TODO: check preview.txt contains expected contents
+            //assert generated preview file
+            var assembly = Assembly.GetExecutingAssembly();
+            var stream = assembly.GetManifestResourceStream("Bluejam.Utils.DatabaseScripter.SystemTests.Files.Asserts.NominalPreview.txt");
+            var streamReader = new StreamReader(stream);
+
+            var generatedPreview = File.ReadAllText("preview.txt");
+            var expectedPreview = streamReader.ReadToEnd();
+            
+            Assert.AreEqual(expectedPreview, generatedPreview);
+
         }
     }
 }
