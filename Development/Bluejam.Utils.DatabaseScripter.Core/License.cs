@@ -16,39 +16,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Core
 {
-
     /// <summary>
-    /// The result of a method call
+    /// Encapsulates license information
     /// </summary>
-    public class Result
+    public static class License
     {
 
-        #region Constructors
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="Result"/> class.
+        /// Gets the splash version of the license.
         /// </summary>
-        /// <param name="errorCode">The error code.</param>
-        public Result(ErrorCode errorCode)
+        /// <value>The splash.</value>
+        public static string Splash
         {
-            ErrorCode = errorCode;
+            get 
+            {
+                return string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    "{1}DatabaseScripter version {0}  Copyright (C) 2010  Philip Wood {1}http://code.google.com/p/databasescripter/{1}{1}This program comes with ABSOLUTELY NO WARRANTY. This is free software, {1}and you are welcome to redistribute it under certain conditions. {1}{1}For more information, see License.txt.{1}{1}{1}",
+                     Assembly.GetExecutingAssembly().GetName().Version.ToString(), 
+                     System.Environment.NewLine);
+            }
         }
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets or sets the error code.
-        /// </summary>
-        /// <value>The error code.</value>
-        public ErrorCode ErrorCode { get; protected set; }
-
-        #endregion
 
     }
 }
