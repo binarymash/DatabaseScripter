@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFileFactory.cs" />
+    <Compile Include="TestIncorrectVersion.cs" />
+    <Compile Include="TestScriptUsingPropertyNotSetInConfig.cs" />
     <Compile Include="TestInvalidConfigSchema.cs" />
     <Compile Include="TestInvalidManifestSchema.cs" />
     <Compile Include="TestManifestNotFound.cs" />
@@ -67,6 +69,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Files\Config\IncorrectVersion.config" />
+    <EmbeddedResource Include="Files\Config\PropertyNotSet.config" />
     <EmbeddedResource Include="Files\Config\ScriptNotInManifest.config" />
     <EmbeddedResource Include="Files\Config\InvalidSchema.config" />
     <EmbeddedResource Include="Files\Manifest\InvalidSchema.xml" />

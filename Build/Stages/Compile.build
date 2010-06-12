@@ -4,7 +4,12 @@
   
     <echo />
 		<echo message="Creating build area directory..."/>
-		<delete dir="${buildarea.solution.dir}" />
+    <delete>
+      <fileset basedir="${buildarea.solution.dir}" defaultexcludes="false">
+        <include name="**/*" />
+      </fileset>
+    </delete>
+<!--		<delete dir="${buildarea.solution.dir}" />-->
 		<mkdir dir="${buildarea.solution.dir}" />			
     
     <echo />
