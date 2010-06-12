@@ -15,7 +15,7 @@ using NUnit.Framework;
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
     [TestFixture]
-    public class TestWhenRunningAsPreview : AbstractTestBase
+    public class TestNominalRunningAsPreview : AbstractTestBase
     {
 
         [SetUp]

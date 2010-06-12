@@ -11,7 +11,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestScriptUsingPropertyNotSetInConfig : AbstractTestBase
+    public class TestWhenScriptUsingPropertyNotSetInConfig : AbstractTestBase
     {
 
         [SetUp]

@@ -7,6 +7,7 @@
       <arg value="-threshold=10" />
       <arg value="-includes=${code.solution.dir}**\*.cs" />
       <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests\*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests\*.cs" />      
       <arg value="-excludes=${ThirdPartyDir}**\*.cs" />
     </exec>
     

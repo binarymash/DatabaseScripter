@@ -54,21 +54,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFileFactory.cs" />
-    <Compile Include="TestIncorrectVersion.cs" />
-    <Compile Include="TestScriptUsingPropertyNotSetInConfig.cs" />
-    <Compile Include="TestInvalidConfigSchema.cs" />
-    <Compile Include="TestInvalidManifestSchema.cs" />
-    <Compile Include="TestManifestNotFound.cs" />
+    <Compile Include="TestWhenPreviewAdapterDoesNotExist.cs" />
+    <Compile Include="TestWhenDatabaseAdapterDoesNotExist.cs" />
+    <Compile Include="TestWhenIncorrectVersion.cs" />
+    <Compile Include="TestWhenScriptUsingPropertyNotSetInConfig.cs" />
+    <Compile Include="TestWhenInvalidConfigSchema.cs" />
+    <Compile Include="TestWhenInvalidManifestSchema.cs" />
+    <Compile Include="TestWhenManifestNotFound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamExtensions.cs" />
     <Compile Include="AbstractTestBase.cs" />
-    <Compile Include="TestScriptNotInManifest.cs" />
+    <Compile Include="TestWhenScriptNotInManifest.cs" />
     <Compile Include="TestNominal.cs" />
     <Compile Include="TestNominalWhenNotRunningInExeDir.cs" />
-    <Compile Include="TestWhenRunningAsPreview.cs" />
+    <Compile Include="TestNominalRunningAsPreview.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Files\Config\PreviewAdapterDoesNotExist.config" />
+    <EmbeddedResource Include="Files\Config\DatabaseAdapterDoesNotExist.config" />
     <EmbeddedResource Include="Files\Config\IncorrectVersion.config" />
     <EmbeddedResource Include="Files\Config\PropertyNotSet.config" />
     <EmbeddedResource Include="Files\Config\ScriptNotInManifest.config" />

@@ -11,7 +11,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestIncorrectVersion : AbstractTestBase
+    public class TestWhenIncorrectVersion : AbstractTestBase
     {
 
         [SetUp]
