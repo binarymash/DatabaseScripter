@@ -1,11 +1,8 @@
-<project name="ConfigGlobal" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
   <!-- svn -->
   <property name="svn.repo" value="https://databasescripter.googlecode.com/svn/trunk" />
-  
-  <!-- base path of the checked out code -->
-  <property name="BaseDir" value="D:\development\code.google\databasescripter\" />
-  
+    
   <!-- build inputs path configuration -->
   <property name="build.dir" value="${BaseDir}build\" />
   <property name="build.stages.dir" value="${build.dir}stages\" />  
@@ -18,7 +15,6 @@
   <property name="ZipExe" value="${ThirdPartyDir}7-Zip\7z.exe" />  
 
   <!-- compiler build configuration -->
-  <property name="MsBuildExe" value="G:\Windows\Microsoft.NET\Framework\v3.5\msbuild.exe" />
   <property name="msbuild.configuration" value="Release" />
   
   <!-- build output path configuration-->

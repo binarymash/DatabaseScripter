@@ -1,8 +1,10 @@
 <project name="DatabaseScripter" default="build" xmlns="http://nant.sf.net/schemas/nant.xsd" basedir=".">
 
-  <property name="stages" value="Version,Compile,Simian,RunUnitTests,FxCop,Package,DeployToTestArea,RunSystemTests" />
+  <property name="stages" value="Configure,Version,Compile,Simian,RunUnitTests,FxCop,Package,DeployToTestArea,RunSystemTests" />
   <property name="projects" value="Bluejam.Utils.DatabaseScripter.DbAdapter,Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer,Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter,Bluejam.Utils.DatabaseScripter.Core,Bluejam.Utils.DatabaseScripter,Bluejam.Utils.DatabaseScripter.Tests,Bluejam.Utils.DatabaseScripter.SystemTests" />
+
   <include buildfile="Config\ConfigDev.build" />
+  <include buildfile="Config\ConfigGlobal.build" />
 
   <target name="build" description="Main build target">
     <foreach item="String" in="${stages}" delim="," property="stage">

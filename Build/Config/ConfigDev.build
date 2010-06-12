@@ -1,3 +1,12 @@
-<project name="ConfigBuild" xmlns="http://nant.sf.net/schemas/nant.xsd">
-  <include buildfile="ConfigGlobal.build" />
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <!-- base path of the checked out code -->
+  <property name="BaseDir" value="D:\development\code.google\databasescripter\" />
+  
+  <!-- compiler build configuration -->
+  <property name="MsBuildExe" value="G:\Windows\Microsoft.NET\Framework\v3.5\msbuild.exe" />
+
+  <!-- database connection -->
+  <property name="ConnectionString" value="Data Source=LAPTOP\SQLEXPRESS;User ID=devadmin;Password=devadminpass" />
+   
 </project>

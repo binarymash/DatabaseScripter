@@ -1,4 +1,4 @@
-<project name="Version" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
   <target name="UpdateVersion" failonerror="false" if="${property::exists('IncrementVersion')}">
 

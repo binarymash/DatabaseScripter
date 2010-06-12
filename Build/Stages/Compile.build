@@ -1,4 +1,4 @@
-<project name="MediaLibrary" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
 
   <target name="CopyToBuildArea" description="Copies the codebase to the build area" >
   
@@ -9,8 +9,10 @@
         <include name="**/*" />
       </fileset>
     </delete>
-<!--		<delete dir="${buildarea.solution.dir}" />-->
 		<mkdir dir="${buildarea.solution.dir}" />			
+
+    <echo>Injecting connection string to app.config</echo>
+    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter/app.config" xpath="/configuration/connectionStrings/add[@name='medialibrary']/@connectionString" value="${ConnectionString}"/>    
     
     <echo />
     <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>

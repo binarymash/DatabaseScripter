@@ -1,4 +1,4 @@
-<project name="run-unit-tests">
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<target name="RunUnitTests">
   
 		<nunit2>
