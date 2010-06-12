@@ -9,21 +9,19 @@
         <include name="**/*" />
       </fileset>
     </delete>
-		<mkdir dir="${buildarea.solution.dir}" />			
 
-    <echo>Injecting connection string to app.config</echo>
-    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter/app.config" xpath="/configuration/connectionStrings/add[@name='medialibrary']/@connectionString" value="${ConnectionString}"/>    
+    <mkdir dir="${buildarea.solution.dir}" />			
     
     <echo />
     <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>
     <copy todir="${buildarea.solution.dir}" >
       <fileset basedir="${code.solution.dir}">
-        <exclude name="output\*.*" />
-        <exclude name="deployed\**" />
-        <exclude name="*\bin\**" />
-        <exclude name="*\obj\**" />
-        <exclude name="*\.svn\**" />
-        <include name="**\*" />   
+        <exclude name="output/*.*" />
+        <exclude name="deployed/**" />
+        <exclude name="*/bin/**" />
+        <exclude name="*/obj/**" />
+        <exclude name="*/.svn/**" />
+        <include name="**/*" />   
       </fileset>        
     </copy>    
   </target>
@@ -33,7 +31,7 @@
     <echo />
     <echo>Compiling...</echo>
     <foreach item="String" in="${projects}" delim="," property="project">    
-      <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}\" />
+      <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}/" />
       <property name="buildarea.project.file" value="${buildarea.project.dir}${project}.csproj" />
       <echo />
       <echo>Compiling ${project} ...</echo>

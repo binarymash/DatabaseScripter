@@ -2,12 +2,12 @@
 
   <target name="ConfigureAppConfig" description="Tweaks the app.config for the specified user config" >
     <echo>Injecting connection string to app.config: ${ConnectionString}</echo>
-    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter/app.config" xpath="/configuration/connectionStrings/add[@name='medialibrary']/@connectionString" value="${ConnectionString}"/>    
+    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter/App.config" xpath="/configuration/connectionStrings/add[@name='medialibrary']/@connectionString" value="${ConnectionString}"/>    
   </target>
 
   <target name="ConfigureSystemTestsAppConfig" description="Tweaks the system tests app.config for the specified user config" >
     <echo>Injecting connection string to system test app.config: ${ConnectionString}</echo>
-    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests/app.config" xpath="/configuration/connectionStrings/add[@name='nominal']/@connectionString" value="${ConnectionString}"/>    
+    <xmlpoke file="${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests/App.config" xpath="/configuration/connectionStrings/add[@name='nominal']/@connectionString" value="${ConnectionString}"/>    
   </target>
   
   <target name="Configure" depends="ConfigureAppConfig,ConfigureSystemTestsAppConfig" />
