@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFileFactory.cs" />
+    <Compile Include="TestWhenConnectionStringIsRejected.cs" />
     <Compile Include="TestWhenPreviewAdapterDoesNotExist.cs" />
     <Compile Include="TestWhenDatabaseAdapterDoesNotExist.cs" />
     <Compile Include="TestWhenIncorrectVersion.cs" />
@@ -71,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="Files\Config\InvalidConnectionString.config" />
     <EmbeddedResource Include="Files\Config\PreviewAdapterDoesNotExist.config" />
     <EmbeddedResource Include="Files\Config\DatabaseAdapterDoesNotExist.config" />
     <EmbeddedResource Include="Files\Config\IncorrectVersion.config" />
