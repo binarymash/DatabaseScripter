@@ -12,11 +12,11 @@
             <xs:sequence>
               <xs:element name="ScriptManifest" minOccurs="0" maxOccurs="unbounded">
                 <xs:complexType>
-                  <xs:sequence>
+                  <xs:all>
                     <xs:element name="Description" type="xs:string" minOccurs="0" />
                     <xs:element name="CurrentVersion" type="xs:string" minOccurs="0" />
                     <xs:element name="NewVersion" type="xs:string" minOccurs="0" />
-                  </xs:sequence>
+                  </xs:all>
                   <xs:attribute name="name" form="unqualified" type="xs:string" />
                   <xs:attribute name="path" form="unqualified" type="xs:string" />
                   <xs:attribute name="transactional" form="unqualified" type="xs:boolean" use="optional" default="false"/>
