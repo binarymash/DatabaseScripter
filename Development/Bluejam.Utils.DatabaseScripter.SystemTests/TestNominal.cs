@@ -31,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         public void Run()
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
-            var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("Bluejam.Utils.DatabaseScripter.exe"));
+            var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
 
             Assert.AreEqual(ErrorCode.Ok, RunApplication(exeFile.FullName));

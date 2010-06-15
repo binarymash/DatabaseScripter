@@ -44,7 +44,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         [Test]
         public void Run()
         {
-            Assert.AreEqual(ErrorCode.Ok, RunApplication("Bluejam.Utils.DatabaseScripter.exe", "-preview"));
+            Assert.AreEqual(ErrorCode.Ok, RunApplication("DatabaseScripter.exe", "-preview"));
 
             //database should still not exist
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));

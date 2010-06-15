@@ -40,6 +40,13 @@ namespace Bluejam.Utils.DatabaseScripter.Core
                     return ErrorCode.Ok;
                 }
 
+                if (args.ToList().Exists(arg => string.Equals(arg, "-configschema", StringComparison.OrdinalIgnoreCase)))
+                {
+                    var configValidator = new Config.ConfigurationValidator();
+                    Console.WriteLine(configValidator.SchemaString);
+                    return ErrorCode.Ok;
+                }
+
                 Config.ConfigurationFactory.Create(args);
 
                 var adapter = Scripts.AdapterFactory.Create();

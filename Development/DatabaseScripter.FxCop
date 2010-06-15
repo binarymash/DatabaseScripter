@@ -24,7 +24,7 @@
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Core.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll" Analyze="True" AnalyzeAllChildren="True" />
-  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.exe" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/Output/DatabaseScripter.exe" Analyze="True" AnalyzeAllChildren="True" />
  </Targets>
  <Rules>
   <RuleFiles>
@@ -339,13 +339,13 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.exe">
+   <Target Name="$(ProjectDir)/Output/DatabaseScripter.exe">
     <Modules>
-     <Module Name="bluejam.utils.databasescripter.exe">
+     <Module Name="databasescripter.exe">
       <Messages>
        <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-03-18 20:50:36Z">
         <Issue Name="NoStrongName">
-         <Item>'Bluejam.Utils.DatabaseScripter.exe'</Item>
+         <Item>'DatabaseScripter.exe'</Item>
         </Issue>
        </Message>
       </Messages>
