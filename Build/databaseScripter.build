@@ -10,6 +10,8 @@
   <echo>Including Config/build.config</echo>
   <include buildfile="Config/build.config" />
   
+  <echo>BaseDir "${BaseDir}"</echo>
+  
   <target name="build" description="Main build target">
     <foreach item="String" in="${stages}" delim="," property="stage">
       <do>
