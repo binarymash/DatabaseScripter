@@ -2,10 +2,14 @@
 
   <property name="stages" value="Configure,Version,Compile,Simian,RunUnitTests,FxCop,Package,DeployToTestArea,RunSystemTests" />
   <property name="projects" value="Bluejam.Utils.DatabaseScripter.DbAdapter,Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer,Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter,Bluejam.Utils.DatabaseScripter.Core,Bluejam.Utils.DatabaseScripter,Bluejam.Utils.DatabaseScripter.Tests,Bluejam.Utils.DatabaseScripter.SystemTests" />
-
-  <include buildfile="Config/user.config" />
+  <property name="userconfig" value="user" />
+  
+  <echo>Including Config/${userconfig}.config</echo>
+  <include buildfile="Config/${userconfig}.config" />  
+  
+  <echo>Including Config/build.config</echo>
   <include buildfile="Config/build.config" />
-
+  
   <target name="build" description="Main build target">
     <foreach item="String" in="${stages}" delim="," property="stage">
       <do>
