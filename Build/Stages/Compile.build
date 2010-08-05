@@ -29,17 +29,22 @@
   <target name="Compile" depends="CopyToBuildArea">
 
     <echo />
-    <echo>Compiling...</echo>
+    <echo>Compiler: ${compiler.exe}</echo>
+    <echo>Configuration: ${msbuild.configuration}</echo>
+    <echo>Solution directory: ${buildarea.solution.dir}</echo>
+    <echo>Output directory: ${buildarea.output.dir}</echo>
+    <echo />
+    
     <foreach item="String" in="${projects}" delim="," property="project">    
       <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}${dir.slash}" />
       <property name="buildarea.project.file" value="${buildarea.project.dir}${project}.csproj" />
       <echo />
       <echo>Compiling ${project} ...</echo>
-      <exec basedir="${buildarea.solution.dir}" program="${compiler.exe}">
-        <arg value="${buildarea.project.file}" />
+      <exec basedir='${buildarea.solution.dir}' program='${compiler.exe}'>
+        <arg value='${buildarea.project.file}' />
         <arg value="/t:Rebuild" />
         <arg value="/v:quiet" />
-        <arg value="/p:Configuration=${msbuild.configuration};OutDir=${buildarea.output.dir}" />
+        <arg value='/p:Configuration=${msbuild.configuration};OutDir=${buildarea.output.dir}' />
       </exec>
     </foreach>
     

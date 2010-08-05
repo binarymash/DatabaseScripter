@@ -2,7 +2,7 @@
 
   <property name="userconfig" value="user" />
 
-  <include buildfile="Config/${userconfig}.config" />  
+  <include buildfile="Config/user/${userconfig}.config" />  
   <include buildfile="Config/platform/${platform}.config" />
 
   <property name="base.dir" value="${directory::get-parent-directory(project::get-base-directory())}${dir.slash}" />  
