@@ -39,7 +39,7 @@
     <!-- build output path configuration-->
     <property name="buildarea.dir" value="${base.dir}BuildWorkspace${dir.slash}" />
     <property name="buildarea.solution.dir" value="${buildarea.dir}databasescripter${dir.slash}" />
-    <property name="buildarea.output.dir" value="${buildarea.solution.dir}${dir.slash}Output${dir.slash}" />
+    <property name="buildarea.output.dir" value="${buildarea.solution.dir}Output${dir.slash}" />
 
     <!-- system test configuration -->
     <property name="testarea.dir" value="${base.dir}TestDeployment${dir.slash}" dynamic="true" />
