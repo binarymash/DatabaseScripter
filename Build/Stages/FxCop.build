@@ -1,6 +1,6 @@
 <project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
-  <property name="artifacts.fxcop.dir" value="${artifacts.dir}FxCop\" />
+  <property name="artifacts.fxcop.dir" value="${artifacts.dir}FxCop${dir.slash}" />
   <property name="artifacts.fxcop.file" value="${artifacts.fxcop.dir}DatabaseScripter.xml" />
 
   <target name="FxCop">

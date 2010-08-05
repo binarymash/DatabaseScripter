@@ -1,18 +1,55 @@
 <project name="DatabaseScripter" default="build" xmlns="http://nant.sf.net/schemas/nant.xsd" basedir=".">
 
-  <property name="stages" value="Configure,Version,Compile,Simian,RunUnitTests,FxCop,Package,DeployToTestArea,RunSystemTests" />
-  <property name="projects" value="Bluejam.Utils.DatabaseScripter.DbAdapter,Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer,Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter,Bluejam.Utils.DatabaseScripter.Core,Bluejam.Utils.DatabaseScripter,Bluejam.Utils.DatabaseScripter.Tests,Bluejam.Utils.DatabaseScripter.SystemTests" />
   <property name="userconfig" value="user" />
-  
-  <echo>Including Config/${userconfig}.config</echo>
+
   <include buildfile="Config/${userconfig}.config" />  
-  
-  <echo>Including Config/build.config</echo>
-  <include buildfile="Config/build.config" />
-  
-  <echo>BaseDir "${BaseDir}"</echo>
-  
+  <include buildfile="Config/platform/${platform}.config" />
+
+  <property name="base.dir" value="${directory::get-parent-directory(project::get-base-directory())}${dir.slash}" />  
+    
   <target name="build" description="Main build target">
+  
+    <echo />
+    <echo>Building database scripter...</echo>
+    <echo />
+    <echo>User: ${userconfig}</echo>
+    <echo>Platform: ${platform}</echo>
+    <echo />
+    <echo>Base directory: ${base.dir}</echo>
+    <echo />
+    <echo>User config: ${base.dir}Config${dir.slash}${userconfig}.config</echo>
+    <echo>Platform config: ${base.dir}Config${dir.slash}platform${dir.slash}${platform}.config</echo>
+    <echo />
+    <echo />
+
+    <!-- svn -->
+    <property name="svn.repo" value="https://databasescripter.googlecode.com/svn/trunk" />
+      
+    <!-- build inputs path configuration -->
+    <property name="build.dir" value="${base.dir}Build${dir.slash}" />
+    <property name="build.stages.dir" value="${build.dir}Stages${dir.slash}" />  
+    <property name="code.solution.dir" value="${base.dir}Development${dir.slash}" />
+
+    <!-- paths to third party tools used in build process -->
+    <property name="ThirdPartyDir" value="${code.solution.dir}ThirdParty${dir.slash}" />
+    <property name="SimianExe" value="${ThirdPartyDir}Simian${dir.slash}bin${dir.slash}simian-2.2.24.exe" />
+    <property name="FxCopExe" value="${ThirdPartyDir}Fxcop${dir.slash}FxCopCmd.exe" />
+    <property name="ZipExe" value="${ThirdPartyDir}7-Zip${dir.slash}7z.exe" />  
+
+    <!-- build output path configuration-->
+    <property name="buildarea.dir" value="${base.dir}BuildWorkspace${dir.slash}" />
+    <property name="buildarea.solution.dir" value="${buildarea.dir}databasescripter${dir.slash}" />
+    <property name="buildarea.output.dir" value="${buildarea.solution.dir}${dir.slash}Output${dir.slash}" />
+
+    <!-- system test configuration -->
+    <property name="testarea.dir" value="${base.dir}TestDeployment${dir.slash}" dynamic="true" />
+
+    <!-- build artifacts configuration -->  
+    <property name="artifacts.dir" value="${base.dir}Artifacts${dir.slash}" dynamic="true" />
+
+    <!-- packaged output configuration -->
+    <property name="package.dir" value="${base.dir}Package${dir.slash}" dynamic="true" />
+    
     <foreach item="String" in="${stages}" delim="," property="stage">
       <do>
         <nant buildfile="${build.stages.dir}${stage}.build" target="${stage}" inheritall="true" inheritrefs="false" />
@@ -21,3 +58,4 @@
   </target>
   
 </project>
+

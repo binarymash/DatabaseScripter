@@ -11,9 +11,9 @@
 		</nunit2>
 		
     <!--
-		<nunit2report format="NoFrames" todir="${artifacts.dir}\UnitTests" failonerror="true" >
+		<nunit2report format="NoFrames" todir="${artifacts.dir}${dir.slash}UnitTests" failonerror="true" >
 			<fileset>
-				<include name="${artifacts.dir}\UnitTests\Bluejam.Utils.DatabaseScripter.Tests.dll-results.xml" />
+				<include name="${artifacts.dir}${dir.slash}UnitTests${dir.slash}Bluejam.Utils.DatabaseScripter.Tests.dll-results.xml" />
 			</fileset>
 		</nunit2report>
     -->

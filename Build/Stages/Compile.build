@@ -16,12 +16,12 @@
     <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>
     <copy todir="${buildarea.solution.dir}" >
       <fileset basedir="${code.solution.dir}">
-        <exclude name="output/*.*" />
-        <exclude name="deployed/**" />
-        <exclude name="*/bin/**" />
-        <exclude name="*/obj/**" />
-        <exclude name="*/.svn/**" />
-        <include name="**/*" />   
+        <exclude name="output${dir.slash}*.*" />
+        <exclude name="deployed${dir.slash}**" />
+        <exclude name="*${dir.slash}bin${dir.slash}**" />
+        <exclude name="*${dir.slash}obj${dir.slash}**" />
+        <exclude name="*${dir.slash}.svn${dir.slash}**" />
+        <include name="**${dir.slash}*" />   
       </fileset>        
     </copy>    
   </target>
@@ -31,11 +31,11 @@
     <echo />
     <echo>Compiling...</echo>
     <foreach item="String" in="${projects}" delim="," property="project">    
-      <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}/" />
+      <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}${dir.slash}" />
       <property name="buildarea.project.file" value="${buildarea.project.dir}${project}.csproj" />
       <echo />
       <echo>Compiling ${project} ...</echo>
-      <exec basedir="${buildarea.solution.dir}" program="${MsBuildExe}">
+      <exec basedir="${buildarea.solution.dir}" program="${compiler.exe}">
         <arg value="${buildarea.project.file}" />
         <arg value="/t:Rebuild" />
         <arg value="/v:quiet" />

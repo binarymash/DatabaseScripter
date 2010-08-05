@@ -15,8 +15,8 @@
 		<echo message="Copying main output..."/>
 		<copy todir="${package.dir}temp" >
 			<fileset basedir="${buildarea.output.dir}">
-				<include name="**\*" />
-				<exclude name="**\*.pdb" />
+				<include name="**${dir.slash}*" />
+				<exclude name="**${dir.slash}*.pdb" />
 			</fileset>
 		</copy>
 				    		
@@ -35,7 +35,7 @@
 			<arg value="a"/>
 			<arg value="-r"/>
 			<arg value="${package.file}"/>
-			<arg value="${package.dir}temp\*"/>
+			<arg value="${package.dir}temp${dir.slash}*"/>
 		</exec>
 
     <echo message="Created ${package.file}"/>		
