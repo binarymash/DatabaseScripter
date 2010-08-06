@@ -1,5 +1,5 @@
 <project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
-  
+
   <target name="CompileWithXBuild">
 
     <echo />
@@ -8,18 +8,18 @@
     <echo>Solution directory: ${buildarea.solution.dir}</echo>
     <echo>Output directory: ${buildarea.output.dir}</echo>
     <echo />
-    
+
     <foreach item="String" in="${projects}" delim="," property="project">    
       <property name="buildarea.project.dir" value="${buildarea.solution.dir}${project}${dir.slash}" />
       <property name="buildarea.project.file" value="${buildarea.project.dir}${project}.csproj" />
       <echo />
       <echo>Compiling ${project} ...</echo>
       <exec basedir='${buildarea.solution.dir}' program='${compiler.exe}'>
-        <arg value='/target:${buildarea.project.file}' />
+        <arg value='${buildarea.project.file}' />
         <arg value="/verbosity:quiet" />
       </exec>
     </foreach>
-    
+
   </target>
-  
+
 </project>
