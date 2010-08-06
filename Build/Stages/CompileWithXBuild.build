@@ -1,6 +1,6 @@
 <project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
-  <target name="Compile">
+  <target name="CompileWithXBuild">
 
     <echo />
     <echo>Compiler: ${compiler.exe}</echo>
@@ -15,10 +15,8 @@
       <echo />
       <echo>Compiling ${project} ...</echo>
       <exec basedir='${buildarea.solution.dir}' program='${compiler.exe}'>
-        <arg value='${buildarea.project.file}' />
-        <arg value="/t:Rebuild" />
-        <arg value="/v:quiet" />
-        <arg value='/p:Configuration=${msbuild.configuration};OutDir="${buildarea.output.dir}${dir.slash}"' />
+        <arg value='/target:${buildarea.project.file}' />
+        <arg value="/verbosity:quiet" />
       </exec>
     </foreach>
     

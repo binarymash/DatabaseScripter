@@ -1,0 +1,29 @@
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <target name="CopyToBuildArea" description="Copies the codebase to the build area" >
+  
+    <echo />
+		<echo message="Creating build area directory..."/>
+    <delete>
+      <fileset basedir="${buildarea.solution.dir}" defaultexcludes="false">
+        <include name="**/*" />
+      </fileset>
+    </delete>
+
+    <mkdir dir="${buildarea.solution.dir}" />			
+    
+    <echo />
+    <echo>Copying codebase from ${code.solution.dir} to ${buildarea.solution.dir} ...</echo>
+    <copy todir="${buildarea.solution.dir}" >
+      <fileset basedir="${code.solution.dir}">
+        <exclude name="output${dir.slash}*.*" />
+        <exclude name="deployed${dir.slash}**" />
+        <exclude name="*${dir.slash}bin${dir.slash}**" />
+        <exclude name="*${dir.slash}obj${dir.slash}**" />
+        <exclude name="*${dir.slash}.svn${dir.slash}**" />
+        <include name="**${dir.slash}*" />   
+      </fileset>        
+    </copy>    
+  </target>
+    
+</project>
