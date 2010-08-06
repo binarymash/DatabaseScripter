@@ -44,7 +44,7 @@
         <arg value='${buildarea.project.file}' />
         <arg value="/t:Rebuild" />
         <arg value="/v:quiet" />
-        <arg value='/p:Configuration=${msbuild.configuration};OutDir=${buildarea.output.dir}' />
+        <arg value='/p:Configuration=${msbuild.configuration};OutDir="${buildarea.output.dir}${dir.slash}"' />
       </exec>
     </foreach>
     
