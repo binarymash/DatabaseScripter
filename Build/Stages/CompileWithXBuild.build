@@ -16,7 +16,7 @@
       <echo>Compiling ${project} ...</echo>
       <exec basedir='${buildarea.solution.dir}' program='${compiler.exe}'>
         <arg value='${buildarea.project.file}' />
-        <arg value="/verbosity:quiet" />
+        <arg value="/verbosity:detailed" />
       </exec>
     </foreach>
 
