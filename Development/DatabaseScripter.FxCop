@@ -23,7 +23,7 @@
  <Targets>
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Core.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter.dll" Analyze="True" AnalyzeAllChildren="True" />
-  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Domain.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Services.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/DatabaseScripter.exe" Analyze="True" AnalyzeAllChildren="True" />
@@ -89,25 +89,31 @@
      </Message>
     </Messages>
    </Namespace>
-   <Namespace Name="Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer">
+   <Namespace Name="Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo">
     <Messages>
-     <Message Id="Db" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2010-03-18 20:50:36Z">
+     <Message Id="Db" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2010-08-14 19:53:38Z">
       <Issue Name="Namespace">
        <Item>Db</Item>
-       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</Item>
        <Item>DB</Item>
       </Issue>
      </Message>
-     <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+     <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
       <Issue Name="Namespace">
        <Item>Bluejam</Item>
-       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</Item>
       </Issue>
      </Message>
-     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+     <Message Id="Smo" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
+      <Issue Name="Namespace">
+       <Item>Smo</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</Item>
+      </Issue>
+     </Message>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
       <Issue Name="Namespace">
        <Item>Utils</Item>
-       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</Item>
       </Issue>
      </Message>
     </Messages>
@@ -237,32 +243,38 @@
      </Module>
     </Modules>
    </Target>
-   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll">
+   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll">
     <Modules>
-     <Module Name="bluejam.utils.databasescripter.dbadapter.sqlserver.dll">
+     <Module Name="bluejam.utils.databasescripter.dbadapter.sqlserversmo.dll">
       <Messages>
-       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-08-14 19:53:38Z">
         <Issue Name="NoStrongName">
-         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll'</Item>
         </Issue>
        </Message>
-       <Message Id="Db" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message Id="Db" TypeName="IdentifiersShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1709" Status="Excluded" Created="2010-08-14 19:53:38Z">
         <Issue Name="Assembly">
          <Item>Db</Item>
-         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll'</Item>
          <Item>DB</Item>
         </Issue>
        </Message>
-       <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
         <Issue Name="Assembly">
          <Item>Bluejam</Item>
-         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll'</Item>
         </Issue>
        </Message>
-       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message Id="Smo" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
+        <Issue Name="Assembly">
+         <Item>Smo</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll'</Item>
+        </Issue>
+       </Message>
+       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-14 19:53:38Z">
         <Issue Name="Assembly">
          <Item>Utils</Item>
-         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll'</Item>
         </Issue>
        </Message>
       </Messages>

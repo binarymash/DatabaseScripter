@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CC03B955-5258-46E4-A7B5-63E9001B71AA}</ProjectGuid>
+    <ProjectGuid>{C3CE3A43-AFE1-4AAB-89BB-0C2C9971F876}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bluejam.Utils.DatabaseScripter.Tests</RootNamespace>
-    <AssemblyName>Bluejam.Utils.DatabaseScripter.Tests</AssemblyName>
+    <RootNamespace>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</RootNamespace>
+    <AssemblyName>Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,10 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.5.3.9345, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\ThirdParty\NUnit-2.5.3.9345\bin\net-2.0\nunit.framework.dll</HintPath>
+      <HintPath>..\ThirdParty\Castle-Windsor-2.1.1\bin\net-3.5\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.ConnectionInfo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Management.Sdk.Sfc, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SqlServer.Smo, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -52,29 +55,13 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Domain\TestManifest.cs" />
-    <Compile Include="Core\Scripts\TestScriptConfigInjector.cs" />
-    <Compile Include="Core\Scripts\TestScriptConfigManager.cs" />
-    <Compile Include="Core\Scripts\TestScriptFactory.cs" />
-    <Compile Include="Domain\TestVersion.cs" />
+    <Compile Include="Adapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
-      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter\Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter.csproj">
-      <Project>{550F30DF-BF78-4308-BFFC-F95E78605BF0}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
       <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter\Bluejam.Utils.DatabaseScripter.csproj">
-      <Project>{9C90713C-9E9D-47F1-9118-00CBBE7713DE}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

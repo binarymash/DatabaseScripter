@@ -20,7 +20,7 @@ using System.Reflection;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
-    public class FileWriterAdapter : Domain.IDatabaseAdapter
+    public class Adapter : Domain.IDatabaseAdapter
     {
 
         #region Properties
@@ -41,7 +41,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         #region Constructors
 
-        public FileWriterAdapter()
+        public Adapter()
         {
             var execPath = new FileInfo(Assembly.GetExecutingAssembly().Location);
             FileName = Path.Combine(execPath.Directory.FullName, "preview.txt");
@@ -161,7 +161,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
         }
 
         // Use C# destructor syntax for finalization code.
-        ~FileWriterAdapter()
+        ~Adapter()
         {
             // Simply call Dispose(false).
             Dispose(false);
