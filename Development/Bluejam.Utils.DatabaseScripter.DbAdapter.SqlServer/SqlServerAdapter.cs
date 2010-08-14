@@ -19,11 +19,12 @@ using System.Globalization;
 using log4net;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
 {
-    public class SqlServerAdapter : IDatabaseAdapter
+    public class SqlServerAdapter : Domain.IDatabaseAdapter
     {
 
         #region Non-public
@@ -204,7 +205,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
         /// <param name="version">The version.</param>
         /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
         /// <returns></returns>
-        public bool ConfirmVersion(string databaseName, Version version, out bool confirmed)
+        public bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
         {
             confirmed = false;
 
@@ -217,7 +218,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
                     return false;
                 }
 
-                var currentDatabaseVersion = new Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
+                var currentDatabaseVersion = new Domain.Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
                 log.InfoFormat(CultureInfo.InvariantCulture, "Current database version is {0}", currentDatabaseVersion);
                 confirmed = (version == currentDatabaseVersion);
             }
@@ -241,7 +242,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServer
         /// </summary>
         /// <param name="version">The version.</param>
         /// <returns></returns>
-        public bool SetVersion(string databaseName, Version version)
+        public bool SetVersion(string databaseName, Domain.Version version)
         {
             try
             {

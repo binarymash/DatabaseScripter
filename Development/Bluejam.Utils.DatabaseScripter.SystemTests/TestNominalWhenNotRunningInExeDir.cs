@@ -40,7 +40,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
                 Assert.IsNull(newDirectoryInfo.GetFiles().ToList().Find(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe")));
                 var exeFile = originalDirectoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
 
-                Assert.AreEqual(ErrorCode.Ok, RunApplication(exeFile.FullName));
+                Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName));
 
                 //database should exist
                 Assert.IsTrue(server.Databases.Contains("MediaLibrary"));

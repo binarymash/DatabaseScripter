@@ -60,9 +60,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
-      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
+      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Services\Bluejam.Utils.DatabaseScripter.Services.csproj">
+      <Project>{DC3C4437-46AE-4790-86EB-E23432806A60}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

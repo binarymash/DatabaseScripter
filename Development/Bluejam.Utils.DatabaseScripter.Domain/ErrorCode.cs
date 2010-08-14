@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bluejam.Utils.DatabaseScripter.Core
+namespace Bluejam.Utils.DatabaseScripter.Domain
 {
     public enum ErrorCode
     {

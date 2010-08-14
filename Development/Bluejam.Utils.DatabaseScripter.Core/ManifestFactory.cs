@@ -20,7 +20,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using log4net;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
 
     public static class ManifestFactory
@@ -49,29 +49,29 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 if (!File.Exists(path))
                 {
                     log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", path);
-                    return new ManifestFactoryResult(ErrorCode.CouldNotFindManifest, null);
+                    return new ManifestFactoryResult(Domain.ErrorCode.CouldNotFindManifest, null);
                 }
 
                 var manifestValidator = new ManifestValidator();
                 var result = manifestValidator.Validate(path);
-                if (result.ErrorCode != ErrorCode.Ok)
+                if (result.ErrorCode != Domain.ErrorCode.Ok)
                 {
                     log.Error("The manifest file is invalid");
-                    return new ManifestFactoryResult(ErrorCode.InvalidManifest, null);
+                    return new ManifestFactoryResult(Domain.ErrorCode.InvalidManifest, null);
                 }
 
                 //deserialize
                 var xmlReader = XmlReader.Create(path);
-                var xmlSerializer = new XmlSerializer(typeof(Manifest));
-                var manifest = (Manifest)xmlSerializer.Deserialize(xmlReader);
+                var xmlSerializer = new XmlSerializer(typeof(Domain.Manifest));
+                var manifest = (Domain.Manifest)xmlSerializer.Deserialize(xmlReader);
                 manifest.FilePath = path;
 
-                return new ManifestFactoryResult(ErrorCode.Ok, manifest);
+                return new ManifestFactoryResult(Domain.ErrorCode.Ok, manifest);
             }
             catch (DatabaseScripterException ex)
             {
                 log.Error("An unexpected error occurred when reading the manifest file.", ex);
-                return new ManifestFactoryResult(ErrorCode.UnknownError, null);
+                return new ManifestFactoryResult(Domain.ErrorCode.UnknownError, null);
             }
         }
 

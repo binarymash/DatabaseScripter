@@ -89,6 +89,10 @@
       <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
+      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Files\Manifest\Nominal.xml" />

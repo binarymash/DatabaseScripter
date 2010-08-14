@@ -21,8 +21,9 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using log4net;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public class DatabaseScripterSection : IConfigurationSectionHandler
     {
@@ -34,7 +35,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         {
             var configurationValidator = new ConfigurationValidator();
             var configValidatorResult = configurationValidator.Validate(section);
-            if (configValidatorResult.ErrorCode != ErrorCode.Ok)
+            if (configValidatorResult.ErrorCode != Domain.ErrorCode.Ok)
             {
                 log.Error("The configuration contains errors.");
                 throw new DatabaseScripterException(configValidatorResult.ErrorCode, "The configuration is invalid.");
@@ -56,7 +57,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                         break;
                     case "manifestPath":
                         var manifestFactoryResult = ManifestFactory.Create(child.InnerText);
-                        if (manifestFactoryResult.ErrorCode != ErrorCode.Ok)
+                        if (manifestFactoryResult.ErrorCode != Domain.ErrorCode.Ok)
                         {
                             throw new DatabaseScripterException(manifestFactoryResult.ErrorCode, "Failed to read manifest");
                         }
@@ -74,9 +75,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         private static readonly ILog log = LogManager.GetLogger(typeof(DatabaseScripterSection));
 
-        private static List<ScriptConfig> GetScripts(XmlNode node)
+        private static List<Domain.ScriptConfig> GetScripts(XmlNode node)
         {
-            var scripts = new List<ScriptConfig>();
+            var scripts = new List<Domain.ScriptConfig>();
 
             foreach (XmlNode child in node.ChildNodes)
             {
@@ -109,9 +110,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
             return properties;
         }
 
-        private static ScriptConfig GetScript(XmlNode node)
+        private static Domain.ScriptConfig GetScript(XmlNode node)
         {
-            var script = new ScriptConfig();
+            var script = new Domain.ScriptConfig();
             foreach (XmlAttribute attribute in node.Attributes)
             {
                 switch (attribute.Name)

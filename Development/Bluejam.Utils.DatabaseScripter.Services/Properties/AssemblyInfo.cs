@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Bluejam.Utils.DatabaseScripter.DbAdapter.Interfaces")]
+[assembly: AssemblyTitle("Bluejam.Utils.DatabaseScripter.Services")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Bluejam.Utils.DatabaseScripter.DbAdapter.Interfaces")]
+[assembly: AssemblyProduct("Bluejam.Utils.DatabaseScripter.Services")]
 [assembly: AssemblyCopyright("Copyright ©  2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
 
-[assembly: CLSCompliant(true)]
-
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("4ccbdc56-6bb6-45c1-a06e-ba9d856331fb")]
+[assembly: Guid("18905b49-e3eb-410c-ac05-39d710f46528")]
+
+[assembly: CLSCompliant(true)]

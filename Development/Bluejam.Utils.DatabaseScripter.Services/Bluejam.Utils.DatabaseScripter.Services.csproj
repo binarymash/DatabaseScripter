@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}</ProjectGuid>
+    <ProjectGuid>{DC3C4437-46AE-4790-86EB-E23432806A60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bluejam.Utils.DatabaseScripter.DbAdapter</RootNamespace>
-    <AssemblyName>Bluejam.Utils.DatabaseScripter.DbAdapter</AssemblyName>
+    <RootNamespace>Bluejam.Utils.DatabaseScripter.Services</RootNamespace>
+    <AssemblyName>Bluejam.Utils.DatabaseScripter.Services</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\Output\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\Castle-Windsor-2.1.1\bin\net-3.5\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -48,9 +52,20 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="IDatabaseAdapter.cs" />
+    <Compile Include="LicenceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Version.cs" />
+    <Compile Include="ConfigService.cs" />
+    <Compile Include="ScriptingService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
+      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

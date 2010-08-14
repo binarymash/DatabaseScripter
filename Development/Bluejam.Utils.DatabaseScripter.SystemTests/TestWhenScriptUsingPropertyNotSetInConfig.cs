@@ -42,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(ErrorCode.CouldNotFindPropertyForScript, RunApplication(exeFile.FullName));
+            Assert.AreEqual(Domain.ErrorCode.CouldNotFindPropertyForScript, RunApplication(exeFile.FullName));
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
         }
 

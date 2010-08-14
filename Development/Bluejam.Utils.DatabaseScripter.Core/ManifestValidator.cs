@@ -25,7 +25,7 @@ using System.Xml.Schema;
 using System.Xml.Serialization;
 using log4net;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public class ManifestValidator : SchemaValidatorBase
     {
@@ -61,7 +61,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     if (!File.Exists(manifestFilePath))
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", manifestFilePath);
-                        return new Result(ErrorCode.CouldNotFindManifest);
+                        return new Result(Domain.ErrorCode.CouldNotFindManifest);
                     }
 
                     var xmlReaderSettings = new XmlReaderSettings();
@@ -87,7 +87,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     isValid = false;
                 }
 
-                return new Result(isValid ? ErrorCode.Ok : ErrorCode.InvalidManifest);
+                return new Result(isValid ? Domain.ErrorCode.Ok : Domain.ErrorCode.InvalidManifest);
             }
         }
 

@@ -15,10 +15,14 @@
 
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
+
 using log4net;
 
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public static class ScriptFactory
     {
@@ -29,19 +33,19 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// Creates this instance.
         /// </summary>
         /// <returns></returns>
-        public static ICollection<Script> Create()
+        public static ICollection<Domain.Script> Create()
         {
-            var config = Config.DatabaseScripterConfig.Instance;
+            var config = DatabaseScripterConfig.Instance;
 
-            var scripts = new List<Script>();
+            var scripts = new List<Domain.Script>();
 
-            foreach (var scriptConfig in Config.DatabaseScripterConfig.Instance.Scripts)
+            foreach (var scriptConfig in DatabaseScripterConfig.Instance.Scripts)
             {
                 var scriptManifest = config.Manifest.GetManifest(scriptConfig.Name);
                 if (scriptManifest == null)
                 {
                     log.ErrorFormat(CultureInfo.InvariantCulture, "Could not find script \"{0}\" in the manifest file.");
-                    throw new DatabaseScripterException(ErrorCode.CouldNotFindScript, scriptConfig.Name);
+                    throw new DatabaseScripterException(Domain.ErrorCode.CouldNotFindScript, scriptConfig.Name);
                 }
                 
                 scripts.Add(CreateScript(scriptConfig, scriptManifest));
@@ -56,9 +60,17 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptFactory));
 
-        private static Script CreateScript(Config.ScriptConfig scriptConfig, Config.ScriptManifest scriptManifest)
+        private static Domain.Script CreateScript(Domain.ScriptConfig scriptConfig, Domain.ScriptManifest scriptManifest)
         {
-            return new Script(scriptConfig, scriptManifest);
+            var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(DatabaseScripterConfig.Instance.Manifest.FilePath), scriptManifest.Path));
+
+            return new Domain.Script(scriptConfig.Name,
+                scriptManifest.Description,
+                ScriptConfigManager.GetConfig(scriptConfig, "databaseName"),
+                ScriptConfigManager.GetConnectionString(scriptConfig), scriptManifest.WrapInTransaction,
+                (scriptManifest.CurrentVersion == null) ? null : new Domain.Version(scriptManifest.CurrentVersion),
+                (scriptManifest.NewVersion == null) ? null : new Domain.Version(scriptManifest.NewVersion),
+                ScriptConfigInjector.InjectConfig(command, scriptConfig));
         }
 
         #endregion

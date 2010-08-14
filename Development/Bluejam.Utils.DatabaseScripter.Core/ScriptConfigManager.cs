@@ -16,8 +16,9 @@
 using System.Configuration;
 using System.Globalization;
 using log4net;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public static class ScriptConfigManager
     {
@@ -27,23 +28,23 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// <param name="scriptConfig">The script config.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <returns></returns>
-        public static string GetConfig(Config.ScriptConfig scriptConfig, string propertyName)
+        public static string GetConfig(Domain.ScriptConfig scriptConfig, string propertyName)
         {
             if (scriptConfig.Properties.ContainsKey(propertyName))
             {
                 return scriptConfig.Properties[propertyName];
             }
 
-            if (Config.DatabaseScripterConfig.Instance.GlobalScriptProperties.ContainsKey(propertyName))
+            if (DatabaseScripterConfig.Instance.GlobalScriptProperties.ContainsKey(propertyName))
             {
-                return Config.DatabaseScripterConfig.Instance.GlobalScriptProperties[propertyName];
+                return DatabaseScripterConfig.Instance.GlobalScriptProperties[propertyName];
             }
 
             log.ErrorFormat(CultureInfo.InvariantCulture, "Could not find script key \"{0}\" property in the configuration", propertyName);
-            throw new DatabaseScripterException(ErrorCode.CouldNotFindPropertyForScript, propertyName);
+            throw new DatabaseScripterException(Domain.ErrorCode.CouldNotFindPropertyForScript, propertyName);
         }
 
-        public static string GetConnectionString(Config.ScriptConfig scriptConfig)
+        public static string GetConnectionString(Domain.ScriptConfig scriptConfig)
         {
             return ConfigurationManager.ConnectionStrings[GetConfig(scriptConfig, "connection")].ConnectionString;
         }

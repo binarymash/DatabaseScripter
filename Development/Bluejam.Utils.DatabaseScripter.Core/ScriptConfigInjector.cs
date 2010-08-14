@@ -16,12 +16,13 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 using log4net;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public static class ScriptConfigInjector
     {
-        public static string InjectConfig(string command, Config.ScriptConfig config)
+        public static string InjectConfig(string command, Domain.ScriptConfig config)
         {
             var regex = new Regex(@"\x7B[a-zA-z0-9\-_]+\x7D");
             var match = regex.Match(command);

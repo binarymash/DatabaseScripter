@@ -15,10 +15,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace Bluejam.Utils.DatabaseScripter.DbAdapter
+namespace Bluejam.Utils.DatabaseScripter.Domain
 {
     public interface IDatabaseAdapter : IDisposable
     {

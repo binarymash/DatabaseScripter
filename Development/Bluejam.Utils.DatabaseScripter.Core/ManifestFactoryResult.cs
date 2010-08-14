@@ -17,8 +17,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public class ManifestFactoryResult : Result
     {
@@ -30,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="manifest">The manifest.</param>
-        public ManifestFactoryResult(ErrorCode errorCode, Manifest manifest) : base(errorCode)
+        public ManifestFactoryResult(Domain.ErrorCode errorCode, Domain.Manifest manifest) : base(errorCode)
         {
             Manifest = manifest;
         }
@@ -43,7 +44,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// Gets the manifest.
         /// </summary>
         /// <value>The manifest.</value>
-        public Manifest Manifest { get; protected set; }
+        public Domain.Manifest Manifest { get; protected set; }
 
         #endregion
 

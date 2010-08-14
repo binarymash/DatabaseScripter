@@ -19,10 +19,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using Bluejam.Utils.DatabaseScripter.Core.Config;
+
+using Bluejam.Utils.DatabaseScripter.Domain;
+
 using NUnit.Framework;
 
-namespace Bluejam.Utils.DatabaseScripter.Tests.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
 {
     public class TestManifest
     {

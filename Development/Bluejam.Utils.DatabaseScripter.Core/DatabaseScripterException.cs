@@ -19,6 +19,8 @@ using System.Linq;
 using System.Security.Permissions;
 using System.Text;
 
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
+
 namespace Bluejam.Utils.DatabaseScripter.Core
 {
     [Serializable]
@@ -29,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// Gets or sets the error code.
         /// </summary>
         /// <value>The error code.</value>
-        public ErrorCode ErrorCode { get; set; }
+        public Domain.ErrorCode ErrorCode { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DatabaseScripterException"/> class.
@@ -42,7 +44,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// Initializes a new instance of the <see cref="DatabaseScripterException"/> class.
         /// </summary>
         /// <param name="errorCode">The error code.</param>
-        public DatabaseScripterException(ErrorCode errorCode)
+        public DatabaseScripterException(Domain.ErrorCode errorCode)
         {
             ErrorCode = errorCode;
         }
@@ -52,7 +54,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="message">The message.</param>
-        public DatabaseScripterException(ErrorCode errorCode, string message)
+        public DatabaseScripterException(Domain.ErrorCode errorCode, string message)
             : base(message)
         {
             ErrorCode = errorCode;
@@ -64,7 +66,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// <param name="errorCode">The error code.</param>
         /// <param name="message">The message.</param>
         /// <param name="innerException">The inner exception.</param>
-        public DatabaseScripterException(ErrorCode errorCode, string message, Exception innerException)
+        public DatabaseScripterException(Domain.ErrorCode errorCode, string message, Exception innerException)
             : base(message, innerException)
         {
             ErrorCode = errorCode;
@@ -102,7 +104,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         protected DatabaseScripterException(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
             : base(info, context)
         {
-            ErrorCode = (ErrorCode)info.GetValue("ErrorCode", typeof(ErrorCode));
+            ErrorCode = (Domain.ErrorCode)info.GetValue("ErrorCode", typeof(Domain.ErrorCode));
         }
 
         /// <summary>

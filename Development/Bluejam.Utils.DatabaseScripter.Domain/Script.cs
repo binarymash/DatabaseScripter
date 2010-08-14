@@ -22,9 +22,7 @@ using System.Text;
 using System.IO;
 using log4net;
 
-using Bluejam.Utils.DatabaseScripter.DbAdapter;
-
-namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Domain
 {
     public class Script
     {
@@ -71,13 +69,13 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// Gets or sets the current version.
         /// </summary>
         /// <value>The current version.</value>
-        public DbAdapter.Version CurrentVersion { get; protected set; }
+        public Version CurrentVersion { get; protected set; }
 
         /// <summary>
         /// Gets or sets the new version.
         /// </summary>
         /// <value>The new version.</value>
-        public DbAdapter.Version NewVersion { get; protected set; }
+        public Version NewVersion { get; protected set; }
 
         #endregion
 
@@ -88,18 +86,30 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// </summary>
         /// <param name="config">The script config.</param>
         /// <param name="manifest">The script manifest.</param>
-        public Script(Config.ScriptConfig config, Config.ScriptManifest manifest)
-        {
-            Name = config.Name;
-            Description = manifest.Description;
-            DatabaseName = ScriptConfigManager.GetConfig(config, "databaseName");
-            ConnectionString = ScriptConfigManager.GetConnectionString(config);
-            WrapInTransaction = manifest.WrapInTransaction;
-            CurrentVersion = (manifest.CurrentVersion == null) ? null : new DbAdapter.Version(manifest.CurrentVersion);
-            NewVersion = (manifest.NewVersion == null) ? null : new DbAdapter.Version(manifest.NewVersion);
+        //public Script(ScriptConfig config, ScriptManifest manifest)
+        //{
+        //    Name = config.Name;
+        //    Description = manifest.Description;
+        //    DatabaseName = ScriptConfigManager.GetConfig(config, "databaseName");
+        //    ConnectionString = ScriptConfigManager.GetConnectionString(config);
+        //    WrapInTransaction = manifest.WrapInTransaction;
+        //    CurrentVersion = (manifest.CurrentVersion == null) ? null : new DbAdapter.Version(manifest.CurrentVersion);
+        //    NewVersion = (manifest.NewVersion == null) ? null : new DbAdapter.Version(manifest.NewVersion);
 
-            var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(Config.DatabaseScripterConfig.Instance.Manifest.FilePath), manifest.Path));
-            Command = ScriptConfigInjector.InjectConfig(command, config);
+        //    var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(Config.DatabaseScripterConfig.Instance.Manifest.FilePath), manifest.Path));
+        //    Command = ScriptConfigInjector.InjectConfig(command, config);
+        //}
+
+        public Script(string name, string description, string databaseName, string connectionString, bool wrapInTransaction, Version currentVersion, Version newVersion, string command)
+        {
+            Name = name;
+            Description = description;
+            DatabaseName = databaseName;
+            ConnectionString = connectionString;
+            WrapInTransaction = wrapInTransaction;
+            CurrentVersion = currentVersion;
+            NewVersion = newVersion;
+            Command = command;
         }
 
         #endregion

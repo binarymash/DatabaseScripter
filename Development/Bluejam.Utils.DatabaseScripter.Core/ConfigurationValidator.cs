@@ -25,7 +25,7 @@ using System.Xml.Schema;
 using System.Xml.XPath;
 using log4net;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public class ConfigurationValidator : SchemaValidatorBase
     {
@@ -70,7 +70,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                     isValid = false;
                 }
 
-                return new Result(isValid ? ErrorCode.Ok : ErrorCode.InvalidConfig);
+                return new Result(isValid ? Domain.ErrorCode.Ok : Domain.ErrorCode.InvalidConfig);
             }
         }
 

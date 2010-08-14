@@ -20,7 +20,7 @@ using System.Text;
 using System.Configuration;
 using log4net;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     public static class ConfigurationFactory
     {
@@ -56,7 +56,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
                 }
                 else
                 {
-                    throw new DatabaseScripterException(ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
+                    throw new DatabaseScripterException(Domain.ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
                 }
             }
         }

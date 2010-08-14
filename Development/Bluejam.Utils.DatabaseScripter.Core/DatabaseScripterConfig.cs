@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
 
     public sealed class DatabaseScripterConfig
@@ -43,13 +43,13 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
         /// Gets or sets the scripts.
         /// </summary>
         /// <value>The scripts.</value>
-        public List<ScriptConfig> Scripts { get; set; }
+        public List<Domain.ScriptConfig> Scripts { get; set; }
 
         /// <summary>
         /// Gets or sets the manifest file.
         /// </summary>
         /// <value>The file path.</value>
-        public Manifest Manifest { get; set; }
+        public Domain.Manifest Manifest { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the scripter will run in preview mode.
@@ -63,9 +63,9 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Config
 
         private DatabaseScripterConfig()
         {
-            Scripts = new List<ScriptConfig>();
+            Scripts = new List<Domain.ScriptConfig>();
             GlobalScriptProperties = new Dictionary<string, string>();
-            Manifest = new Manifest();
+            Manifest = new Domain.Manifest();
         }
 
         /// <summary>

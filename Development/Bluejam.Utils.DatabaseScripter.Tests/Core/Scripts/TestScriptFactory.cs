@@ -18,10 +18,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Bluejam.Utils.DatabaseScripter.Core.Scripts;
+using Bluejam.Utils.DatabaseScripter.Core;
+
 using NUnit.Framework;
 
-namespace Bluejam.Utils.DatabaseScripter.Tests
+namespace Bluejam.Utils.DatabaseScripter.Tests.Core
 {
     [TestFixture]
     public class TestScriptFactory

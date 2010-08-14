@@ -20,7 +20,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
-using Bluejam.Utils.DatabaseScripter.Core;
+
+using Core = Bluejam.Utils.DatabaseScripter.Core;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -67,7 +69,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 
         }
 
-        protected static ErrorCode RunApplication(string exePath, string arguments)
+        protected static Domain.ErrorCode RunApplication(string exePath, string arguments)
         {
             var process = new System.Diagnostics.Process();
             process.StartInfo.FileName = exePath;
@@ -76,10 +78,10 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var started = process.Start();
             process.WaitForExit();
 
-            return (ErrorCode)process.ExitCode;
+            return (Domain.ErrorCode)process.ExitCode;
         }
 
-        protected static ErrorCode RunApplication(string exePath)
+        protected static Domain.ErrorCode RunApplication(string exePath)
         {
             return RunApplication(exePath, string.Empty);
         }

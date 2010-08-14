@@ -20,7 +20,7 @@ using System.Reflection;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
-    public class FileWriterAdapter : IDatabaseAdapter
+    public class FileWriterAdapter : Domain.IDatabaseAdapter
     {
 
         #region Properties
@@ -120,7 +120,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool ConfirmVersion(string databaseName, Version version, out bool confirmed)
+        public bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
         {
             confirmed = true;
 
@@ -131,7 +131,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool SetVersion(string databaseName, Version version)
+        public bool SetVersion(string databaseName, Domain.Version version)
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Set database version - {0}", version.ToString()));
@@ -146,8 +146,27 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         public void Dispose()
         {
-            fileWriter.Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                fileWriter.Close();
+            }
+
+            fileWriter = null;
+        }
+
+        // Use C# destructor syntax for finalization code.
+        ~FileWriterAdapter()
+        {
+            // Simply call Dispose(false).
+            Dispose(false);
+        }
+
 
         #endregion
 

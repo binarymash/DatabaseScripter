@@ -69,33 +69,26 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="Config\ConfigurationFactory.cs" />
-    <Compile Include="Config\ConfigurationValidator.cs" />
-    <Compile Include="Config\DatabaseScripterSection.cs" />
-    <Compile Include="Config\ManifestFactory.cs" />
-    <Compile Include="Config\ManifestFactoryResult.cs" />
-    <Compile Include="Config\ManifestValidator.cs" />
+    <Compile Include="ConfigurationFactory.cs" />
+    <Compile Include="ConfigurationValidator.cs" />
+    <Compile Include="DatabaseScripterSection.cs" />
+    <Compile Include="ManifestFactory.cs" />
+    <Compile Include="ManifestFactoryResult.cs" />
+    <Compile Include="ManifestValidator.cs" />
     <Compile Include="DatabaseScripterException.cs" />
-    <Compile Include="ErrorCode.cs" />
-    <Compile Include="Config\Manifest.cs" />
-    <Compile Include="Config\ScriptConfig.cs" />
-    <Compile Include="Config\DatabaseScripterConfig.cs" />
-    <Compile Include="Config\ScriptManifest.cs" />
-    <Compile Include="License.cs" />
-    <Compile Include="Processor.cs" />
+    <Compile Include="DatabaseScripterConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
     <Compile Include="SchemaValidatorBase.cs" />
-    <Compile Include="Scripts\AdapterFactory.cs" />
-    <Compile Include="Scripts\Script.cs" />
-    <Compile Include="Scripts\ScriptConfigInjector.cs" />
-    <Compile Include="Scripts\ScriptConfigManager.cs" />
-    <Compile Include="Scripts\ScriptFactory.cs" />
+    <Compile Include="AdapterFactory.cs" />
+    <Compile Include="ScriptConfigInjector.cs" />
+    <Compile Include="ScriptConfigManager.cs" />
+    <Compile Include="ScriptFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter\Bluejam.Utils.DatabaseScripter.DbAdapter.csproj">
-      <Project>{E17B1DB4-E1E3-479C-AC54-75C88D26AB3C}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.DbAdapter</Name>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
+      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

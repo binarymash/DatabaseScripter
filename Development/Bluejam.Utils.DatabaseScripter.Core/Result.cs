@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 namespace Bluejam.Utils.DatabaseScripter.Core
 {
@@ -33,7 +34,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// Initializes a new instance of the <see cref="Result"/> class.
         /// </summary>
         /// <param name="errorCode">The error code.</param>
-        public Result(ErrorCode errorCode)
+        public Result(Domain.ErrorCode errorCode)
         {
             ErrorCode = errorCode;
         }
@@ -46,7 +47,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core
         /// Gets or sets the error code.
         /// </summary>
         /// <value>The error code.</value>
-        public ErrorCode ErrorCode { get; protected set; }
+        public Domain.ErrorCode ErrorCode { get; protected set; }
 
         #endregion
 

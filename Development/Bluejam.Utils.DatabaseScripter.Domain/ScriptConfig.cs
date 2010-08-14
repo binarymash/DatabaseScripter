@@ -16,43 +16,38 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
-using System.Xml.Serialization;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Domain
 {
-    [Serializable]
-    [XmlRoot(Namespace = "http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema")]
-    public class Manifest
+    public class ScriptConfig
     {
 
         #region Properties
 
         /// <summary>
-        /// Gets or sets the file path.
+        /// Gets or sets the name.
         /// </summary>
-        /// <value>The file path.</value>
-        [XmlIgnore]
-        public string FilePath { get; set; }
+        /// <value>The name.</value>
+        public string Name { get; set; }
 
         /// <summary>
-        /// Gets or sets the scripts.
+        /// Gets or sets the properties.
         /// </summary>
-        /// <value>The scripts.</value>
-        public List<ScriptManifest> ScriptManifests { get; set; }
+        /// <value>The properties.</value>
+        public Dictionary<string, string> Properties { get; set; }
 
-        /// <summary>
-        /// Gets the manifest.
-        /// </summary>
-        /// <param name="name">The name of the script.</param>
-        /// <returns></returns>
-        public ScriptManifest GetManifest(string name)
+        #endregion
+
+        #region Constructors
+
+        public ScriptConfig()
         {
-            return ScriptManifests.ToList().Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
+            Properties = new Dictionary<string, string>();
         }
 
         #endregion
+
 
     }
 }

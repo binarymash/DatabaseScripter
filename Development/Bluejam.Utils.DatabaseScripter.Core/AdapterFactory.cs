@@ -22,10 +22,9 @@ using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using log4net;
 
-using Bluejam.Utils.DatabaseScripter.Core.Config;
-using Bluejam.Utils.DatabaseScripter.DbAdapter;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
+namespace Bluejam.Utils.DatabaseScripter.Core
 {
     /// <summary>
     /// Factory class for IDatabaseAdapter objects
@@ -40,7 +39,7 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
         /// will be instantiated. Otherwise, the database adapter will be instantiated.
         /// </summary>
         /// <returns></returns>
-        public static IDatabaseAdapter Create()
+        public static Domain.IDatabaseAdapter Create()
         {
             if (DatabaseScripterConfig.Instance.Preview)
             {
@@ -56,38 +55,38 @@ namespace Bluejam.Utils.DatabaseScripter.Core.Scripts
 
         private static readonly ILog log = LogManager.GetLogger(typeof(AdapterFactory));
 
-        private static IDatabaseAdapter CreatePreviewAdapter()
+        private static Domain.IDatabaseAdapter CreatePreviewAdapter()
         {
-            IDatabaseAdapter previewAdapter;
+            Domain.IDatabaseAdapter previewAdapter;
 
             try
             {
                 var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-                previewAdapter = (IDatabaseAdapter)container["previewAdapter"];
+                previewAdapter = (Domain.IDatabaseAdapter)container["previewAdapter"];
             }
             catch (Exception ex)
             {
                 log.Error("An error occurred when creating the preview adapter.", ex);
-                throw new DatabaseScripterException(ErrorCode.FailedToCreatePreviewAdapter, "The preview adapter could not be created", ex);
+                throw new DatabaseScripterException(Domain.ErrorCode.FailedToCreatePreviewAdapter, "The preview adapter could not be created", ex);
             }
 
             log.Debug("Preview adapter created");
             return previewAdapter;
         }
 
-        private static IDatabaseAdapter CreateDatabaseAdapter()
+        private static Domain.IDatabaseAdapter CreateDatabaseAdapter()
         {
-            IDatabaseAdapter databaseAdapter;
+            Domain.IDatabaseAdapter databaseAdapter;
 
             try
             {
                 var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-                databaseAdapter = (IDatabaseAdapter)container["databaseAdapter"];
+                databaseAdapter = (Domain.IDatabaseAdapter)container["databaseAdapter"];
             }
             catch (Exception ex)
             {
                 log.Error("An error occurred when creating the database adapter", ex);
-                throw new DatabaseScripterException(ErrorCode.FailedToCreateDatabaseAdapter, "The database adapter could not be created", ex);
+                throw new DatabaseScripterException(Domain.ErrorCode.FailedToCreateDatabaseAdapter, "The database adapter could not be created", ex);
             }
 
             log.Debug("Database adapter created");

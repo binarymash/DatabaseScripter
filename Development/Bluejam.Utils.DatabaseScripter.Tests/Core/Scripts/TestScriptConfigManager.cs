@@ -20,11 +20,11 @@ using System.Text;
 
 using Bluejam.Utils.DatabaseScripter;
 using Bluejam.Utils.DatabaseScripter.Core;
-using Bluejam.Utils.DatabaseScripter.Core.Config;
-using Bluejam.Utils.DatabaseScripter.Core.Scripts;
+using Bluejam.Utils.DatabaseScripter.Domain;
+
 using NUnit.Framework;
 
-namespace Bluejam.Utils.DatabaseScripter.Tests
+namespace Bluejam.Utils.DatabaseScripter.Tests.Core
 {
     [TestFixture]
     public class TestScriptConfigManager

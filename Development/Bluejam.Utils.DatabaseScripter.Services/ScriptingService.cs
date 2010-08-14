@@ -14,67 +14,44 @@
 //along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
 using log4net;
 
-
-namespace Bluejam.Utils.DatabaseScripter.Core
+namespace Bluejam.Utils.DatabaseScripter.Services
 {
-
-    public sealed class Processor
+    public class ScriptingService
     {
 
-        private static readonly ILog log = LogManager.GetLogger(typeof(Processor));
+        private static readonly ILog log = LogManager.GetLogger(typeof(ScriptingService));
 
-        public static ErrorCode Run(string[] args)
+        public Domain.ErrorCode Execute()
         {
             try
             {
-                Console.WriteLine(License.Splash);
-
-                if (args.ToList().Exists(arg => string.Equals(arg, "-manifestschema", StringComparison.OrdinalIgnoreCase)))
-                {
-                    var manifestValidator = new Config.ManifestValidator();
-                    Console.WriteLine(manifestValidator.SchemaString);
-                    return ErrorCode.Ok;
-                }
-
-                if (args.ToList().Exists(arg => string.Equals(arg, "-configschema", StringComparison.OrdinalIgnoreCase)))
-                {
-                    var configValidator = new Config.ConfigurationValidator();
-                    Console.WriteLine(configValidator.SchemaString);
-                    return ErrorCode.Ok;
-                }
-
-                Config.ConfigurationFactory.Create(args);
-
-                var adapter = Scripts.AdapterFactory.Create();
+                var adapter = Core.AdapterFactory.Create();
                 adapter.Initialize();
 
-                var scripts = Scripts.ScriptFactory.Create();
+                var scripts = Core.ScriptFactory.Create();
                 foreach (var script in scripts)
                 {
                     var errorCode = script.Run(adapter);
-                    if (ErrorCode.Ok != errorCode)
+                    if (Domain.ErrorCode.Ok != errorCode)
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "Script \"{0}\" failed; subsequent scripts will not run.", script.Name);
                         return errorCode;
                     }
                 }
+
+                return Domain.ErrorCode.Ok;
             }
-            catch (DatabaseScripterException ex)
+            catch (Core.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 return ex.ErrorCode;
             }
-
-            return ErrorCode.Ok;            
         }
-
-        private Processor()
-        {
-        }
-
     }
 }

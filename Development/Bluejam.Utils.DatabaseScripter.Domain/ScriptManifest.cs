@@ -19,7 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Bluejam.Utils.DatabaseScripter.Core.Config
+namespace Bluejam.Utils.DatabaseScripter.Domain
 {
     [Serializable]
     public class ScriptManifest
