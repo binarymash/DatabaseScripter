@@ -19,7 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Bluejam.Utils.DatabaseScripter.Core;
+
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
@@ -29,20 +29,13 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     public class TestWhenIncorrectVersion : AbstractTestBase
     {
 
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-            ConfigFileFactory.SetUpConfig("DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.IncorrectVersion.config");
-        }
-
         [Test]
         public void Run()
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.IncorrectCurrentVersion, RunApplication(exeFile.FullName));
+            Assert.AreEqual(Domain.ErrorCode.IncorrectCurrentVersion, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.2\""));
             Assert.IsTrue(server.Databases.Contains("MediaLibrary"));
             var database = server.Databases["MediaLibrary"];
             Assert.AreEqual("0.0.0.0", database.ExtendedProperties["SCHEMA_VERSION"].Value);

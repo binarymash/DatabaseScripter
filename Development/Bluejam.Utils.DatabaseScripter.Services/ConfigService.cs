@@ -17,6 +17,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Config = Bluejam.Utils.DatabaseScripter.Config;
 using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
@@ -30,7 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         {
             get
             {
-                var manifestValidator = new Core.ManifestValidator();
+                var manifestValidator = new Config.ManifestValidator();
                 return manifestValidator.SchemaString;
             }
         }
@@ -39,26 +41,30 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         {
             get
             {
-                var configValidator = new Core.ConfigurationValidator();
+                var configValidator = new Config.ConfigurationValidator();
                 return configValidator.SchemaString;
             }
         }
 
-        public Domain.ErrorCode Create(string[] args)
+        public ConfigurationResult Create(string[] args)
         {
+
             var errorCode = Domain.ErrorCode.Ok;
+            Domain.Configuration configuration = null;
+            Domain.ExecutionPlan executionPlan = null;
 
             try
             {
-                Core.ConfigurationFactory.Create(args);
+                configuration = Config.ConfigurationFactory.Create();
+                executionPlan = Config.ExecutionPlanFactory.Create(args);
             }
-            catch (Core.DatabaseScripterException ex)
+            catch (Domain.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 errorCode = ex.ErrorCode;
             }
 
-            return errorCode;
+            return new ConfigurationResult(errorCode, configuration, executionPlan);
         }
     }
 }

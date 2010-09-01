@@ -49,7 +49,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// <returns></returns>
         public ScriptManifest GetManifest(string name)
         {
-            return ScriptManifests.ToList().Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
+            return ScriptManifests.Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
         }
 
         #endregion

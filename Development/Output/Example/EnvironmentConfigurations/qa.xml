@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<EnvironmentConfiguration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  xmlns="http://code.google.com/p/databasescripter/2010/08/29/EnvironmentConfigurationSchema">
+
+  <Name>QA</Name>
+  
+  <!-- Global script properties. These will be substituted into the scripts if a matching key is found in -->
+  <!-- a script. Global properties may be overriden for a script by specifying a property element in a  -->
+  <!-- script element below -->
+  <Properties>
+    <Property name="connection">medialibrary</Property>
+    <Property name="databaseName">MediaLibrary_QA</Property>
+  </Properties>
+
+  <!-- scripts to be run - the name is used to find the information in the manifest file -->
+  <!-- scripts can optionally have their own properties element, which allows overriding -->
+  <!-- overriding of global script properties. -->
+  <ScriptConfigurations>
+    <ScriptConfiguration name="create">
+      <Properties>
+        <Property name="databasePath">D:\databases</Property>
+      </Properties>
+    </ScriptConfiguration>
+    <ScriptConfiguration name="increment to 0.0.0.1" />
+    <ScriptConfiguration name="drop" />
+  </ScriptConfigurations>
+
+</EnvironmentConfiguration>
+
+

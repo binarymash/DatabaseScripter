@@ -27,7 +27,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
 {
-    public class Adapter : Domain.IDatabaseAdapter
+    public class Adapter : Domain.DatabaseAdapter
     {
 
         #region Non-public
@@ -46,12 +46,12 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         
         #endregion
 
-        #region IDatabaseAdapter implementation
+        #region DatabaseAdapter overrides
 
         /// <summary>
         /// Initializes the adapter.
         /// </summary>
-        public bool Initialize()
+        public override bool Initialize()
         {
             return true;
         }
@@ -60,7 +60,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// Connects the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        public bool Connect(string connectionString)
+        public override bool Connect(string connectionString)
         {
             var success = false;
 
@@ -92,7 +92,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <summary>
         /// Disconnects this instance.
         /// </summary>
-        public bool Disconnect()
+        public override bool Disconnect()
         {
             try
             {
@@ -110,7 +110,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <summary>
         /// Begins the transaction on the database.
         /// </summary>
-        public bool BeginTransaction()
+        public override bool BeginTransaction()
         {
             try
             {
@@ -134,7 +134,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// Commits the transaction to the database.
         /// </summary>
         /// <returns></returns>
-        public bool CommitTransaction()
+        public override bool CommitTransaction()
         {
             try
             {
@@ -154,7 +154,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
             return true;
         }
 
-        public bool RollBackTransaction()
+        public override bool RollBackTransaction()
         {
             try
             {
@@ -180,7 +180,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <param name="command">The command.</param>
         /// <param name="newVersion">The new version.</param>
         /// <returns></returns>
-        public bool RunCommand(string databaseName, string command)
+        public override bool RunCommand(string databaseName, string command)
         {
             try
             {
@@ -208,7 +208,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <param name="version">The version.</param>
         /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
         /// <returns></returns>
-        public bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
+        public override bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
         {
             confirmed = false;
 
@@ -245,7 +245,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// </summary>
         /// <param name="version">The version.</param>
         /// <returns></returns>
-        public bool SetVersion(string databaseName, Domain.Version version)
+        public override bool SetVersion(string databaseName, Domain.Version version)
         {
             try
             {
@@ -281,20 +281,17 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
 
         #region IDisposable implementation
 
-        public void Dispose()
+        protected override void Dispose(bool disposing)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
-        protected virtual void Dispose(bool disposing)
-        {
             if (disposing)
             {
                 _connection.Close();
             }
 
             _connection = null;
+
+            base.Dispose(disposing);
         }
 
         // Use C# destructor syntax for finalization code.

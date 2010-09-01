@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Output\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -36,6 +36,7 @@
       <HintPath>..\ThirdParty\Castle-Windsor-2.1.1\bin\net-3.5\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -52,12 +53,23 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
+    <Compile Include="ConfigInjector.cs" />
+    <Compile Include="Configuration.cs" />
+    <Compile Include="DatabaseScripterException.cs" />
     <Compile Include="ErrorCode.cs" />
-    <Compile Include="IDatabaseAdapter.cs" />
+    <Compile Include="DatabaseAdapter.cs" />
+    <Compile Include="ExecutionPlan.cs" />
     <Compile Include="Manifest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="PropertyCollection.cs" />
     <Compile Include="Script.cs" />
-    <Compile Include="ScriptConfig.cs" />
+    <Compile Include="EnvironmentConfiguration.cs" />
+    <Compile Include="EnvironmentConfigurationCollection.cs" />
+    <Compile Include="ScriptCollection.cs" />
+    <Compile Include="ScriptConfiguration.cs" />
+    <Compile Include="ScriptConfigurationCollection.cs" />
+    <Compile Include="ScriptFactory.cs" />
     <Compile Include="ScriptManifest.cs" />
     <Compile Include="Version.cs" />
   </ItemGroup>

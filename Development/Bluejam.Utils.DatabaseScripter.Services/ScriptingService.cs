@@ -18,6 +18,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using Castle.Core.Resource;
+using Castle.Windsor;
+using Castle.Windsor.Configuration.Interpreters;
 using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
@@ -26,18 +29,23 @@ namespace Bluejam.Utils.DatabaseScripter.Services
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptingService));
+        private Domain.ConfigInjector configInjector;
 
-        public Domain.ErrorCode Execute()
+        public ScriptingService()
+        {
+            var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+            configInjector = (Domain.ConfigInjector)container["configInjector"];
+        }
+
+        public Domain.ErrorCode Execute(Domain.Configuration configuration, Domain.ExecutionPlan executionPlan)
         {
             try
             {
-                var adapter = Core.AdapterFactory.Create();
-                adapter.Initialize();
-
-                var scripts = Core.ScriptFactory.Create();
-                foreach (var script in scripts)
+                var scripts = Domain.ScriptFactory.Create(configuration, executionPlan, configInjector);
+                executionPlan.DatabaseAdapter.Initialize();
+                foreach(var script in scripts)
                 {
-                    var errorCode = script.Run(adapter);
+                    var errorCode = script.Run(executionPlan.DatabaseAdapter);
                     if (Domain.ErrorCode.Ok != errorCode)
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "Script \"{0}\" failed; subsequent scripts will not run.", script.Name);
@@ -47,7 +55,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
 
                 return Domain.ErrorCode.Ok;
             }
-            catch (Core.DatabaseScripterException ex)
+            catch (Domain.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 return ex.ErrorCode;

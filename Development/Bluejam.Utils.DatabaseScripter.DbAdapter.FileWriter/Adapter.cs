@@ -20,7 +20,7 @@ using System.Reflection;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
-    public class Adapter : Domain.IDatabaseAdapter
+    public class Adapter : Domain.DatabaseAdapter
     {
 
         #region Properties
@@ -51,7 +51,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         #region IDatabaseAdapter Members
 
-        public bool Initialize()
+        public override bool Initialize()
         {
             fileWriter = System.IO.File.CreateText(FileName);
             fileWriter.AutoFlush = true;
@@ -63,7 +63,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
         /// Connects to the database using the specified connection string.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>
-        public bool Connect(string connectionString)
+        public override bool Connect(string connectionString)
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Connect to database"));
@@ -75,7 +75,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
         /// <summary>
         /// Disconnects from the database
         /// </summary>
-        public bool Disconnect()
+        public override bool Disconnect()
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Disconnect from database"));
@@ -84,7 +84,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool BeginTransaction()
+        public override bool BeginTransaction()
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Begin transaction"));
@@ -93,7 +93,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool CommitTransaction()
+        public override bool CommitTransaction()
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Commit transaction"));
@@ -102,7 +102,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool RollBackTransaction()
+        public override bool RollBackTransaction()
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Roll back transaction"));
@@ -111,7 +111,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool RunCommand(string databaseName, string command)
+        public override bool RunCommand(string databaseName, string command)
         {
             fileWriter.WriteLine();
             fileWriter.WriteLine(command);
@@ -120,7 +120,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
+        public override bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
         {
             confirmed = true;
 
@@ -131,7 +131,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public bool SetVersion(string databaseName, Domain.Version version)
+        public override bool SetVersion(string databaseName, Domain.Version version)
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Set database version - {0}", version.ToString()));
@@ -144,13 +144,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 
         #region IDisposable Members
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
+        protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
@@ -158,6 +152,8 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             }
 
             fileWriter = null;
+
+            base.Dispose(disposing);
         }
 
         // Use C# destructor syntax for finalization code.

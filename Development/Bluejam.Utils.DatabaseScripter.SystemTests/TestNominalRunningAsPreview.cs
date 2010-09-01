@@ -21,7 +21,6 @@ using System.Linq;
 using System.Text;
 using System.Data.SqlClient;
 using System.Reflection;
-using Bluejam.Utils.DatabaseScripter.Core;
 
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
@@ -34,17 +33,10 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     public class TestNominalRunningAsPreview : AbstractTestBase
     {
 
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-            ConfigFileFactory.SetUpConfig("test.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.Nominal.config");
-        }
-
         [Test]
         public void Run()
         {
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication("DatabaseScripter.exe", "-preview"));
+            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication("DatabaseScripter.exe", "--preview --environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
 
             //database should still not exist
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));

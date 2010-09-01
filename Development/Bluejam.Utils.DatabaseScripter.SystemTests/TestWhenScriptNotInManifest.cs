@@ -19,7 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Bluejam.Utils.DatabaseScripter.Core;
+
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
@@ -29,20 +29,13 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     public class TestWhenScriptNotInManifest : AbstractTestBase
     {
 
-        [SetUp]
-        public override void SetUp()
-        {
-            base.SetUp();
-            ConfigFileFactory.SetUpConfig("DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.ScriptNotInManifest.config");
-        }
-
         [Test]
         public void Run()
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.CouldNotFindScript, RunApplication(exeFile.FullName));
+            Assert.AreEqual(Domain.ErrorCode.CouldNotFindScript, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=\"this script is not in the manifest\""));
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
         }
 

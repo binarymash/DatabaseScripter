@@ -21,7 +21,8 @@
   <IgnoreGeneratedCode>False</IgnoreGeneratedCode>
  </ProjectOptions>
  <Targets>
-  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Core.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.BasicConfigInjector.dll" Analyze="True" AnalyzeAllChildren="True" />
+  <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Config.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo.dll" Analyze="True" AnalyzeAllChildren="True" />
   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Domain.dll" Analyze="True" AnalyzeAllChildren="True" />
@@ -45,23 +46,34 @@
  </Rules>
  <FxCopReport Version="1.36">
   <Namespaces>
-   <Namespace Name="Bluejam.Utils.DatabaseScripter.Core">
+   <Namespace Name="Bluejam.Utils.DatabaseScripter.BasicConfigInjector">
     <Messages>
-     <Message TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020" Status="Excluded" Created="2010-03-18 20:50:36Z">
-      <Issue>
-       <Item>Bluejam.Utils.DatabaseScripter.Core</Item>
-      </Issue>
-     </Message>
-     <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+     <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
       <Issue Name="Namespace">
        <Item>Bluejam</Item>
-       <Item>Bluejam.Utils.DatabaseScripter.Core</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.BasicConfigInjector</Item>
       </Issue>
      </Message>
-     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
       <Issue Name="Namespace">
        <Item>Utils</Item>
-       <Item>Bluejam.Utils.DatabaseScripter.Core</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.BasicConfigInjector</Item>
+      </Issue>
+     </Message>
+    </Messages>
+   </Namespace>
+   <Namespace Name="Bluejam.Utils.DatabaseScripter.Config">
+    <Messages>
+     <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
+      <Issue Name="Namespace">
+       <Item>Bluejam</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.Config</Item>
+      </Issue>
+     </Message>
+     <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
+      <Issue Name="Namespace">
+       <Item>Utils</Item>
+       <Item>Bluejam.Utils.DatabaseScripter.Config</Item>
       </Issue>
      </Message>
     </Messages>
@@ -152,53 +164,39 @@
    </Namespace>
   </Namespaces>
   <Targets>
-   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Core.dll">
+   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.BasicConfigInjector.dll">
     <Modules>
-     <Module Name="bluejam.utils.databasescripter.core.dll">
+     <Module Name="bluejam.utils.databasescripter.basicconfiginjector.dll">
       <Messages>
-       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-08-31 18:16:29Z">
         <Issue Name="NoStrongName">
-         <Item>'Bluejam.Utils.DatabaseScripter.Core.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.BasicConfigInjector.dll'</Item>
         </Issue>
        </Message>
-       <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
         <Issue Name="Assembly">
          <Item>Bluejam</Item>
-         <Item>'Bluejam.Utils.DatabaseScripter.Core.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.BasicConfigInjector.dll'</Item>
         </Issue>
        </Message>
-       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-03-18 20:50:36Z">
+       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
         <Issue Name="Assembly">
          <Item>Utils</Item>
-         <Item>'Bluejam.Utils.DatabaseScripter.Core.dll'</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.BasicConfigInjector.dll'</Item>
         </Issue>
        </Message>
       </Messages>
       <Namespaces>
-       <Namespace Name="Bluejam.Utils.DatabaseScripter.Core">
+       <Namespace Name="Bluejam.Utils.DatabaseScripter.BasicConfigInjector">
         <Types>
-         <Type Name="DatabaseScripterConfig">
+         <Type Name="Injector">
           <Members>
-           <Member Name="#GlobalScriptProperties">
+           <Member Name="#InjectConfig(System.String,Bluejam.Utils.DatabaseScripter.Domain.PropertyCollection)">
             <Messages>
-             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-14 17:28:16Z">
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-09-01 17:31:11Z">
               <Issue>
-               <Item>'DatabaseScripterConfig.GlobalScriptProperties'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-           <Member Name="#Scripts">
-            <Messages>
-             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-14 17:28:16Z">
-              <Issue>
-               <Item>'DatabaseScripterConfig.Scripts'</Item>
-              </Issue>
-             </Message>
-             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-14 17:28:16Z">
-              <Issue>
-               <Item>'List&lt;ScriptConfig&gt;'</Item>
-               <Item>'DatabaseScripterConfig.Scripts'</Item>
+               <Item>'PropertyCollection'</Item>
+               <Item>'Injector.InjectConfig(string, PropertyCollection)'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -208,6 +206,31 @@
         </Types>
        </Namespace>
       </Namespaces>
+     </Module>
+    </Modules>
+   </Target>
+   <Target Name="$(ProjectDir)/Output/Bluejam.Utils.DatabaseScripter.Config.dll">
+    <Modules>
+     <Module Name="bluejam.utils.databasescripter.config.dll">
+      <Messages>
+       <Message TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210" Status="Excluded" Created="2010-08-31 18:16:29Z">
+        <Issue Name="NoStrongName">
+         <Item>'Bluejam.Utils.DatabaseScripter.Config.dll'</Item>
+        </Issue>
+       </Message>
+       <Message Id="Bluejam" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
+        <Issue Name="Assembly">
+         <Item>Bluejam</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.Config.dll'</Item>
+        </Issue>
+       </Message>
+       <Message Id="Utils" TypeName="IdentifiersShouldBeSpelledCorrectly" Category="Microsoft.Naming" CheckId="CA1704" Status="Excluded" Created="2010-08-31 18:16:29Z">
+        <Issue Name="Assembly">
+         <Item>Utils</Item>
+         <Item>'Bluejam.Utils.DatabaseScripter.Config.dll'</Item>
+        </Issue>
+       </Message>
+      </Messages>
      </Module>
     </Modules>
    </Target>
@@ -306,11 +329,61 @@
       <Namespaces>
        <Namespace Name="Bluejam.Utils.DatabaseScripter.Domain">
         <Types>
-         <Type Name="IDatabaseAdapter">
+         <Type Name="ConfigInjector">
+          <Members>
+           <Member Name="#InjectConfig(System.String,Bluejam.Utils.DatabaseScripter.Domain.PropertyCollection)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-09-01 17:31:11Z">
+              <Issue>
+               <Item>'PropertyCollection'</Item>
+               <Item>'ConfigInjector.InjectConfig(string, PropertyCollection)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="Configuration">
+          <Messages>
+           <Message TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724" Status="Excluded" Created="2010-08-31 18:15:16Z">
+            <Issue Name="System">
+             <Item>'Configuration'</Item>
+             <Item>System.Configuration</Item>
+            </Issue>
+           </Message>
+          </Messages>
+          <Members>
+           <Member Name="#ConnectionStrings">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'Configuration.ConnectionStrings'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#EnvironmentConfigurations">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'Configuration.EnvironmentConfigurations'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'EnvironmentConfigurationCollection'</Item>
+               <Item>'Configuration.EnvironmentConfigurations'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="DatabaseAdapter">
           <Members>
            <Member Name="#ConfirmVersion(System.String,Bluejam.Utils.DatabaseScripter.Domain.Version,System.Boolean&amp;)">
             <Messages>
-             <Message Id="2#" TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021" Status="Excluded" Created="2010-08-14 17:28:44Z">
+             <Message Id="2#" TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021" Status="Excluded" Created="2010-08-31 18:15:16Z">
               <Issue>
                <Item>'confirmed'</Item>
               </Issue>
@@ -319,11 +392,73 @@
            </Member>
            <Member Name="#RollBackTransaction()">
             <Messages>
-             <Message Id="RollBack" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Excluded" Created="2010-08-14 17:28:44Z">
+             <Message Id="RollBack" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Excluded" Created="2010-08-31 18:15:16Z">
               <Issue Name="MemberShouldBeDiscreteTerm">
                <Item>RollBack</Item>
-               <Item>'IDatabaseAdapter.RollBackTransaction()'</Item>
+               <Item>'DatabaseAdapter.RollBackTransaction()'</Item>
                <Item>Rollback</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="EnvironmentConfiguration">
+          <Members>
+           <Member Name="#log">
+            <Messages>
+             <Message TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823" Status="Excluded" Created="2010-09-01 17:31:11Z">
+              <Issue>
+               <Item>'EnvironmentConfiguration.log'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Properties">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'EnvironmentConfiguration.Properties'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'PropertyCollection'</Item>
+               <Item>'EnvironmentConfiguration.Properties'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#ScriptConfigurations">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'EnvironmentConfiguration.ScriptConfigurations'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'ScriptConfigurationCollection'</Item>
+               <Item>'EnvironmentConfiguration.ScriptConfigurations'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="ExecutionPlan">
+          <Members>
+           <Member Name="#NameOfScriptsToRun">
+            <Messages>
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'ExecutionPlan.NameOfScriptsToRun'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'List&lt;string&gt;'</Item>
+               <Item>'ExecutionPlan.NameOfScriptsToRun'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -349,13 +484,29 @@
            </Member>
           </Members>
          </Type>
-         <Type Name="ScriptConfig">
+         <Type Name="Property">
+          <Messages>
+           <Message Id="Property" TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716" Status="Excluded" Created="2010-08-31 18:15:16Z">
+            <Issue Name="Type">
+             <Item>'Property'</Item>
+             <Item>Property</Item>
+            </Issue>
+           </Message>
+          </Messages>
+         </Type>
+         <Type Name="ScriptConfiguration">
           <Members>
            <Member Name="#Properties">
             <Messages>
-             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-14 17:28:44Z">
+             <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-08-31 18:15:16Z">
               <Issue>
-               <Item>'ScriptConfig.Properties'</Item>
+               <Item>'ScriptConfiguration.Properties'</Item>
+              </Issue>
+             </Message>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-08-31 18:15:16Z">
+              <Issue>
+               <Item>'PropertyCollection'</Item>
+               <Item>'ScriptConfiguration.Properties'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -451,19 +602,6 @@
            </Member>
           </Members>
          </Type>
-         <Type Name="ScriptingService">
-          <Members>
-           <Member Name="#Execute()">
-            <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-08-14 17:28:44Z" FixCategory="DependsOnFix">
-              <Issue>
-               <Item>'ScriptingService.Execute()'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-          </Members>
-         </Type>
         </Types>
        </Namespace>
       </Namespaces>
@@ -488,11 +626,11 @@
    <Rule TypeName="AssembliesShouldHaveValidStrongNames" Category="Microsoft.Design" CheckId="CA2210">
     <Resolution Name="NoStrongName">Sign {0} with a strong name key.</Resolution>
    </Rule>
-   <Rule TypeName="AvoidNamespacesWithFewTypes" Category="Microsoft.Design" CheckId="CA1020">
-    <Resolution Name="Default">Consider merging the types defined in '{0}' with another namespace.</Resolution>
-   </Rule>
    <Rule TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021">
     <Resolution Name="Default">Consider a design that does not require that {0} be an out parameter.</Resolution>
+   </Rule>
+   <Rule TypeName="AvoidUnusedPrivateFields" Category="Microsoft.Performance" CheckId="CA1823">
+    <Resolution Name="Default">It appears that field {0} is never used or is only ever assigned to. Use this field or remove it.</Resolution>
    </Rule>
    <Rule TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227">
     <Resolution Name="Default">Change {0} to be read-only by removing the property setter.</Resolution>
@@ -513,8 +651,14 @@
     <Resolution Name="Namespace">Correct the spelling of '{0}' in namespace name '{1}'.</Resolution>
     <Resolution Name="Type">Correct the spelling of '{0}' in type name {1}.</Resolution>
    </Rule>
+   <Rule TypeName="IdentifiersShouldNotMatchKeywords" Category="Microsoft.Naming" CheckId="CA1716">
+    <Resolution Name="Type">Rename type {0} so that it no longer conflicts with the reserved language keyword '{1}'. Using a reserved keyword as the name of a type makes it harder for consumers in other languages to use the type.</Resolution>
+   </Rule>
    <Rule TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822">
     <Resolution Name="Default">The 'this' parameter (or 'Me' in Visual Basic) of {0} is never used. Mark the member as static (or Shared in Visual Basic) or use 'this'/'Me' in the method body or at least one property accessor, if appropriate.</Resolution>
+   </Rule>
+   <Rule TypeName="TypeNamesShouldNotMatchNamespaces" Category="Microsoft.Naming" CheckId="CA1724">
+    <Resolution Name="System">The type name {0} conflicts in whole or in part with the namespace name '{1}' defined in the .NET Framework. Rename the type to eliminate the conflict.</Resolution>
    </Rule>
   </Rules>
  </FxCopReport>

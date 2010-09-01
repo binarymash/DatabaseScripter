@@ -74,9 +74,7 @@
     <EmbeddedResource Include="Files\Config\InvalidConnectionString.config" />
     <EmbeddedResource Include="Files\Config\PreviewAdapterDoesNotExist.config" />
     <EmbeddedResource Include="Files\Config\DatabaseAdapterDoesNotExist.config" />
-    <EmbeddedResource Include="Files\Config\IncorrectVersion.config" />
-    <EmbeddedResource Include="Files\Config\PropertyNotSet.config" />
-    <EmbeddedResource Include="Files\Config\ScriptNotInManifest.config" />
+    <EmbeddedResource Include="Files\Environment\PropertyNotSet.xml" />
     <EmbeddedResource Include="Files\Config\InvalidSchema.config" />
     <EmbeddedResource Include="Files\Manifest\InvalidSchema.xml" />
     <EmbeddedResource Include="Files\Config\Nominal.config" />
@@ -85,10 +83,6 @@
     <EmbeddedResource Include="Files\Config\ManifestNotFound.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
-      <Project>{DC9732C5-68AE-4252-81D5-C999BA824B4B}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
       <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
@@ -99,6 +93,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Files\Asserts\NominalPreview.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Environment\Nominal.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

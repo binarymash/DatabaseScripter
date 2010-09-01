@@ -66,7 +66,14 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// An unknown error occurred
         /// </summary>
         UnknownError = 10,
-
+        /// <summary>
+        /// An environment configuration file could not be found
+        /// </summary>
+        CouldNotFindEnvironmentConfiguration = 11,
+        /// <summary>
+        /// An environment configuration does not validate against the environment configuration schema
+        /// </summary>
+        InvalidEnvironmentConfiguration = 12,
 
 
         /// <summary>

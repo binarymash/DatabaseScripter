@@ -19,7 +19,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-using Core = Bluejam.Utils.DatabaseScripter.Core;
 using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 using NUnit.Framework;
@@ -37,7 +36,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
 
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName));
+            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
 
             //database should exist
             Assert.IsTrue(server.Databases.Contains("MediaLibrary"));

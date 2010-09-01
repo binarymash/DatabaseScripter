@@ -4,6 +4,9 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using Castle.Core.Resource;
+using Castle.Windsor;
+using Castle.Windsor.Configuration.Interpreters;
 
 using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 using Services = Bluejam.Utils.DatabaseScripter.Services;
@@ -15,31 +18,42 @@ namespace Bluejam.Utils.DatabaseScripter
     class Program
     {
         private static readonly ILog log = LogManager.GetLogger(typeof(Program));
-        private static Services.LicenceService licenseService = new Services.LicenceService();
-        private static Services.ConfigService configService = new Services.ConfigService();
-        private static Services.ScriptingService scriptingService = new Services.ScriptingService();
 
         static int Main(string[] args)
         {
-            Console.WriteLine(licenseService.LicenceSplash);
             Domain.ErrorCode errorCode = Domain.ErrorCode.Ok;
 
-            if (args.ToList().Exists(arg => string.Equals(arg, "-manifestschema", StringComparison.OrdinalIgnoreCase)))
+            try
             {
-                Console.WriteLine(configService.ManifestSchema);
-                return (int)Domain.ErrorCode.Ok;
-            }
+                var licenseService = new Services.LicenceService();
+                var configService = new Services.ConfigService();
+                var scriptingService = new Services.ScriptingService();
 
-            if (args.ToList().Exists(arg => string.Equals(arg, "-configschema", StringComparison.OrdinalIgnoreCase)))
-            {
-                Console.WriteLine(configService.ConfigSchema);
-                return (int)Domain.ErrorCode.Ok;
-            }
+                Console.WriteLine(licenseService.LicenceSplash);
 
-            errorCode = configService.Create(args);
-            if (errorCode == Domain.ErrorCode.Ok)
+                if (args.ToList().Exists(arg => string.Equals(arg, "--manifestschema", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine(configService.ManifestSchema);
+                    return (int)Domain.ErrorCode.Ok;
+                }
+
+                if (args.ToList().Exists(arg => string.Equals(arg, "--configschema", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine(configService.ConfigSchema);
+                    return (int)Domain.ErrorCode.Ok;
+                }
+
+                var configResult = configService.Create(args);
+                errorCode = configResult.ErrorCode;
+
+                if (configResult.ErrorCode == Domain.ErrorCode.Ok)
+                {
+                    errorCode = scriptingService.Execute(configResult.Configuration, configResult.ExecutionPlan);
+                }
+            }
+            catch (Domain.DatabaseScripterException ex)
             {
-                errorCode = scriptingService.Execute();
+                return (int)ex.ErrorCode;
             }
 
             if (errorCode == Domain.ErrorCode.Ok)

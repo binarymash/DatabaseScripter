@@ -81,25 +81,6 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
 
         #region Constructors
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Script"/> class.
-        /// </summary>
-        /// <param name="config">The script config.</param>
-        /// <param name="manifest">The script manifest.</param>
-        //public Script(ScriptConfig config, ScriptManifest manifest)
-        //{
-        //    Name = config.Name;
-        //    Description = manifest.Description;
-        //    DatabaseName = ScriptConfigManager.GetConfig(config, "databaseName");
-        //    ConnectionString = ScriptConfigManager.GetConnectionString(config);
-        //    WrapInTransaction = manifest.WrapInTransaction;
-        //    CurrentVersion = (manifest.CurrentVersion == null) ? null : new DbAdapter.Version(manifest.CurrentVersion);
-        //    NewVersion = (manifest.NewVersion == null) ? null : new DbAdapter.Version(manifest.NewVersion);
-
-        //    var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(Config.DatabaseScripterConfig.Instance.Manifest.FilePath), manifest.Path));
-        //    Command = ScriptConfigInjector.InjectConfig(command, config);
-        //}
-
         public Script(string name, string description, string databaseName, string connectionString, bool wrapInTransaction, Version currentVersion, Version newVersion, string command)
         {
             Name = name;
@@ -121,7 +102,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public ErrorCode Run(IDatabaseAdapter databaseAdapter)
+        public ErrorCode Run(DatabaseAdapter databaseAdapter)
         {
             log.InfoFormat(CultureInfo.InvariantCulture, "{0} : running...", this);
 
@@ -176,7 +157,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        private ErrorCode RunImplementation(IDatabaseAdapter databaseAdapter)
+        private ErrorCode RunImplementation(DatabaseAdapter databaseAdapter)
         {
             var errorCode = ErrorCode.Ok;
 
@@ -257,5 +238,6 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         }
 
         #endregion
+
     }
 }

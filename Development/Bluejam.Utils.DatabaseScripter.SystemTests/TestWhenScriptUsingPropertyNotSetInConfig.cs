@@ -19,7 +19,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Reflection;
-using Bluejam.Utils.DatabaseScripter.Core;
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
@@ -33,7 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         public override void SetUp()
         {
             base.SetUp();
-            ConfigFileFactory.SetUpConfig("DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.PropertyNotSet.config");
+            ConfigFileFactory.SetUpConfig(@"Example\EnvironmentConfigurations\SystemTest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Environment.PropertyNotSet.xml");
         }
 
         [Test]
@@ -42,7 +41,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.CouldNotFindPropertyForScript, RunApplication(exeFile.FullName));
+            Assert.AreEqual(Domain.ErrorCode.CouldNotFindPropertyForScript, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create"));
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
         }
 
