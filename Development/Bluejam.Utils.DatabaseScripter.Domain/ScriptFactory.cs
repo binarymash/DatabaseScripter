@@ -44,7 +44,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
                     //TODO: add errors to scripts
                     var message = string.Format(CultureInfo.InvariantCulture, "Could not find script \"{0}\" in the manifest file.", scriptName);
                     log.Error(message);
-                    throw new DatabaseScripterException(ErrorCode.CouldNotFindScript, message);
+                    throw new DatabaseScripterException(ErrorCode.CouldNotFindScriptInManifest, message);
                 }
 
                 var environmentConfiguration = configuration.EnvironmentConfigurations.Find(executionPlan.Environment);
@@ -79,7 +79,13 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
             Domain.ConfigInjector configInjector,
             string connectionString)
         {
-            var command = File.ReadAllText(Path.Combine(Path.GetDirectoryName(configuration.Manifest.FilePath), scriptManifest.Path));
+            var scriptFileName = Path.Combine(Path.GetDirectoryName(configuration.Manifest.FilePath), scriptManifest.Path);
+            if (!File.Exists(scriptFileName))
+            {
+                throw new DatabaseScripterException(ErrorCode.ScriptFileDoesNotExist, scriptFileName);
+            }
+
+            var command = File.ReadAllText(scriptFileName);
 
             return new Domain.Script(scriptManifest.Name,
                 scriptManifest.Description,

@@ -33,7 +33,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// <summary>
         /// A script could not be found in the manifest file
         /// </summary>
-        CouldNotFindScript = 2,
+        CouldNotFindScriptInManifest = 2,
             /// <summary>
         /// An exception occurred during script execution
         /// </summary>
@@ -43,9 +43,9 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// </summary>
         IncorrectCurrentVersion = 4,
         /// <summary>
-        /// A script property could not be found
+        /// A script property could not be found in the environment configuration
         /// </summary>
-        CouldNotFindPropertyForScript = 5,
+        CouldNotFindPropertyForScriptInEnvironmentConfiguration = 5,
         /// <summary>
         /// The manifest does not validate against the manifest schema
         /// </summary>
@@ -74,7 +74,10 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// An environment configuration does not validate against the environment configuration schema
         /// </summary>
         InvalidEnvironmentConfiguration = 12,
-
+        /// <summary>
+        /// A script file pointed to by the manifest does not exist
+        /// </summary>
+        ScriptFileDoesNotExist = 13,
 
         /// <summary>
         /// The database adapter failed when connecting to the database

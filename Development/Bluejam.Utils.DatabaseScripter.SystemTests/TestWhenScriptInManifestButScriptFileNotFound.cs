@@ -15,19 +15,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Reflection;
+using System.IO;
+
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
-
     [TestFixture]
-    public class TestWhenScriptNotInManifest : AbstractTestBase
+    public class TestWhenScriptInManifestButScriptFileNotFound : AbstractTestBase
     {
+        [SetUp]
+        public override void SetUp()
+        {            
+            base.SetUp();
+            ConfigFileFactory.SetUpConfig(@"Example\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.NonExistentScript.xml");
+        }
 
         [Test]
         public void Run()
@@ -35,9 +41,11 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.CouldNotFindScriptInManifest, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=\"this script is not in the manifest\""));
+
+            Assert.AreEqual(Domain.ErrorCode.ScriptFileDoesNotExist, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
+
+            //database should not exist
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
         }
-
     }
 }

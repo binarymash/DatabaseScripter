@@ -26,8 +26,15 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    public class TestWhenScriptNotInManifest : AbstractTestBase
+    public class TestWhenInvalidEnvironmentConfigurationSchema : AbstractTestBase
     {
+
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+            ConfigFileFactory.SetUpConfig(@"Example\EnvironmentConfigurations\SystemTest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Environment.InvalidSchema.xml");
+        }
 
         [Test]
         public void Run()
@@ -35,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.CouldNotFindScriptInManifest, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=\"this script is not in the manifest\""));
+            Assert.AreEqual(Domain.ErrorCode.InvalidEnvironmentConfiguration, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create"));
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
         }
 

@@ -15,19 +15,25 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
-using System.Reflection;
+using System.IO;
+
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
-
     [TestFixture]
-    public class TestWhenScriptNotInManifest : AbstractTestBase
+    public class TestWhenScriptWithNoPropertiesIsNotInEnvironmentConfiguration : AbstractTestBase
     {
+        [SetUp]
+        public override void SetUp()
+        {
+            base.SetUp();
+            ConfigFileFactory.SetUpConfig(@"Example\EnvironmentConfigurations\SystemTest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Environment.ScriptWithNoPropertiesNotSpecified.xml");
+        }
 
         [Test]
         public void Run()
@@ -35,9 +41,15 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.CouldNotFindScriptInManifest, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=\"this script is not in the manifest\""));
-            Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
-        }
 
+            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
+
+            //database should exist
+            Assert.IsTrue(server.Databases.Contains("MediaLibrary"));
+            var database = server.Databases["MediaLibrary"];
+            Assert.AreEqual("0.0.0.1", database.ExtendedProperties["SCHEMA_VERSION"].Value);
+            Assert.IsTrue(database.Tables.Contains("CodecType"));
+            Assert.IsTrue(database.Tables.Contains("Encoding"));               
+        }
     }
 }

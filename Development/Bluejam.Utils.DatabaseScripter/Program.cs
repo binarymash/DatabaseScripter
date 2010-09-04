@@ -31,6 +31,12 @@ namespace Bluejam.Utils.DatabaseScripter
 
                 Console.WriteLine(licenseService.LicenceSplash);
 
+                if (args.ToList().Exists(arg => string.Equals(arg, "--pause", StringComparison.OrdinalIgnoreCase)))
+                {
+                    System.Console.WriteLine("Paused - press any key to run execution plan...");
+                    System.Console.ReadLine();
+                }
+
                 if (args.ToList().Exists(arg => string.Equals(arg, "--manifestschema", StringComparison.OrdinalIgnoreCase)))
                 {
                     Console.WriteLine(configService.ManifestSchema);

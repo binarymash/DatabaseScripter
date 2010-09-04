@@ -19,6 +19,12 @@
   <!-- overriding of global script properties. -->
   <ScriptConfigurations>
 
+    <ScriptConfiguration name="create">
+      <Properties>
+        <Property name="databasePath">D:\databases</Property>
+      </Properties>
+    </ScriptConfiguration>    
+    
   </ScriptConfigurations>
 
 </EnvironmentConfiguration>

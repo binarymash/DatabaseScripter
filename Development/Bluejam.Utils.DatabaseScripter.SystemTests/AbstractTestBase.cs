@@ -37,9 +37,12 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
     public abstract class AbstractTestBase
     {
 
+
         [SetUp]
         public virtual void SetUp()
         {
+            Console.WriteLine(string.Format("Running {0}", this.GetType().Name));
+
             var connectionStringConfig = new KeyValuePair<string, string>("/configuration/connectionStrings/add[@name='medialibrary']/@connectionString", ConfigurationManager.ConnectionStrings["nominal"].ConnectionString);
             ConfigFileFactory.SetUpConfig("DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.Nominal.config", new List<KeyValuePair<string, string>>{connectionStringConfig});
             ConfigFileFactory.SetUpConfig(@"Example\manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.Nominal.xml");

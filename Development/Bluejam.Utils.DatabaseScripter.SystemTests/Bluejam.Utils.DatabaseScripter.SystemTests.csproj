@@ -54,6 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigFileFactory.cs" />
+    <Compile Include="TestWhenScriptInManifestButScriptFileNotFound.cs" />
+    <Compile Include="TestWhenScriptWithPropertiesIsNotInEnvironmentConfiguration.cs" />
+    <Compile Include="TestWhenScriptWithNoPropertiesIsNotInEnvironmentConfiguration.cs" />
+    <Compile Include="TestWhenInvalidEnvironmentConfigurationSchema.cs" />
     <Compile Include="TestWhenConnectionStringIsRejected.cs" />
     <Compile Include="TestWhenPreviewAdapterDoesNotExist.cs" />
     <Compile Include="TestWhenDatabaseAdapterDoesNotExist.cs" />
@@ -96,6 +100,18 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Files\Environment\Nominal.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Environment\InvalidSchema.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Environment\ScriptWithNoPropertiesNotSpecified.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Environment\ScriptWithPropertiesNotSpecified.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Files\Manifest\NonExistentScript.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

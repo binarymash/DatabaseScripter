@@ -37,7 +37,6 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         }
 
         [Test]
-        [Ignore]
         public void Run()
         {
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());

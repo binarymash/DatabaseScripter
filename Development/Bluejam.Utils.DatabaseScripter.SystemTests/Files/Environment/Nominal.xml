@@ -25,10 +25,6 @@
       </Properties>
     </ScriptConfiguration>
 
-    <ScriptConfiguration name="increment to 0.0.0.1" />
-
-    <ScriptConfiguration name="drop" />
-
   </ScriptConfigurations>
 
 </EnvironmentConfiguration>

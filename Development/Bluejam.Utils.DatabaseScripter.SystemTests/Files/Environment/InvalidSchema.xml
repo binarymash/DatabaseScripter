@@ -15,9 +15,17 @@
     <Property name="databaseName">MediaLibrary</Property>
   </Properties>
 
+  <ThisIsAnUnknownElement />
+  
   <!-- Script-specific configuration. Scripts can optionally have their own properties element, which allows -->
   <!-- overriding of global script properties. -->
   <ScriptConfigurations>
+    
+    <ScriptConfiguration name="create">
+      <Properties>
+        <Property name="databasePath">D:\databases</Property>
+      </Properties>
+    </ScriptConfiguration>
 
   </ScriptConfigurations>
 

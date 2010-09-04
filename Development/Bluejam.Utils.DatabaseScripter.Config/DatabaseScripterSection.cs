@@ -51,7 +51,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 switch (child.Name)
                 {
                     case "environmentConfigurationPaths":
-                        configuration.EnvironmentConfigurations = GetScriptConfigurations(child);
+                        configuration.EnvironmentConfigurations = GetEnvironmentConfigurations(child);
                         break;
                     case "manifestPath":
                         var manifestFactoryResult = ManifestFactory.Create(child.InnerText);
@@ -74,7 +74,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         private static readonly ILog log = LogManager.GetLogger(typeof(DatabaseScripterSection));
 
-        private static Domain.EnvironmentConfigurationCollection GetScriptConfigurations(XmlNode node)
+        private static Domain.EnvironmentConfigurationCollection GetEnvironmentConfigurations(XmlNode node)
         {
             var environmentConfigurations = new Domain.EnvironmentConfigurationCollection();
 
