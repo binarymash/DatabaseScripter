@@ -15,17 +15,24 @@
     <Property name="databaseName">MediaLibrary_QA</Property>
   </Properties>
 
-  <!-- scripts to be run - the name is used to find the information in the manifest file -->
-  <!-- scripts can optionally have their own properties element, which allows overriding -->
+  <!-- Script-specific configuration. Scripts can optionally have their own properties element, which allows -->
   <!-- overriding of global script properties. -->
   <ScriptConfigurations>
-    <ScriptConfiguration name="create">
+
+    <ScriptConfiguration name="insert sample data">
       <Properties>
-        <Property name="databasePath">D:\databases</Property>
+        <Property name="title">Curb Your Enthusiasm: Meet The Blacks</Property>
+        <Property name="episodeNum">s06e01</Property>
+        <Property name="date">0x000099A400000000</Property>
+        <Property name="description">After Larry''s quest to find the perfect excuse for missing a pair of parties backfires on him big time, he gets in a tense, heated fight with Cheryl. So to make up for it, he agrees to take in the Black Family, who lost their home in Hurricane Edna. But can the Blacks deal with Larry''s total recklessness and lack of respect, not to mention his poorly planned pastry selection?</Property>
+        <Property name="rating">4</Property>
+        <Property name="mediumType1Name">DVD-R</Property>
+        <Property name="mediumType1Description">DVD-R 4.7GB</Property>
+        <Property name="mediumType2Name">BD-RE</Property>
+        <Property name="mediumType2Description">BD-RE 2.0</Property>
       </Properties>
     </ScriptConfiguration>
-    <ScriptConfiguration name="increment to 0.0.0.1" />
-    <ScriptConfiguration name="drop" />
+
   </ScriptConfigurations>
 
 </EnvironmentConfiguration>

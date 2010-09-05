@@ -36,7 +36,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         [Test]
         public void Run()
         {
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication("DatabaseScripter.exe", "--preview --environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
+            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication("DatabaseScripter.exe", "--preview --environment=SystemTest --scripts=create,\"increment to 0.0.0.1\",\"insert sample data\""));
 
             //database should still not exist
             Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
@@ -50,6 +50,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var expectedPreview = streamReader.ReadToEnd();
             
             Assert.AreEqual(expectedPreview, generatedPreview);
+            dbAsserter.AssertThatDatabaseDoesNotExist();
 
         }
     }

@@ -36,12 +36,9 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
             Assert.AreEqual(Domain.ErrorCode.IncorrectCurrentVersion, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.2\""));
-            Assert.IsTrue(server.Databases.Contains("MediaLibrary"));
-            var database = server.Databases["MediaLibrary"];
-            Assert.AreEqual("0.0.0.0", database.ExtendedProperties["SCHEMA_VERSION"].Value);
-            Assert.IsFalse(database.Tables.Contains("CodecType"));
-            Assert.IsFalse(database.Tables.Contains("Encoding"));
-            Assert.IsFalse(database.Tables.Contains("AnotherTable"));               
+            dbAsserter.AssertThatDatabaseExists();
+            dbAsserter.AssertThatSchemaVersionIs0_0_0_0();
+            dbAsserter.AssertThatIncrement0_0_0_2HasNotBeenApplied();
         }
 
     }

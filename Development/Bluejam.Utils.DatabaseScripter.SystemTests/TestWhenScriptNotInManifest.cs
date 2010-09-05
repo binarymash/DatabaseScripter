@@ -36,7 +36,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
             Assert.AreEqual(Domain.ErrorCode.CouldNotFindScriptInManifest, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=\"this script is not in the manifest\""));
-            Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
+            dbAsserter.AssertThatDatabaseDoesNotExist();
         }
 
     }

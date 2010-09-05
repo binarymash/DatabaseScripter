@@ -1,4 +1,4 @@
-USE [MediaLibraryTest2]
+USE [{databaseName}]
 GO
 
 CREATE TABLE [dbo].[AnotherTable]

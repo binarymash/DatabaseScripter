@@ -43,9 +43,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             Assert.IsNotNull(exeFile);
 
             Assert.AreEqual(Domain.ErrorCode.ScriptFileDoesNotExist, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
-
-            //database should not exist
-            Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
+            dbAsserter.AssertThatDatabaseDoesNotExist();
         }
     }
 }

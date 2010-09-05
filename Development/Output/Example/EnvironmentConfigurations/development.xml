@@ -19,16 +19,20 @@
   <!-- overriding of global script properties. -->
   <ScriptConfigurations>
     
-    <ScriptConfiguration name="create">
+    <ScriptConfiguration name="insert sample data">
       <Properties>
-        <Property name="databasePath">D:\databases</Property>
+        <Property name="title">Peep Show</Property>
+        <Property name="episodeNum">s01e01</Property>
+        <Property name="date">0x000093F900000000</Property>
+        <Property name="description">Mark and Jeremy compete for the attentions of their attractive neighbor Toni.</Property>
+        <Property name="rating">5</Property>
+        <Property name="mediumType1Name">DVD+R</Property>
+        <Property name="mediumType1Description">DVD+R 4.7GB</Property>
+        <Property name="mediumType2Name">DVD+RW</Property>
+        <Property name="mediumType2Description">DVD+RW 4.7GB</Property>
       </Properties>
     </ScriptConfiguration>
-    
-    <ScriptConfiguration name="increment to 0.0.0.1" />
-    
-    <ScriptConfiguration name="drop" />
-    
+        
   </ScriptConfigurations>
   
 </EnvironmentConfiguration>

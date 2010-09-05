@@ -43,7 +43,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
             Assert.AreEqual(Domain.ErrorCode.InvalidEnvironmentConfiguration, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create"));
-            Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
+            dbAsserter.AssertThatDatabaseDoesNotExist();
         }
 
     }

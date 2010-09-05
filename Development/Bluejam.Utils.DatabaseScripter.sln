@@ -26,6 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{622D
 		Output\Example\Scripts\0.0.0.2.sql = Output\Example\Scripts\0.0.0.2.sql
 		Output\Example\Scripts\create.sql = Output\Example\Scripts\create.sql
 		Output\Example\Scripts\drop.sql = Output\Example\Scripts\drop.sql
+		Output\Example\Scripts\sampleData.sql = Output\Example\Scripts\sampleData.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.SystemTests", "Bluejam.Utils.DatabaseScripter.SystemTests\Bluejam.Utils.DatabaseScripter.SystemTests.csproj", "{E516A556-7835-4D27-943A-54AD2ED0626A}"

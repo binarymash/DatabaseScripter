@@ -51,9 +51,8 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             connection = new SqlConnection(connectionStringConfig.Value);
             connection.Open();
             server = new Server(new ServerConnection(connection));
-
-            //database should not exist
-            Assert.IsFalse(server.Databases.Contains("MediaLibrary"));
+            dbAsserter = new DatabaseAsserter(server, "MediaLibrary");
+            dbAsserter.AssertThatDatabaseDoesNotExist();
         }
 
         [TearDown]
@@ -91,6 +90,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 
         protected SqlConnection connection;
         protected Server server;
+        protected DatabaseAsserter dbAsserter;
 
     }
 }
