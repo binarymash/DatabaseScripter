@@ -33,7 +33,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         public override void SetUp()
         {
             base.SetUp();
-            ConfigFileFactory.SetUpConfig(@"Example\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.InvalidSchema.xml");
+            ConfigFileFactory.SetUpConfig(@"Example\Manifest\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.InvalidSchema.xml");
         }
 
         [Test]

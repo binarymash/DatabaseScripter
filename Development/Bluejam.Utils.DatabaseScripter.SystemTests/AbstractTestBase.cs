@@ -45,7 +45,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 
             var connectionStringConfig = new KeyValuePair<string, string>("/configuration/connectionStrings/add[@name='medialibrary']/@connectionString", ConfigurationManager.ConnectionStrings["nominal"].ConnectionString);
             ConfigFileFactory.SetUpConfig("DatabaseScripter.exe.config", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Config.Nominal.config", new List<KeyValuePair<string, string>>{connectionStringConfig});
-            ConfigFileFactory.SetUpConfig(@"Example\manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.Nominal.xml");
+            ConfigFileFactory.SetUpConfig(@"Example\Manifest\manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.Nominal.xml");
             ConfigFileFactory.SetUpConfig(@"Example\EnvironmentConfigurations\SystemTest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Environment.Nominal.xml");
 
             connection = new SqlConnection(connectionStringConfig.Value);

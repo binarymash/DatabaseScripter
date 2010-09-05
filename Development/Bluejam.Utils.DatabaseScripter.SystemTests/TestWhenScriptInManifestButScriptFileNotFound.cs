@@ -32,7 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
         public override void SetUp()
         {            
             base.SetUp();
-            ConfigFileFactory.SetUpConfig(@"Example\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.NonExistentScript.xml");
+            ConfigFileFactory.SetUpConfig(@"Example\Manifest\Manifest.xml", "Bluejam.Utils.DatabaseScripter.SystemTests.Files.Manifest.NonExistentScript.xml");
         }
 
         [Test]
