@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4BA89372-2D7A-483F-A465-7878C01E6ACB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bluejam.Utils.DatabaseScripter.Test.Resources</RootNamespace>
+    <AssemblyName>Bluejam.Utils.DatabaseScripter.Test.Resources</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SharpArch, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\SharpArchitecture\SharpArch.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EmbeddedResourceReader.cs" />
+    <Compile Include="Factories\Domain\CommandFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\ScriptManifestFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\EnvironmentConfigurationCollectionFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\EnvironmentConfigurationFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\PropertyCollectionFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\ScriptCollectionFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\ScriptConfigurationCollectionFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\ScriptFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\PropertyFactory.cs" />
+    <Compile Include="Factories\Domain\Entities\ScriptConfigurationFactory.cs" />
+    <Compile Include="Factories\Domain\Values\ExecutionPlanFactory.cs" />
+    <Compile Include="Factories\Domain\Values\ConfigurationFactory.cs" />
+    <Compile Include="Factories\Domain\Values\ManifestFactory.cs" />
+    <Compile Include="Factories\Domain\Values\VersionFactory.cs" />
+    <Compile Include="Factories\Misc\ConnectionStringSettingsFactory.cs" />
+    <Compile Include="Factories\Misc\ConnectionStringSettingsCollectionFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter\Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter.csproj">
+      <Project>{550F30DF-BF78-4308-BFFC-F95E78605BF0}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
+      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

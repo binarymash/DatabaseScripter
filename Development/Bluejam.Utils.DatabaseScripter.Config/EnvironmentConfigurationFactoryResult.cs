@@ -31,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="environmentConfiguration">The environment configuration.</param>
-        public EnvironmentConfigurationFactoryResult(Domain.ErrorCode errorCode, Domain.EnvironmentConfiguration environmentConfiguration) : base(errorCode)
+        public EnvironmentConfigurationFactoryResult(Domain.ErrorCode errorCode, Domain.Entities.EnvironmentConfiguration environmentConfiguration) : base(errorCode)
         {
             EnvironmentConfiguration = environmentConfiguration;
         }
@@ -44,7 +44,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// Gets the environment configuration.
         /// </summary>
         /// <value>The environment configuration.</value>
-        public Domain.EnvironmentConfiguration EnvironmentConfiguration { get; protected set; }
+        public Domain.Entities.EnvironmentConfiguration EnvironmentConfiguration { get; protected set; }
 
         #endregion
 

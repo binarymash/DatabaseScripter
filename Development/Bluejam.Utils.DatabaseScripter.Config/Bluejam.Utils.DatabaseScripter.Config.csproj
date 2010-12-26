@@ -51,6 +51,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Castle-Windsor-2.1.1\bin\net-3.5\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="SharpArch, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\SharpArchitecture\SharpArch.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -85,6 +89,10 @@
     <Compile Include="SchemaValidatorBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
       <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>

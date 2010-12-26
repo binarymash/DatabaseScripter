@@ -23,17 +23,17 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public static class ConfigurationFactory
+    public class ConfigurationFactory
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationFactory));
 
-        public static Domain.Configuration Create()
+        public Domain.Values.Configuration Create()
         {
             try
             {
                 //set config from app.config
-                var configuration = (Domain.Configuration)ConfigurationManager.GetSection("databaseScripter");
+                var configuration = (Domain.Values.Configuration)ConfigurationManager.GetSection("databaseScripter");
                 configuration.ConnectionStrings = ConfigurationManager.ConnectionStrings;
                 return configuration;
             }

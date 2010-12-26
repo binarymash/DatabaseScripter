@@ -62,8 +62,8 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
                 //deserialize
                 var xmlReader = XmlReader.Create(path);
-                var xmlSerializer = new XmlSerializer(typeof(Domain.EnvironmentConfiguration));
-                var environmentConfiguration = (Domain.EnvironmentConfiguration)xmlSerializer.Deserialize(xmlReader);
+                var xmlSerializer = new XmlSerializer(typeof(Domain.Entities.EnvironmentConfiguration));
+                var environmentConfiguration = (Domain.Entities.EnvironmentConfiguration)xmlSerializer.Deserialize(xmlReader);
 
                 return new EnvironmentConfigurationFactoryResult(Domain.ErrorCode.Ok, environmentConfiguration);
             }

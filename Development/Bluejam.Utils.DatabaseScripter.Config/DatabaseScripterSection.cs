@@ -35,7 +35,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         public object Create(object parent, object configContext, XmlNode section)
         {
-            var configuration = new Domain.Configuration();
+            var configuration = new Domain.Values.Configuration();
 
             var configurationValidator = new ConfigurationValidator();
             var result = configurationValidator.Validate(section);
@@ -51,7 +51,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 switch (child.Name)
                 {
                     case "environmentConfigurationPaths":
-                        configuration.EnvironmentConfigurations = GetEnvironmentConfigurations(child);
+                        configuration.EnvironmentConfigurations.AddRange(GetEnvironmentConfigurations(child));
                         break;
                     case "manifestPath":
                         var manifestFactoryResult = ManifestFactory.Create(child.InnerText);
@@ -74,9 +74,9 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         private static readonly ILog log = LogManager.GetLogger(typeof(DatabaseScripterSection));
 
-        private static Domain.EnvironmentConfigurationCollection GetEnvironmentConfigurations(XmlNode node)
+        private static Domain.Entities.EnvironmentConfigurationCollection GetEnvironmentConfigurations(XmlNode node)
         {
-            var environmentConfigurations = new Domain.EnvironmentConfigurationCollection();
+            var environmentConfigurations = new Domain.Entities.EnvironmentConfigurationCollection();
 
             foreach (XmlNode child in node.ChildNodes)
             {

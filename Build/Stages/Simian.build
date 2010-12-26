@@ -6,8 +6,9 @@
     <exec program="${SimianExe}" output="${artifacts.dir}${dir.slash}duplication${dir.slash}duplication.txt">
       <arg value="-threshold=10" />
       <arg value="-includes=${code.solution.dir}**${dir.slash}*.cs" />
-      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests${dir.slash}*.cs" />      
-      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests${dir.slash}*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests${dir.slash}**${dir.slash}*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests${dir.slash}**${dir.slash}*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Test.Resources${dir.slash}**${dir.slash}*.cs" />      
       <arg value="-excludes=${ThirdPartyDir}**${dir.slash}*.cs" />
     </exec>
     

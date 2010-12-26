@@ -26,7 +26,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
 {
 
     [TestFixture]
-    [Ignore("Fix this following the refactoring")]
+    //[Ignore("Fix this following the refactoring")]
     public class TestWhenDatabaseAdapterDoesNotExist : AbstractTestBase
     {
 
@@ -43,7 +43,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.FailedToCreateDatabaseAdapter, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\",\"insert sample data\""));
+            Assert.AreEqual(Domain.ErrorCode.FailedToInitialiseComponents, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\",\"insert sample data\""));
             dbAsserter.AssertThatDatabaseDoesNotExist();
         }
 

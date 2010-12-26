@@ -31,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="manifest">The manifest.</param>
-        public ManifestFactoryResult(Domain.ErrorCode errorCode, Domain.Manifest manifest)
+        public ManifestFactoryResult(Domain.ErrorCode errorCode, Domain.Values.Manifest manifest)
             : base(errorCode)
         {
             Manifest = manifest;
@@ -45,7 +45,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// Gets the manifest.
         /// </summary>
         /// <value>The manifest.</value>
-        public Domain.Manifest Manifest { get; protected set; }
+        public Domain.Values.Manifest Manifest { get; protected set; }
 
         #endregion
 

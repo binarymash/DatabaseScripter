@@ -32,7 +32,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         /// <param name="errorCode">The error code.</param>
         /// <param name="configuration">The configuration.</param>
         /// <param name="executionPlan">The execution plan.</param>
-        public ConfigurationResult(Domain.ErrorCode errorCode, Domain.Configuration configuration, Domain.ExecutionPlan executionPlan)
+        public ConfigurationResult(Domain.ErrorCode errorCode, Domain.Values.Configuration configuration, Domain.Values.ExecutionPlan executionPlan)
             : base(errorCode)
         {
             Configuration = configuration;
@@ -43,9 +43,9 @@ namespace Bluejam.Utils.DatabaseScripter.Services
 
         #region Properties
 
-        public Domain.Configuration Configuration { get; protected set; }
+        public Domain.Values.Configuration Configuration { get; protected set; }
 
-        public Domain.ExecutionPlan ExecutionPlan { get; protected set; }
+        public Domain.Values.ExecutionPlan ExecutionPlan { get; protected set; }
 
         #endregion
 

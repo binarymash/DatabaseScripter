@@ -1,0 +1,9 @@
+<PartCoverSettings>
+  <Target>D:\development\code.google\databasescripter\trunk\Development\ThirdParty\NUnit-2.5.3.9345\bin\net-2.0\nunit-console.exe</Target>
+  <TargetWorkDir>D:\development\code.google\databasescripter\trunk\Development\Output</TargetWorkDir>
+  <TargetArgs>Bluejam.Utils.DatabaseScripter.Tests.dll</TargetArgs>
+  <LogLevel>120</LogLevel>
+  <Rule>+[Bluejam.*]*</Rule>
+  <Rule>-[Bluejam.Utils.DatabaseScripter.Tests]*</Rule>
+  <Rule>-[Bluejam.Utils.DatabaseScripter.SystemTests]*</Rule>
+</PartCoverSettings>

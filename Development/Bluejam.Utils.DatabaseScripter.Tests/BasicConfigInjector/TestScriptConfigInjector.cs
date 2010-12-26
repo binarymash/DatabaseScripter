@@ -21,6 +21,7 @@ using System.Text;
 using Bluejam.Utils.DatabaseScripter;
 using Bluejam.Utils.DatabaseScripter.BasicConfigInjector;
 using Bluejam.Utils.DatabaseScripter.Domain;
+using Bluejam.Utils.DatabaseScripter.Domain.Entities;
 
 using NUnit.Framework;
 

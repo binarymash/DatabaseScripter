@@ -62,8 +62,8 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
                 //deserialize
                 var xmlReader = XmlReader.Create(path);
-                var xmlSerializer = new XmlSerializer(typeof(Domain.Manifest));
-                var manifest = (Domain.Manifest)xmlSerializer.Deserialize(xmlReader);
+                var xmlSerializer = new XmlSerializer(typeof(Domain.Values.Manifest));
+                var manifest = (Domain.Values.Manifest)xmlSerializer.Deserialize(xmlReader);
                 manifest.FilePath = path;
 
                 return new ManifestFactoryResult(Domain.ErrorCode.Ok, manifest);

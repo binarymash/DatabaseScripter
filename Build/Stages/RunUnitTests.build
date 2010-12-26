@@ -3,7 +3,7 @@
   
 		<nunit2>
 			<formatter type="Xml" usefile="true" extension=".xml" outputdir="${artifacts.dir}UnitTests" />
-			<test haltonfailure="true">
+			<test haltonfailure="false">
 				<assemblies basedir="${buildarea.output.dir}">
 					<include name="Bluejam.Utils.DatabaseScripter.Tests.dll" />
 				</assemblies>

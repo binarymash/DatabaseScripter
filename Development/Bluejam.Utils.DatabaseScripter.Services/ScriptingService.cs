@@ -29,19 +29,29 @@ namespace Bluejam.Utils.DatabaseScripter.Services
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptingService));
-        private Domain.ConfigInjector configInjector;
+        private Domain.Strategies.ConfigInjector configInjector;
 
         public ScriptingService()
         {
             var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-            configInjector = (Domain.ConfigInjector)container["configInjector"];
+            configInjector = (Domain.Strategies.ConfigInjector)container["configInjector"];
         }
 
-        public Domain.ErrorCode Execute(Domain.Configuration configuration, Domain.ExecutionPlan executionPlan)
+        public Domain.ErrorCode Execute(Domain.Values.Configuration configuration, Domain.Values.ExecutionPlan executionPlan)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
+            if (executionPlan == null)
+            {
+                throw new ArgumentNullException("executionPlan");
+            }
+
             try
             {
-                var scripts = Domain.ScriptFactory.Create(configuration, executionPlan, configInjector);
+                var scripts = Domain.Factories.ScriptFactory.Create(configuration, executionPlan, configInjector);
                 executionPlan.DatabaseAdapter.Initialize();
                 foreach(var script in scripts)
                 {

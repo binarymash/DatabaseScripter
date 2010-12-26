@@ -20,7 +20,7 @@ using System.Reflection;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
 {
-    public class Adapter : Domain.DatabaseAdapter
+    public class Adapter : Domain.Strategies.DatabaseAdapter
     {
 
         #region Properties
@@ -120,7 +120,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public override bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
+        public override bool ConfirmVersion(string databaseName, Domain.Values.Version version, out bool confirmed)
         {
             confirmed = true;
 
@@ -131,7 +131,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
-        public override bool SetVersion(string databaseName, Domain.Version version)
+        public override bool SetVersion(string databaseName, Domain.Values.Version version)
         {
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "--"));
             fileWriter.WriteLine(String.Format(CultureInfo.InvariantCulture, "-- Set database version - {0}", version.ToString()));

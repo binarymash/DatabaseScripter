@@ -25,6 +25,16 @@ namespace Bluejam.Utils.DatabaseScripter
 
             try
             {
+                try
+                {
+                    //test initialisation of IoC components
+                    new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+                }
+                catch(System.Exception ex)
+                {
+                    throw new Domain.DatabaseScripterException(Domain.ErrorCode.FailedToInitialiseComponents, ex.Message);
+                }
+
                 var licenseService = new Services.LicenceService();
                 var configService = new Services.ConfigService();
                 var scriptingService = new Services.ScriptingService();
@@ -40,6 +50,12 @@ namespace Bluejam.Utils.DatabaseScripter
                 if (args.ToList().Exists(arg => string.Equals(arg, "--manifestschema", StringComparison.OrdinalIgnoreCase)))
                 {
                     Console.WriteLine(configService.ManifestSchema);
+                    return (int)Domain.ErrorCode.Ok;
+                }
+
+                if (args.ToList().Exists(arg => string.Equals(arg, "--environmentconfigschema", StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine(configService.EnvironmentConfigSchema);
                     return (int)Domain.ErrorCode.Ok;
                 }
 

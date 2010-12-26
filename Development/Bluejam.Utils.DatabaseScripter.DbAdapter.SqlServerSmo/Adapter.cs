@@ -27,7 +27,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
 {
-    public class Adapter : Domain.DatabaseAdapter
+    public class Adapter : Domain.Strategies.DatabaseAdapter
     {
 
         #region Non-public
@@ -208,7 +208,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <param name="version">The version.</param>
         /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
         /// <returns></returns>
-        public override bool ConfirmVersion(string databaseName, Domain.Version version, out bool confirmed)
+        public override bool ConfirmVersion(string databaseName, Domain.Values.Version version, out bool confirmed)
         {
             confirmed = false;
 
@@ -221,7 +221,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
                     return false;
                 }
 
-                var currentDatabaseVersion = new Domain.Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
+                var currentDatabaseVersion = new Domain.Values.Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
                 log.InfoFormat(CultureInfo.InvariantCulture, "Current database version is {0}", currentDatabaseVersion);
                 confirmed = (version == currentDatabaseVersion);
             }
@@ -245,7 +245,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// </summary>
         /// <param name="version">The version.</param>
         /// <returns></returns>
-        public override bool SetVersion(string databaseName, Domain.Version version)
+        public override bool SetVersion(string databaseName, Domain.Values.Version version)
         {
             try
             {
@@ -297,7 +297,6 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         // Use C# destructor syntax for finalization code.
         ~Adapter()
         {
-            // Simply call Dispose(false).
             Dispose(false);
         }
 

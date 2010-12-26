@@ -20,12 +20,12 @@ using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public static class ExecutionPlanFactory
+    public class ExecutionPlanFactory
     {
 
-        public static Domain.ExecutionPlan Create(IEnumerable<string> args)
+        public Domain.Values.ExecutionPlan Create(IEnumerable<string> args)
         {
-            var executionPlan = new Domain.ExecutionPlan();
+            var executionPlan = new Domain.Values.ExecutionPlan();
 
             foreach (var arg in args)
             {
@@ -38,7 +38,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 if (arg.StartsWith("--scripts=", StringComparison.OrdinalIgnoreCase) || 
                     arg.StartsWith("-s=", StringComparison.OrdinalIgnoreCase))
                 {
-                    executionPlan.NameOfScriptsToRun = GetArgumentValue(arg).Split(',').ToList();
+                    executionPlan.NameOfScriptsToRun.AddRange(GetArgumentValue(arg).Split(',').ToList());
                 }
             }
 

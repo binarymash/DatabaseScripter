@@ -1,0 +1,30 @@
+<project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
+
+  <property name="module.bin.dir" value="${buildarea.output.dir}\" />
+  <property name="artifacts.coverage.dir" value="${artifacts.dir}\testcoverage\" overwrite="false"/>
+  <property name="artifacts.coverage.partcover.output" value="${artifacts.coverage.dir}coverage.xml" />
+  
+  <target name="TestCoverage" if="${property::exists('partcover.exe')}">
+
+    <mkdir dir="${artifacts.dir}/testcoverage/" failonerror="true" />
+  
+    <exec program="${partcover.exe}" failonerror="true">
+      <arg value='--target "${nunit.exe}"' />
+      <arg value='--target-work-dir "${module.bin.dir}"'/>
+      <arg value='--target-args "Bluejam.Utils.DatabaseScripter.Tests.dll"' />
+      <arg value='--include "[Bluejam.Utils.DatabaseScripter*]*"' />
+      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.Tests]*"' />
+      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.Test.Resources]*"' />
+      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.SystemTests]*"' />
+      <arg value='--output "${artifacts.coverage.partcover.output}"' />      
+    </exec>
+ 
+ <!--  seems to be broken with the current version of partcover
+    <exec program="${reportgenerator.exe}" failonerror="false">
+      <arg value='"${artifacts.coverage.partcover.output}"' />
+      <arg value='"${artifacts.coverage.dir}\"' />
+    </exec>
+ -->   
+ 
+  </target>
+</project>

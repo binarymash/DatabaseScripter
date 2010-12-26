@@ -35,7 +35,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ThirdParty\Castle-Windsor-2.1.1\bin\net-3.5\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\SharpArchitecture\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.3001, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\SharpArchitecture\NHibernate.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpArch, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\SharpArchitecture\SharpArch.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -53,25 +68,35 @@
     <Compile Include="..\AssemblyVersion.cs">
       <Link>AssemblyVersion.cs</Link>
     </Compile>
-    <Compile Include="ConfigInjector.cs" />
-    <Compile Include="Configuration.cs" />
     <Compile Include="DatabaseScripterException.cs" />
     <Compile Include="ErrorCode.cs" />
-    <Compile Include="DatabaseAdapter.cs" />
-    <Compile Include="ExecutionPlan.cs" />
-    <Compile Include="Manifest.cs" />
+    <Compile Include="Strategies\ConfigInjector.cs" />
+    <Compile Include="Validators\NotNullNotWhiteSpaceValidator.cs" />
+    <Compile Include="Validators\NotNullNotWhiteSpaceAttribute.cs" />
+    <Compile Include="Validators\UniqueMembersValidator.cs" />
+    <Compile Include="Validators\UniqueMembersAttribute.cs" />
+    <Compile Include="Values\Configuration.cs" />
+    <Compile Include="Strategies\DatabaseAdapter.cs" />
+    <Compile Include="Values\ExecutionPlan.cs" />
+    <Compile Include="Values\Manifest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Property.cs" />
-    <Compile Include="PropertyCollection.cs" />
-    <Compile Include="Script.cs" />
-    <Compile Include="EnvironmentConfiguration.cs" />
-    <Compile Include="EnvironmentConfigurationCollection.cs" />
-    <Compile Include="ScriptCollection.cs" />
-    <Compile Include="ScriptConfiguration.cs" />
-    <Compile Include="ScriptConfigurationCollection.cs" />
-    <Compile Include="ScriptFactory.cs" />
-    <Compile Include="ScriptManifest.cs" />
-    <Compile Include="Version.cs" />
+    <Compile Include="Entities\Property.cs" />
+    <Compile Include="Entities\PropertyCollection.cs" />
+    <Compile Include="Entities\Script.cs" />
+    <Compile Include="Entities\EnvironmentConfiguration.cs" />
+    <Compile Include="Entities\EnvironmentConfigurationCollection.cs" />
+    <Compile Include="Entities\ScriptCollection.cs" />
+    <Compile Include="Entities\ScriptConfiguration.cs" />
+    <Compile Include="Entities\ScriptConfigurationCollection.cs" />
+    <Compile Include="Factories\ScriptFactory.cs" />
+    <Compile Include="Entities\ScriptManifest.cs" />
+    <Compile Include="Values\Version.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
+      <Project>{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

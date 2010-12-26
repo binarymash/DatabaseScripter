@@ -78,6 +78,10 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// A script file pointed to by the manifest does not exist
         /// </summary>
         ScriptFileDoesNotExist = 13,
+        /// <summary>
+        /// The components in the database scripter could not be initialised
+        /// </summary>
+        FailedToInitialiseComponents = 14,
 
         /// <summary>
         /// The database adapter failed when connecting to the database

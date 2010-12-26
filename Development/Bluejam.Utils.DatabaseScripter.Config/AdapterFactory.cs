@@ -34,7 +34,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         #region Public
 
-        public static Domain.DatabaseAdapter Create(bool previewOnly)
+        public static Domain.Strategies.DatabaseAdapter Create(bool previewOnly)
         {
             return previewOnly ? CreatePreviewAdapter() : CreateDatabaseAdapter();
         }
@@ -45,14 +45,14 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         private static readonly ILog log = LogManager.GetLogger(typeof(AdapterFactory));
 
-        private static Domain.DatabaseAdapter CreatePreviewAdapter()
+        private static Domain.Strategies.DatabaseAdapter CreatePreviewAdapter()
         {
-            Domain.DatabaseAdapter previewAdapter;
+            Domain.Strategies.DatabaseAdapter previewAdapter;
 
             try
             {
                 var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-                previewAdapter = (Domain.DatabaseAdapter)container["previewAdapter"];
+                previewAdapter = (Domain.Strategies.DatabaseAdapter)container["previewAdapter"];
             }
             catch (Exception ex)
             {
@@ -64,14 +64,14 @@ namespace Bluejam.Utils.DatabaseScripter.Config
             return previewAdapter;
         }
 
-        private static Domain.DatabaseAdapter CreateDatabaseAdapter()
+        private static Domain.Strategies.DatabaseAdapter CreateDatabaseAdapter()
         {
-            Domain.DatabaseAdapter databaseAdapter;
+            Domain.Strategies.DatabaseAdapter databaseAdapter;
 
             try
             {
                 var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-                databaseAdapter = (Domain.DatabaseAdapter)container["databaseAdapter"];
+                databaseAdapter = (Domain.Strategies.DatabaseAdapter)container["databaseAdapter"];
             }
             catch (Exception ex)
             {

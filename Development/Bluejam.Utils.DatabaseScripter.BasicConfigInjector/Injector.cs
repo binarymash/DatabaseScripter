@@ -23,9 +23,9 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.BasicConfigInjector
 {
-    public class Injector : Domain.ConfigInjector
+    public class Injector : Domain.Strategies.ConfigInjector
     {
-        public override string InjectConfig(string command, Domain.PropertyCollection properties)
+        public override string InjectConfig(string command, Domain.Entities.PropertyCollection properties)
         {
             var regex = new Regex(@"\x7B[a-zA-z0-9\-_]+\x7D");
             var match = regex.Match(command);

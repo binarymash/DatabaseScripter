@@ -39,6 +39,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnvironmentConfigurations",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manifest", "Manifest", "{9503F091-21B9-4423-B0DF-10BD28C8F7A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Test.Resources", "Bluejam.Utils.DatabaseScripter.Test.Resources\Bluejam.Utils.DatabaseScripter.Test.Resources.csproj", "{4BA89372-2D7A-483F-A465-7878C01E6ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Core", "Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj", "{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{E0F7CA0B-690D-4027-8168-6340F35AFF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0F7CA0B-690D-4027-8168-6340F35AFF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0F7CA0B-690D-4027-8168-6340F35AFF19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BA89372-2D7A-483F-A465-7878C01E6ACB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BA89372-2D7A-483F-A465-7878C01E6ACB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BA89372-2D7A-483F-A465-7878C01E6ACB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BA89372-2D7A-483F-A465-7878C01E6ACB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

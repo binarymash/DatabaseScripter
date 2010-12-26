@@ -26,37 +26,50 @@ namespace Bluejam.Utils.DatabaseScripter.Services
     public class ConfigService
     {
 
+        private Config.ConfigurationFactory configurationFactory = new Config.ConfigurationFactory();
+        private Config.ExecutionPlanFactory executionPlanFactory = new Config.ExecutionPlanFactory();
+        private Config.ManifestValidator manifestValidator = new Config.ManifestValidator();
+        private Config.ConfigurationValidator configValidator = new Config.ConfigurationValidator();
+        private Config.EnvironmentConfigurationValidator environmentConfigValidator = new Config.EnvironmentConfigurationValidator();
+
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigService));
+
+        public Config.ConfigurationFactory ConfigurationFactory { get; set; }
+        public Config.ExecutionPlanFactory ExecutionPlanFactory { get; set; }
+        public Config.ManifestValidator ManifestValidator { get; set; }
+        public Config.ConfigurationValidator ConfigValidator { get; set; }
+        public Config.EnvironmentConfigurationValidator EnvironmentConfigValidator { get; set; }
 
         public string ManifestSchema
         {
-            get
-            {
-                var manifestValidator = new Config.ManifestValidator();
-                return manifestValidator.SchemaString;
-            }
+            get { return manifestValidator.SchemaString; }
         }
 
         public string ConfigSchema
         {
-            get
-            {
-                var configValidator = new Config.ConfigurationValidator();
-                return configValidator.SchemaString;
-            }
+            get { return configValidator.SchemaString; }
+        }
+
+        public string EnvironmentConfigSchema
+        {
+            get { return environmentConfigValidator.SchemaString; }
         }
 
         public ConfigurationResult Create(string[] args)
         {
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
 
             var errorCode = Domain.ErrorCode.Ok;
-            Domain.Configuration configuration = null;
-            Domain.ExecutionPlan executionPlan = null;
+            Domain.Values.Configuration configuration = null;
+            Domain.Values.ExecutionPlan executionPlan = null;
 
             try
             {
-                configuration = Config.ConfigurationFactory.Create();
-                executionPlan = Config.ExecutionPlanFactory.Create(args);
+                configuration = configurationFactory.Create();
+                executionPlan = executionPlanFactory.Create(args);
             }
             catch (Domain.DatabaseScripterException ex)
             {
