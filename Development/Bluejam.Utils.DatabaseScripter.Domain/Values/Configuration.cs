@@ -27,11 +27,16 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
     public sealed class Configuration : Core.DomainModel.ValidatableValueObject
     {
 
+        #region Constructors
+
         public Configuration()
         {
             ConnectionStrings = new ConnectionStringSettingsCollection();
             EnvironmentConfigurations = new Entities.EnvironmentConfigurationCollection();
+            NameOfScriptsToRun = new List<string>();
         }
+
+        #endregion
 
         #region Properties
 
@@ -54,6 +59,22 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         /// <value>The file path.</value>
         [Valid]
         public Values.Manifest Manifest { get; set; }
+
+        public Domain.Values.Version TargetVersion { get; set; }
+
+        public bool Pause { get; set; }
+
+        public bool ManifestSchema { get; set; }
+
+        public bool EnvironmentConfigSchema { get; set; }
+
+        public bool ConfigSchema { get; set; }
+
+        public string Environment { get; set; }
+
+        public List<string> NameOfScriptsToRun { get; private set; }
+
+        public bool Preview { get; set; }
 
         #endregion
 

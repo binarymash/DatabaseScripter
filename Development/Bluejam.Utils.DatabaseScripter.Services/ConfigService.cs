@@ -55,21 +55,19 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             get { return environmentConfigValidator.SchemaString; }
         }
 
-        public ConfigurationResult Create(string[] args)
+        public ConfigurationResult GetConfiguration(string[] args)
         {
             if (args == null)
             {
                 throw new ArgumentNullException("args");
-            }
-
+            } 
+            
             var errorCode = Domain.ErrorCode.Ok;
             Domain.Values.Configuration configuration = null;
-            Domain.Values.ExecutionPlan executionPlan = null;
 
             try
             {
-                configuration = configurationFactory.Create();
-                executionPlan = executionPlanFactory.Create(args);
+                configuration = configurationFactory.Create(args);
             }
             catch (Domain.DatabaseScripterException ex)
             {
@@ -77,7 +75,55 @@ namespace Bluejam.Utils.DatabaseScripter.Services
                 errorCode = ex.ErrorCode;
             }
 
-            return new ConfigurationResult(errorCode, configuration, executionPlan);
+            return new ConfigurationResult(errorCode, configuration);
         }
+
+        public ExecutionPlanResult GetExecutionPlan(Domain.Values.Configuration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
+            var errorCode = Domain.ErrorCode.Ok;
+            Domain.Values.ExecutionPlan executionPlan = null;
+
+            try
+            {
+                executionPlan = executionPlanFactory.Create(configuration);
+            }
+            catch (Domain.DatabaseScripterException ex)
+            {
+                log.Error("An error occurred. Check the debug information that follows.", ex);
+                errorCode = ex.ErrorCode;
+            }
+
+            return new ExecutionPlanResult(errorCode, executionPlan);
+        }
+
+        //public ConfigurationResult Create(string[] args)
+        //{
+        //    if (args == null)
+        //    {
+        //        throw new ArgumentNullException("args");
+        //    }
+
+        //    var errorCode = Domain.ErrorCode.Ok;
+        //    Domain.Values.Configuration configuration = null;
+        //    Domain.Values.ExecutionPlan executionPlan = null;
+
+        //    try
+        //    {
+        //        configuration = configurationFactory.Create();
+        //        executionPlan = executionPlanFactory.Create(args);
+        //    }
+        //    catch (Domain.DatabaseScripterException ex)
+        //    {
+        //        log.Error("An error occurred. Check the debug information that follows.", ex);
+        //        errorCode = ex.ErrorCode;
+        //    }
+
+        //    return new ConfigurationResult(errorCode, configuration, executionPlan);
+        //}
     }
 }

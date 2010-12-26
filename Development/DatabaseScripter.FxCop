@@ -397,13 +397,23 @@
       <Namespaces>
        <Namespace Name="Bluejam.Utils.DatabaseScripter.Config">
         <Types>
-         <Type Name="ConfigurationFactory">
+         <Type Name="CommandLineReader">
           <Members>
-           <Member Name="#Create()">
+           <Member Name="#Argument(System.Collections.Generic.List`1&lt;System.String&gt;,System.String)">
             <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-12-26 15:46:37Z" FixCategory="DependsOnFix">
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-12-26 20:51:10Z" FixCategory="NonBreaking">
               <Issue>
-               <Item>'ConfigurationFactory.Create()'</Item>
+               <Item>'CommandLineReader.Argument(List&lt;string&gt;, string)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Interpret(System.Collections.Generic.List`1&lt;System.String&gt;,Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-12-26 20:51:10Z">
+              <Issue>
+               <Item>'List&lt;string&gt;'</Item>
+               <Item>'CommandLineReader.Interpret(List&lt;string&gt;, Configuration)'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -412,11 +422,11 @@
          </Type>
          <Type Name="ExecutionPlanFactory">
           <Members>
-           <Member Name="#Create(System.Collections.Generic.IEnumerable`1&lt;System.String&gt;)">
+           <Member Name="#Create(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
             <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-12-26 15:46:37Z" FixCategory="DependsOnFix">
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-12-26 20:51:10Z" FixCategory="DependsOnFix">
               <Issue>
-               <Item>'ExecutionPlanFactory.Create(IEnumerable&lt;string&gt;)'</Item>
+               <Item>'ExecutionPlanFactory.Create(Configuration)'</Item>
               </Issue>
              </Message>
             </Messages>
@@ -760,6 +770,16 @@
              </Message>
             </Messages>
            </Member>
+           <Member Name="#NameOfScriptsToRun">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-12-26 20:51:10Z">
+              <Issue>
+               <Item>'List&lt;string&gt;'</Item>
+               <Item>'Configuration.NameOfScriptsToRun'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
           </Members>
          </Type>
          <Type Name="ExecutionPlan">
@@ -833,15 +853,6 @@
              <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-08-14 17:28:44Z" FixCategory="DependsOnFix">
               <Issue>
                <Item>'ConfigService.ConfigSchema'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-           <Member Name="#Create(System.String[])">
-            <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-08-14 17:28:44Z" FixCategory="DependsOnFix">
-              <Issue>
-               <Item>'ConfigService.Create(string[])'</Item>
               </Issue>
              </Message>
             </Messages>

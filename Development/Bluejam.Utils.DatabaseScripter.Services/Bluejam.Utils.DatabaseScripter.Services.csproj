@@ -73,6 +73,7 @@
       <Link>AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="ConfigurationResult.cs" />
+    <Compile Include="ExecutionPlanResult.cs" />
     <Compile Include="LicenceService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigService.cs" />

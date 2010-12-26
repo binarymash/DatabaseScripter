@@ -17,20 +17,34 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Config
+namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class ExecutionPlanFactory
+    public class ExecutionPlanResult : Result
     {
 
-        public Domain.Values.ExecutionPlan Create(Domain.Values.Configuration configuration)
-        {
-            var executionPlan = new Domain.Values.ExecutionPlan();
-            executionPlan.Environment = configuration.Environment;
-            executionPlan.NameOfScriptsToRun.AddRange(configuration.NameOfScriptsToRun);
-            executionPlan.DatabaseAdapter = AdapterFactory.Create(configuration.Preview);
+        #region Constructors
 
-            return executionPlan;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ExecutionPlanResult"/> class.
+        /// </summary>
+        /// <param name="errorCode">The error code.</param>
+        /// <param name="executionPlan">The execution plan.</param>
+        public ExecutionPlanResult(Domain.ErrorCode errorCode, Domain.Values.ExecutionPlan executionPlan)
+            : base(errorCode)
+        {
+            ExecutionPlan = executionPlan;
         }
+
+        #endregion
+
+        #region Properties
+
+        public Domain.Values.ExecutionPlan ExecutionPlan { get; protected set; }
+
+        #endregion
+
+
     }
 }

@@ -74,6 +74,7 @@
       <Link>AssemblyVersion.cs</Link>
     </Compile>
     <Compile Include="AdapterFactory.cs" />
+    <Compile Include="CommandLineReader.cs" />
     <Compile Include="ConfigurationFactory.cs" />
     <Compile Include="ConfigurationValidator.cs" />
     <Compile Include="EnvironmentConfigurationValidator.cs" />

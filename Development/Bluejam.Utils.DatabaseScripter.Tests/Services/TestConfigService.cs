@@ -20,11 +20,11 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
         }
 
         [Test]
-        public void WhenArgsParameterIsNull_CreateThrowsAnArgumentNullException()
+        public void WhenArgsParameterIsNull_GetConfigurationThrowsAnArgumentNullException()
         {
             try
             {
-                var configurationResult = configService.Create(null);
+                var configurationResult = configService.GetConfiguration(null);
                 Assert.Fail();
             }
             catch (ArgumentNullException ex)
@@ -36,13 +36,23 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
                 Assert.Fail();
             }
         }
-
+        
         [Test]
-        [Ignore("need to use IoC and mocks for this to work")]
-        public void WhenNominal_CreateReturnsAConfigurationResult()
+        public void WhenConfigurationParameterIsNull_GetExecutionPlanThrowsAnArgumentNullException()
         {
-            var args = new string[] { };
-            var configurationResult = configService.Create(args);
+            try
+            {
+                var configurationResult = configService.GetExecutionPlan(null);
+                Assert.Fail();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.That(ex.ParamName, Is.EqualTo("configuration"));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
         }
 
         [Test]

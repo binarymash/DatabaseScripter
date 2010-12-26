@@ -27,14 +27,17 @@ namespace Bluejam.Utils.DatabaseScripter.Config
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationFactory));
+        private CommandLineReader commandLineReader = new CommandLineReader();
 
-        public Domain.Values.Configuration Create()
+        public Domain.Values.Configuration Create(string[] args)
         {
             try
             {
                 //set config from app.config
                 var configuration = (Domain.Values.Configuration)ConfigurationManager.GetSection("databaseScripter");
                 configuration.ConnectionStrings = ConfigurationManager.ConnectionStrings;
+                configuration = commandLineReader.Interpret(args.ToList(), configuration);
+
                 return configuration;
             }
             catch (ConfigurationErrorsException ex)

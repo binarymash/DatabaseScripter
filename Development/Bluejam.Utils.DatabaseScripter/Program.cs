@@ -27,7 +27,7 @@ namespace Bluejam.Utils.DatabaseScripter
             {
                 try
                 {
-                    //test initialisation of IoC components
+                    //test initialisation of IoC components. If any components cannot be found then report an error.
                     new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
                 }
                 catch(System.Exception ex)
@@ -41,36 +41,46 @@ namespace Bluejam.Utils.DatabaseScripter
 
                 Console.WriteLine(licenseService.LicenceSplash);
 
-                if (args.ToList().Exists(arg => string.Equals(arg, "--pause", StringComparison.OrdinalIgnoreCase)))
-                {
-                    System.Console.WriteLine("Paused - press any key to run execution plan...");
-                    System.Console.ReadLine();
-                }
-
-                if (args.ToList().Exists(arg => string.Equals(arg, "--manifestschema", StringComparison.OrdinalIgnoreCase)))
-                {
-                    Console.WriteLine(configService.ManifestSchema);
-                    return (int)Domain.ErrorCode.Ok;
-                }
-
-                if (args.ToList().Exists(arg => string.Equals(arg, "--environmentconfigschema", StringComparison.OrdinalIgnoreCase)))
-                {
-                    Console.WriteLine(configService.EnvironmentConfigSchema);
-                    return (int)Domain.ErrorCode.Ok;
-                }
-
-                if (args.ToList().Exists(arg => string.Equals(arg, "--configschema", StringComparison.OrdinalIgnoreCase)))
-                {
-                    Console.WriteLine(configService.ConfigSchema);
-                    return (int)Domain.ErrorCode.Ok;
-                }
-
-                var configResult = configService.Create(args);
+                var configResult = configService.GetConfiguration(args);
                 errorCode = configResult.ErrorCode;
-
-                if (configResult.ErrorCode == Domain.ErrorCode.Ok)
+                var configuration = configResult.Configuration;
+                if (errorCode == Domain.ErrorCode.Ok)
                 {
-                    errorCode = scriptingService.Execute(configResult.Configuration, configResult.ExecutionPlan);
+                    if (configuration.Pause)
+                    {
+                        System.Console.WriteLine("Paused - press any key to run execution plan...");
+                        System.Console.ReadLine();
+                    }
+
+                    if (configuration.ManifestSchema)
+                    {
+                        Console.WriteLine(configService.ManifestSchema);
+                        return (int)Domain.ErrorCode.Ok;
+                    }
+
+                    if (configuration.EnvironmentConfigSchema)
+                    {
+                        Console.WriteLine(configService.EnvironmentConfigSchema);
+                        return (int)Domain.ErrorCode.Ok;
+                    }
+
+                    if (configuration.ConfigSchema)
+                    {
+                        Console.WriteLine(configService.ConfigSchema);
+                        return (int)Domain.ErrorCode.Ok;
+                    }
+                }
+
+                Services.ExecutionPlanResult executionPlanResult = null;
+                if (errorCode == Domain.ErrorCode.Ok)
+                {
+                    executionPlanResult = configService.GetExecutionPlan(configuration);
+                    errorCode = executionPlanResult.ErrorCode;
+                }
+
+                if (errorCode == Domain.ErrorCode.Ok)
+                {
+                    errorCode = scriptingService.Execute(configResult.Configuration, executionPlanResult.ExecutionPlan);
                 }
             }
             catch (Domain.DatabaseScripterException ex)
