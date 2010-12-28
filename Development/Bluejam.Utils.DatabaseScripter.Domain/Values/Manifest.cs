@@ -54,5 +54,43 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 
         #endregion
 
+        #region Public
+
+
+        public bool HasConcurrentScripts(Domain.Values.Version startVersion, Domain.Values.Version endVersion)
+        {            
+            if (startVersion == null)
+            {
+                throw new ArgumentNullException("startVersion");
+            }
+
+            if (endVersion == null)
+            {
+                throw new ArgumentNullException("endVersion");
+            }
+
+            if (!(endVersion > startVersion))
+            {
+                throw new ArgumentException("endVersion must be greater than startVersion", "endVersion");
+            }
+
+            var versionedScriptManifests = ScriptManifests.FindAll(scriptManifest => scriptManifest.CurrentVersion != null && scriptManifest.NewVersion != null);
+
+            var script = versionedScriptManifests.Find(scriptManifest => new Domain.Values.Version(scriptManifest.CurrentVersion) == startVersion);
+            while (script != null)
+            {
+                if (new Domain.Values.Version(script.NewVersion) == endVersion)
+                {
+                    return true;
+                }
+                script = versionedScriptManifests.Find(scriptManifest => new Domain.Values.Version(scriptManifest.CurrentVersion) == new Domain.Values.Version(script.NewVersion));
+            }
+
+            return false;
+        }
+
+        #endregion
+
+
     }
 }

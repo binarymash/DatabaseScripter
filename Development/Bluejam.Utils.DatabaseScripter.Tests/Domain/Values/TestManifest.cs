@@ -39,7 +39,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         public void Test_ManifestSerialization()
         {
             //setup
-            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            var manifest = Factories.Domain.Values.ManifestFactory.Basic;
             var xmlSerializer = new XmlSerializer(typeof(Manifest));
             var stringWriter = new StringWriter();
 
@@ -54,7 +54,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         public void Test_ManifestDeserializtion()
         {
             //setup
-            var expectedManifest = Factories.Domain.Values.ManifestFactory.Default;
+            var expectedManifest = Factories.Domain.Values.ManifestFactory.Basic;
             var xmlSerializer = new XmlSerializer(typeof(Manifest));
             var reader = new StringReader(DefaultXml);
 
@@ -106,7 +106,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         public void TestGetManifestWhenInScriptManifests()
         {
             var name = "script1";
-            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            var manifest = Factories.Domain.Values.ManifestFactory.Basic;
             var expectedManifest = manifest.ScriptManifests.Find(item => item.Name == name);
             Assert.That(expectedManifest, Is.Not.Null);
 
@@ -118,7 +118,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         public void TestGetManifestWhenInScriptManifestsWithDifferentCasing()
         {
             var name = "SCript1";
-            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            var manifest = Factories.Domain.Values.ManifestFactory.Basic;
             var expectedManifest = manifest.ScriptManifests.Find(item => item.Name == name);
             Assert.That(expectedManifest, Is.Null);
             expectedManifest = manifest.ScriptManifests.Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
@@ -126,6 +126,85 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
 
             var scriptManifest = manifest.GetManifest(name);
             Assert.That(scriptManifest, Is.EqualTo(expectedManifest));
+        }
+
+        [Test]
+        public void WhenStartVersionIsNull_HasConcurrentScriptsThrowsNullArgumentException()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            try
+            {
+                manifest.HasConcurrentScripts(null, Factories.Domain.Values.VersionFactory.v1_0_0_2);
+                Assert.Fail("Didn't throw exception");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.That(ex.ParamName, Is.EqualTo("startVersion"));
+            }
+            catch
+            {
+                Assert.Fail("Unexpected exception");
+            }
+        }
+
+        [Test]
+        public void WhenEndVersionIsNull_HasConcurrentScriptsThrowsNullArgumentException()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            try
+            {
+                manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, null);
+                Assert.Fail("Didn't throw exception");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.That(ex.ParamName, Is.EqualTo("endVersion"));
+            }
+            catch
+            {
+                Assert.Fail("Unexpected exception");
+            }
+        }
+
+        [Test]
+        public void WhenStartVersionIsGreaterThanEndVersion_HasConcurrentScriptsThrowsArgumentException()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            try
+            {
+                manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_2, Factories.Domain.Values.VersionFactory.v1_0_0_0);
+                Assert.Fail("Didn't throw exception");
+            }
+            catch (ArgumentException ex)
+            {
+                Assert.That(ex.ParamName, Is.EqualTo("endVersion"));
+                Assert.That(ex.Message, Is.EqualTo("endVersion must be greater than startVersion\r\nParameter name: endVersion"));
+            }
+            catch
+            {
+                Assert.Fail("Unexpected exception");
+            }
+        }
+
+        [Test]
+        public void WhenScriptManifestIsEmpty_HasConcurrentScriptsReturnsFalse()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Empty;
+            Assert.IsFalse(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
+        }
+
+        [Test]
+        public void WhenScriptManifestHasConcurrentScripts_HasConcurrentScriptsReturnsTrue()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            Assert.IsTrue(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v0_0_0_2));
+        }
+
+        [Test]
+        public void WhenScriptManifestDoesntHaveConcurrentScripts_HasConcurrentScriptsReturnsFalse()
+        {
+            var manifest = Factories.Domain.Values.ManifestFactory.Default;
+            Assert.IsFalse(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
         }
 
         private const string DefaultXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Manifest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema\">\r\n  <ScriptManifests>\r\n    <ScriptManifest name=\"script1\" path=\"c:\\some\\path\\script1.sql\" transactional=\"true\" />\r\n    <ScriptManifest name=\"script2\" path=\"c:\\some\\path\\script2.sql\" transactional=\"false\">\r\n      <Description>This is a description of script 2</Description>\r\n      <CurrentVersion>0.0.0.0</CurrentVersion>\r\n      <NewVersion>0.0.0.1</NewVersion>\r\n    </ScriptManifest>\r\n  </ScriptManifests>\r\n</Manifest>";
