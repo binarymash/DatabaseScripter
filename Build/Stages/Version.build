@@ -33,7 +33,7 @@
     <property name="package.version" value="${version.major}.${version.minor}.${version.build}.${version.revision}" />
     <echo>Version is ${package.version}.</echo>        
         
-    <asminfo output="${code.solution.dir}AssemblyVersion.cs" language="CSharp">
+    <asminfo output="${code.solution.dir}CommonAssemblyInfo.cs" language="CSharp">
         <imports>
             <import namespace="System.Reflection" />
         </imports>
