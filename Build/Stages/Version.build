@@ -1,6 +1,6 @@
 <project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
   
-  <target name="UpdateVersion" failonerror="false" if="${property::exists('IncrementVersion')}">
+  <target name="Version" failonerror="true" if="${property::exists('IncrementVersion')}">
 
     <if test="${bool::parse(IncrementVersion)}"> 
       <echo>Getting current revision from ${svn.repo}</echo>    
@@ -28,28 +28,4 @@
   
   </target>
   
-  <target name="Version" depends="UpdateVersion" if="${property::exists('IncrementVersion')}">
-
-    
-    <xmlpeek file="Version.xml" xpath="/version/major" property="version.major" />
-    <xmlpeek file="Version.xml" xpath="/version/minor" property="version.minor" />
-    <xmlpeek file="Version.xml" xpath="/version/build" property="version.build" />
-    <xmlpeek file="Version.xml" xpath="/version/revision" property="version.revision" />
-
-    <property name="package.version" value="${version.major}.${version.minor}.${version.build}.${version.revision}" />
-    <echo>Version is ${package.version}.</echo>        
-        
-    <asminfo output="${code.solution.dir}CommonAssemblyInfo.cs" language="CSharp">
-        <imports>
-            <import namespace="System.Reflection" />
-        </imports>
-        <attributes>
-            <attribute type="AssemblyVersionAttribute" value="${package.version}" />
-            <attribute type="AssemblyFileVersionAttribute" value="${package.version}" />
-        </attributes>
-    </asminfo>
-    
-
-  </target>
-
 </project>
