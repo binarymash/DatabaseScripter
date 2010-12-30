@@ -27,7 +27,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Validators
             }
             catch (SharpArch.Core.PreconditionException)
             {
-                Assert.Pass();
             }
             catch
             {

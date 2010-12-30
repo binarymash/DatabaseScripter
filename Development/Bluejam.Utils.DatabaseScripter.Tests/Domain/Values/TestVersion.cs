@@ -60,7 +60,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -78,7 +77,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -96,7 +94,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -114,7 +111,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -132,7 +128,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -150,7 +145,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {
@@ -168,7 +162,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain
             }
             catch (ArgumentException)
             {
-                Assert.Pass();
             }
             catch
             {

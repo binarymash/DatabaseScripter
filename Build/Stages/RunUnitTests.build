@@ -1,23 +1,14 @@
 <project name="DatabaseScripter" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<target name="RunUnitTests">
   
-		<nunit2>
-			<formatter type="Xml" usefile="true" extension=".xml" outputdir="${artifacts.dir}UnitTests" />
-			<test haltonfailure="false">
-				<assemblies basedir="${buildarea.output.dir}">
-					<include name="Bluejam.Utils.DatabaseScripter.Tests.dll" />
-				</assemblies>
-			</test>
-		</nunit2>
-		
-    <!--
-		<nunit2report format="NoFrames" todir="${artifacts.dir}${dir.slash}UnitTests" failonerror="true" >
-			<fileset>
-				<include name="${artifacts.dir}${dir.slash}UnitTests${dir.slash}Bluejam.Utils.DatabaseScripter.Tests.dll-results.xml" />
-			</fileset>
-		</nunit2report>
-    -->
+  
+    <mkdir dir="${artifacts.dir}/UnitTests/" failonerror="true" />
     
+    <exec program='${nunit.exe}' 
+        workingdir='${buildarea.output.dir}' 
+        commandline='/xml:"${artifacts.dir}UnitTests/Bluejam.Utils.DatabaseScripter.Tests.dll-results.xml" Bluejam.Utils.DatabaseScripter.Tests.dll'
+        failonerror='true' />
+            
     </target>
 </project>
 
