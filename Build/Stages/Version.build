@@ -14,9 +14,15 @@
       <xmlpeek file="svninfo.xml" xpath="/info/entry/commit/@revision" property="svn.revision"/>
       <echo>Current svn revision is ${svn.revision}</echo>         
 
+      <property name="version.major" value="0" />
+      <property name="version.minor" value="10" />
+      <property name="version.build" value="0" />
       <property name="version.revision" value="${int::parse(svn.revision) + 1}" />
       <echo>New revision will be ${version.revision}</echo>         
       
+      <xmlpoke file="Version.xml" xpath="/version/revision" value="${version.major}" />
+      <xmlpoke file="Version.xml" xpath="/version/revision" value="${version.minor}" />
+      <xmlpoke file="Version.xml" xpath="/version/revision" value="${version.build}" />
       <xmlpoke file="Version.xml" xpath="/version/revision" value="${version.revision}" />
     </if>
   

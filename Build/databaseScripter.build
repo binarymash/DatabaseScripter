@@ -50,7 +50,7 @@
     <property name="artifacts.dir" value="${base.dir}Artifacts${dir.slash}" dynamic="true" />
 
     <!-- packaged output configuration -->
-    <property name="package.dir" value="${base.dir}Package${dir.slash}" dynamic="true" />
+    <property name="package.dir" value="${artifacts.dir}Package${dir.slash}" dynamic="true" />
     
     <foreach item="String" in="${stages}" delim="," property="stage">
       <do>
