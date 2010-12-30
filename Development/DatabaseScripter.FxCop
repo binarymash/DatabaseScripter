@@ -65,7 +65,6 @@
     <Rule Name="IndexersShouldNotBeMultidimensional" Enabled="True" />
     <Rule Name="InterfaceMethodsShouldBeCallableByChildTypes" Enabled="True" />
     <Rule Name="ListsAreStronglyTyped" Enabled="True" />
-    <Rule Name="MarkAssembliesWithAssemblyVersion" Enabled="True" />
     <Rule Name="MarkAssembliesWithClsCompliant" Enabled="True" />
     <Rule Name="MarkAssembliesWithComVisible" Enabled="True" />
     <Rule Name="MarkAttributesWithAttributeUsage" Enabled="True" />

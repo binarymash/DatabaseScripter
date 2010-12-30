@@ -22,7 +22,7 @@
   
   </target>
   
-  <target name="Version" depends="UpdateVersion">
+  <target name="Version" depends="UpdateVersion" if="${property::exists('IncrementVersion')}">
 
     
     <xmlpeek file="Version.xml" xpath="/version/major" property="version.major" />
