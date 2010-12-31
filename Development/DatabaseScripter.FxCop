@@ -797,6 +797,16 @@
          </Type>
          <Type Name="Manifest">
           <Members>
+           <Member Name="#GetConcurrentScripts(Bluejam.Utils.DatabaseScripter.Domain.Values.Version,Bluejam.Utils.DatabaseScripter.Domain.Values.Version)">
+            <Messages>
+             <Message TypeName="DoNotExposeGenericLists" Category="Microsoft.Design" CheckId="CA1002" Status="Excluded" Created="2010-12-31 14:50:08Z">
+              <Issue>
+               <Item>'List&lt;ScriptManifest&gt;'</Item>
+               <Item>'Manifest.GetConcurrentScripts(Version, Version)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
            <Member Name="#ScriptManifests">
             <Messages>
              <Message TypeName="CollectionPropertiesShouldBeReadOnly" Category="Microsoft.Usage" CheckId="CA2227" Status="Excluded" Created="2010-12-26 12:21:14Z">

@@ -129,12 +129,12 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         }
 
         [Test]
-        public void WhenStartVersionIsNull_HasConcurrentScriptsThrowsNullArgumentException()
+        public void WhenStartVersionIsNull_GetConcurrentScriptsThrowsNullArgumentException()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Default;
             try
             {
-                manifest.HasConcurrentScripts(null, Factories.Domain.Values.VersionFactory.v1_0_0_2);
+                manifest.GetConcurrentScripts(null, Factories.Domain.Values.VersionFactory.v1_0_0_2);
                 Assert.Fail("Didn't throw exception");
             }
             catch (ArgumentNullException ex)
@@ -148,12 +148,12 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         }
 
         [Test]
-        public void WhenEndVersionIsNull_HasConcurrentScriptsThrowsNullArgumentException()
+        public void WhenEndVersionIsNull_GetConcurrentScriptsThrowsNullArgumentException()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Default;
             try
             {
-                manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, null);
+                manifest.GetConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, null);
                 Assert.Fail("Didn't throw exception");
             }
             catch (ArgumentNullException ex)
@@ -167,12 +167,12 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         }
 
         [Test]
-        public void WhenStartVersionIsGreaterThanEndVersion_HasConcurrentScriptsThrowsArgumentException()
+        public void WhenStartVersionIsGreaterThanEndVersion_GetConcurrentScriptsThrowsArgumentException()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Default;
             try
             {
-                manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_2, Factories.Domain.Values.VersionFactory.v1_0_0_0);
+                manifest.GetConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_2, Factories.Domain.Values.VersionFactory.v1_0_0_0);
                 Assert.Fail("Didn't throw exception");
             }
             catch (ArgumentException ex)
@@ -187,24 +187,27 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
         }
 
         [Test]
-        public void WhenScriptManifestIsEmpty_HasConcurrentScriptsReturnsFalse()
+        public void WhenScriptManifestIsEmpty_GetConcurrentScriptsReturnsEmptyCollection()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Empty;
-            Assert.IsFalse(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
+            Assert.IsEmpty(manifest.GetConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
         }
 
         [Test]
-        public void WhenScriptManifestHasConcurrentScripts_HasConcurrentScriptsReturnsTrue()
+        public void WhenScriptManifestHasConcurrentScripts_HasConcurrentScriptsReturnsTheScriptManifests()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Default;
-            Assert.IsTrue(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v0_0_0_2));
+            var scriptManifests = manifest.GetConcurrentScripts(Factories.Domain.Values.VersionFactory.v0_0_0_0, Factories.Domain.Values.VersionFactory.v0_0_0_2);
+            Assert.That(scriptManifests, Has.Count.EqualTo(2));
+            Assert.That(scriptManifests[0].Name, Is.EqualTo("increment to 0.0.0.1"));
+            Assert.That(scriptManifests[1].Name, Is.EqualTo("increment to 0.0.0.2"));
         }
 
         [Test]
-        public void WhenScriptManifestDoesntHaveConcurrentScripts_HasConcurrentScriptsReturnsFalse()
+        public void WhenScriptManifestDoesntHaveConcurrentScripts_GetConcurrentScriptsReturnsEmptyCollection()
         {
             var manifest = Factories.Domain.Values.ManifestFactory.Default;
-            Assert.IsFalse(manifest.HasConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
+            Assert.IsEmpty(manifest.GetConcurrentScripts(Factories.Domain.Values.VersionFactory.v1_0_0_0, Factories.Domain.Values.VersionFactory.v1_0_0_2));
         }
 
         private const string DefaultXml = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Manifest xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema\">\r\n  <ScriptManifests>\r\n    <ScriptManifest name=\"script1\" path=\"c:\\some\\path\\script1.sql\" transactional=\"true\" />\r\n    <ScriptManifest name=\"script2\" path=\"c:\\some\\path\\script2.sql\" transactional=\"false\">\r\n      <Description>This is a description of script 2</Description>\r\n      <CurrentVersion>0.0.0.0</CurrentVersion>\r\n      <NewVersion>0.0.0.1</NewVersion>\r\n    </ScriptManifest>\r\n  </ScriptManifests>\r\n</Manifest>";

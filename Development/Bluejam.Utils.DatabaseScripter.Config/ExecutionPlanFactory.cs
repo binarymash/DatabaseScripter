@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -27,10 +28,23 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         {
             var executionPlan = new Domain.Values.ExecutionPlan();
             executionPlan.Environment = configuration.Environment;
-            executionPlan.NameOfScriptsToRun.AddRange(configuration.NameOfScriptsToRun);
+            if (configuration.NameOfScriptsToRun.Count > 0)
+            {
+                executionPlan.NameOfScriptsToRun.AddRange(configuration.NameOfScriptsToRun);
+            }
+            else if (configuration.TargetVersion != null && configuration.CurrentVersion != null)
+            {
+                var scriptManifests = configuration.Manifest.GetConcurrentScripts(configuration.CurrentVersion, configuration.TargetVersion);
+                if (scriptManifests.Count == 0)
+                {
+                    throw new Domain.DatabaseScripterException(Domain.ErrorCode.NoExplicitUpgradePath, string.Format(CultureInfo.InvariantCulture, "Could not find an explicit upgrade path from {0} to {1}", configuration.CurrentVersion, configuration.TargetVersion));
+                }
+                executionPlan.NameOfScriptsToRun.AddRange(scriptManifests.Select(item => item.Name));
+            }
             executionPlan.DatabaseAdapter = AdapterFactory.Create(configuration.Preview);
 
             return executionPlan;
         }
+
     }
 }

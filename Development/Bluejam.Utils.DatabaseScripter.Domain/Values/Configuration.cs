@@ -60,6 +60,8 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         [Valid]
         public Values.Manifest Manifest { get; set; }
 
+        public Domain.Values.Version CurrentVersion { get; set; }
+        
         public Domain.Values.Version TargetVersion { get; set; }
 
         public bool Pause { get; set; }

@@ -22,7 +22,6 @@ namespace Bluejam.Utils.DatabaseScripter
         static int Main(string[] args)
         {
             Domain.ErrorCode errorCode = Domain.ErrorCode.Ok;
-
             try
             {
                 try
@@ -85,7 +84,8 @@ namespace Bluejam.Utils.DatabaseScripter
             }
             catch (Domain.DatabaseScripterException ex)
             {
-                return (int)ex.ErrorCode;
+                log.Error("An unexpected error occurred", ex);
+                errorCode = ex.ErrorCode;
             }
 
             if (errorCode == Domain.ErrorCode.Ok)

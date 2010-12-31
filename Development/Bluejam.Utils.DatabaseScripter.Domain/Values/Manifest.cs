@@ -57,7 +57,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         #region Public
 
 
-        public bool HasConcurrentScripts(Domain.Values.Version startVersion, Domain.Values.Version endVersion)
+        public List<Domain.Entities.ScriptManifest> GetConcurrentScripts(Domain.Values.Version startVersion, Domain.Values.Version endVersion)
         {            
             if (startVersion == null)
             {
@@ -74,19 +74,21 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
                 throw new ArgumentException("endVersion must be greater than startVersion", "endVersion");
             }
 
-            var versionedScriptManifests = ScriptManifests.FindAll(scriptManifest => scriptManifest.CurrentVersion != null && scriptManifest.NewVersion != null);
+            var concurrentScriptManifests = new List<Domain.Entities.ScriptManifest>();
 
-            var script = versionedScriptManifests.Find(scriptManifest => new Domain.Values.Version(scriptManifest.CurrentVersion) == startVersion);
-            while (script != null)
+            var versionedScriptManifests = ScriptManifests.FindAll(item => item.CurrentVersion != null && item.NewVersion != null);
+            var scriptManifest = versionedScriptManifests.Find(item => new Domain.Values.Version(item.CurrentVersion) == startVersion);
+            while (scriptManifest != null)
             {
-                if (new Domain.Values.Version(script.NewVersion) == endVersion)
+                concurrentScriptManifests.Add(scriptManifest);
+                if (new Domain.Values.Version(scriptManifest.NewVersion) == endVersion)
                 {
-                    return true;
+                    return concurrentScriptManifests;
                 }
-                script = versionedScriptManifests.Find(scriptManifest => new Domain.Values.Version(scriptManifest.CurrentVersion) == new Domain.Values.Version(script.NewVersion));
+                scriptManifest = versionedScriptManifests.Find(item => new Domain.Values.Version(item.CurrentVersion) == new Domain.Values.Version(scriptManifest.NewVersion));
             }
 
-            return false;
+            return new List<Bluejam.Utils.DatabaseScripter.Domain.Entities.ScriptManifest>();
         }
 
         #endregion

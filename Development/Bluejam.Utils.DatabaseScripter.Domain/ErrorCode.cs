@@ -81,7 +81,11 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// <summary>
         /// The components in the database scripter could not be initialised
         /// </summary>
-        FailedToInitialiseComponents = 14,
+        FailedToInitialiseComponents = 14,        
+        /// <summary>
+        /// No explicit upgrade path could be found for the specified target version
+        /// </summary>
+        NoExplicitUpgradePath = 15,
 
         /// <summary>
         /// The database adapter failed when connecting to the database

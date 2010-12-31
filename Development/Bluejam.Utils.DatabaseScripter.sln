@@ -14,8 +14,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScrip
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{1A7C642C-5CA8-47B1-85E8-3D6BCADB3E80}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{622D5E61-9A8B-4249-B4B0-117DE5CE1605}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.SystemTests", "Bluejam.Utils.DatabaseScripter.SystemTests\Bluejam.Utils.DatabaseScripter.SystemTests.csproj", "{E516A556-7835-4D27-943A-54AD2ED0626A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Services", "Bluejam.Utils.DatabaseScripter.Services\Bluejam.Utils.DatabaseScripter.Services.csproj", "{DC3C4437-46AE-4790-86EB-E23432806A60}"
@@ -35,12 +33,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EnvironmentConfigurations",
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manifest", "Manifest", "{9503F091-21B9-4423-B0DF-10BD28C8F7A3}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Example\Manifest\manifest.xml = Output\Example\Manifest\manifest.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Test.Resources", "Bluejam.Utils.DatabaseScripter.Test.Resources\Bluejam.Utils.DatabaseScripter.Test.Resources.csproj", "{4BA89372-2D7A-483F-A465-7878C01E6ACB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Core", "Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj", "{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter", "Bluejam.Utils.DatabaseScripter\Bluejam.Utils.DatabaseScripter.csproj", "{9C90713C-9E9D-47F1-9118-00CBBE7713DE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5051C732-CC0E-4E74-AA22-0185CE1A8212}"
+	ProjectSection(SolutionItems) = preProject
+		Output\Example\Manifest\Scripts\0.0.0.1.sql = Output\Example\Manifest\Scripts\0.0.0.1.sql
+		Output\Example\Manifest\Scripts\0.0.0.2.sql = Output\Example\Manifest\Scripts\0.0.0.2.sql
+		Output\Example\Manifest\Scripts\create.sql = Output\Example\Manifest\Scripts\create.sql
+		Output\Example\Manifest\Scripts\drop.sql = Output\Example\Manifest\Scripts\drop.sql
+		Output\Example\Manifest\Scripts\sampleData.sql = Output\Example\Manifest\Scripts\sampleData.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,8 +108,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1A7C642C-5CA8-47B1-85E8-3D6BCADB3E80} = {5C13FA8D-C47B-4EBC-8C06-B5DBC044F7BF}
-		{622D5E61-9A8B-4249-B4B0-117DE5CE1605} = {1A7C642C-5CA8-47B1-85E8-3D6BCADB3E80}
 		{AD93251B-CF66-4E94-AB6B-880EB30EE383} = {1A7C642C-5CA8-47B1-85E8-3D6BCADB3E80}
 		{9503F091-21B9-4423-B0DF-10BD28C8F7A3} = {1A7C642C-5CA8-47B1-85E8-3D6BCADB3E80}
+		{5051C732-CC0E-4E74-AA22-0185CE1A8212} = {9503F091-21B9-4423-B0DF-10BD28C8F7A3}
 	EndGlobalSection
 EndGlobal

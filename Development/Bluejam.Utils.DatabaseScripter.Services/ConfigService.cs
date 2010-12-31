@@ -101,29 +101,5 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             return new ExecutionPlanResult(errorCode, executionPlan);
         }
 
-        //public ConfigurationResult Create(string[] args)
-        //{
-        //    if (args == null)
-        //    {
-        //        throw new ArgumentNullException("args");
-        //    }
-
-        //    var errorCode = Domain.ErrorCode.Ok;
-        //    Domain.Values.Configuration configuration = null;
-        //    Domain.Values.ExecutionPlan executionPlan = null;
-
-        //    try
-        //    {
-        //        configuration = configurationFactory.Create();
-        //        executionPlan = executionPlanFactory.Create(args);
-        //    }
-        //    catch (Domain.DatabaseScripterException ex)
-        //    {
-        //        log.Error("An error occurred. Check the debug information that follows.", ex);
-        //        errorCode = ex.ErrorCode;
-        //    }
-
-        //    return new ConfigurationResult(errorCode, configuration, executionPlan);
-        //}
     }
 }

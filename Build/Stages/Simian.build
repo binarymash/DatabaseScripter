@@ -2,12 +2,21 @@
   <target name="Simian">
       
     <mkdir dir="${artifacts.dir}${dir.slash}duplication${dir.slash}" failonerror="false" />
-    
+
+    <echo>Looking for code duplication in "${code.solution.dir}"...</echo>
+    <echo>Ignoring "${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests${dir.slash}**${dir.slash}*.cs"</echo>
+    <echo>Ignoring "${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests${dir.slash}**${dir.slash}*.cs"...</echo>
+    <echo>Ignoring "${code.solution.dir}Bluejam.Utils.DatabaseScripter.Test.Resources${dir.slash}**${dir.slash}*.cs"...</echo>
+    <echo>Ignoring "${ThirdPartyDir}**${dir.slash}*.cs"...</echo>
+
     <exec program="${SimianExe}" output="${artifacts.dir}${dir.slash}duplication${dir.slash}duplication.txt">
       <arg value="-threshold=10" />
       <arg value="-includes=${code.solution.dir}**${dir.slash}*.cs" />
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests${dir.slash}*.cs" />  
       <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Tests${dir.slash}**${dir.slash}*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests${dir.slash}*.cs" />      
       <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.SystemTests${dir.slash}**${dir.slash}*.cs" />      
+      <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Test.Resources${dir.slash}*.cs" />      
       <arg value="-excludes=${code.solution.dir}Bluejam.Utils.DatabaseScripter.Test.Resources${dir.slash}**${dir.slash}*.cs" />      
       <arg value="-excludes=${ThirdPartyDir}**${dir.slash}*.cs" />
     </exec>

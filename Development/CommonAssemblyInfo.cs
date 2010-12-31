@@ -16,6 +16,6 @@ using System.Reflection;
 [assembly: AssemblyCopyrightAttribute("Copyright (c) 2010")]
 [assembly: AssemblyTrademarkAttribute("")]
 [assembly: AssemblyCultureAttribute("")]
-[assembly: AssemblyVersionAttribute("0.10.0.273")]
-[assembly: AssemblyFileVersionAttribute("0.10.0.273")]
+[assembly: AssemblyVersionAttribute("0.0.0.0")]
+[assembly: AssemblyFileVersionAttribute("0.0.0.0")]
 
