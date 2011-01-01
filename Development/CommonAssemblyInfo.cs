@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: AssemblyConfigurationAttribute("")]
 [assembly: AssemblyCompanyAttribute("Philip Wood")]
 [assembly: AssemblyProductAttribute("Database Scripter")]
-[assembly: AssemblyCopyrightAttribute("Copyright (c) 2010")]
+[assembly: AssemblyCopyrightAttribute("Copyright (c) 2011")]
 [assembly: AssemblyTrademarkAttribute("")]
 [assembly: AssemblyCultureAttribute("")]
 [assembly: AssemblyVersionAttribute("0.0.0.0")]

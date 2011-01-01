@@ -1,4 +1,4 @@
-﻿//DatabaseScripter  Copyright (C) 2010  Philip Wood
+﻿//DatabaseScripter  Copyright (C) 2011  Philip Wood
 //
 //This program is free software: you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             get
             {
                 return string.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    "{1}DatabaseScripter version {0}  Copyright (C) 2010  Philip Wood {1}http://code.google.com/p/databasescripter/{1}{1}This program comes with ABSOLUTELY NO WARRANTY. This is free software, {1}and you are welcome to redistribute it under certain conditions. {1}{1}For more information, see License.txt.{1}{1}{1}",
+                    "{1}DatabaseScripter version {0}  Copyright (C) 2011  Philip Wood {1}http://code.google.com/p/databasescripter/{1}{1}This program comes with ABSOLUTELY NO WARRANTY. This is free software, {1}and you are welcome to redistribute it under certain conditions. {1}{1}For more information, see License.txt.{1}{1}{1}",
                      Assembly.GetExecutingAssembly().GetName().Version.ToString(), 
                      System.Environment.NewLine);
             }

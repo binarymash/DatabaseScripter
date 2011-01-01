@@ -18,7 +18,7 @@
             <attribute type="AssemblyConfigurationAttribute" value="" />
             <attribute type="AssemblyCompanyAttribute" value="Philip Wood" />
             <attribute type="AssemblyProductAttribute" value="Database Scripter" />
-            <attribute type="AssemblyCopyrightAttribute" value="Copyright (c) 2010" />
+            <attribute type="AssemblyCopyrightAttribute" value="Copyright (c) 2011" />
             <attribute type="AssemblyTrademarkAttribute" value="" />
             <attribute type="AssemblyCultureAttribute" value="" />
             <attribute type="AssemblyVersionAttribute" value="${package.version}" />
