@@ -42,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             dbAsserter.AssertThatIncrement0_0_0_2HasNotBeenApplied();
             dbAsserter.AssertThatSchemaVersionIs0_0_0_0();
             
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest -c=0.0.0.0 -t=0.0.0.2"));
+            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest -t=0.0.0.2"));
             dbAsserter.AssertThatDatabaseExists();
             dbAsserter.AssertThatIncrement0_0_0_1HasBeenApplied();
             dbAsserter.AssertThatIncrement0_0_0_2HasBeenApplied();

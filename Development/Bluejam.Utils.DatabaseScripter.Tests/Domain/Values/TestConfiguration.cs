@@ -72,5 +72,23 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Values
             AssertIsInvalid(configuration, 1);
             AssertValidationResult(configuration, "Name", "A name must be specified for a property");
         }
+
+        [Test]
+        public void Test_WhenNamedScriptsAndTargetVersion_IsInvalid()
+        {
+            //setup
+            var configuration = Factories.Domain.Values.ConfigurationFactory.Invalid_MixingNamedAndTargetVersion;
+            AssertIsInvalid(configuration, 1);
+            AssertValidationResult(configuration, null, "The configuration execution strategy is invalid; it must be either named or versioned");
+        }
+
+        [Test]
+        public void Test_WhenOnlyTargetVersion_IsInvalid()
+        {
+            //setup
+            var configuration = Factories.Domain.Values.ConfigurationFactory.DevelopmentWithOnlyTargetVersion;
+            AssertIsValid(configuration);
+        }
+    
     }
 }

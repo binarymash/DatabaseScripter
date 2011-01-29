@@ -27,7 +27,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
     {
 
         private Config.ConfigurationFactory configurationFactory = new Config.ConfigurationFactory();
-        private Config.ExecutionPlanFactory executionPlanFactory = new Config.ExecutionPlanFactory();
+
         private Config.ManifestValidator manifestValidator = new Config.ManifestValidator();
         private Config.ConfigurationValidator configValidator = new Config.ConfigurationValidator();
         private Config.EnvironmentConfigurationValidator environmentConfigValidator = new Config.EnvironmentConfigurationValidator();
@@ -35,7 +35,6 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigService));
 
         public Config.ConfigurationFactory ConfigurationFactory { get; set; }
-        public Config.ExecutionPlanFactory ExecutionPlanFactory { get; set; }
         public Config.ManifestValidator ManifestValidator { get; set; }
         public Config.ConfigurationValidator ConfigValidator { get; set; }
         public Config.EnvironmentConfigurationValidator EnvironmentConfigValidator { get; set; }
@@ -76,29 +75,6 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             }
 
             return new ConfigurationResult(errorCode, configuration);
-        }
-
-        public ExecutionPlanResult GetExecutionPlan(Domain.Values.Configuration configuration)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
-
-            var errorCode = Domain.ErrorCode.Ok;
-            Domain.Values.ExecutionPlan executionPlan = null;
-
-            try
-            {
-                executionPlan = executionPlanFactory.Create(configuration);
-            }
-            catch (Domain.DatabaseScripterException ex)
-            {
-                log.Error("An error occurred. Check the debug information that follows.", ex);
-                errorCode = ex.ErrorCode;
-            }
-
-            return new ExecutionPlanResult(errorCode, executionPlan);
         }
 
     }

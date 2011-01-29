@@ -24,7 +24,7 @@ using log4net;
 
 using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
-namespace Bluejam.Utils.DatabaseScripter.Config
+namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
 {
     /// <summary>
     /// Factory class for DatabaseAdapter objects

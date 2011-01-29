@@ -20,11 +20,6 @@ namespace Bluejam.Utils.DatabaseScripter.Config
             {
                 configuration.NameOfScriptsToRun.AddRange(scriptNames.Split(',').ToList());
             }
-            var currentVersion = ArgumentValue(arguments, new List<string> { "--current", "-c" });
-            if (currentVersion != null)
-            {
-                configuration.CurrentVersion = new Domain.Values.Version(currentVersion);
-            } 
             var targetVersion = ArgumentValue(arguments, new List<string> { "--target", "-t" });
             if (targetVersion != null)
             {

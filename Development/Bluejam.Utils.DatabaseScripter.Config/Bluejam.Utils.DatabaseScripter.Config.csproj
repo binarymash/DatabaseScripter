@@ -73,7 +73,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AdapterFactory.cs" />
     <Compile Include="CommandLineReader.cs" />
     <Compile Include="ConfigurationFactory.cs" />
     <Compile Include="ConfigurationValidator.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="EnvironmentConfigurationFactoryResult.cs" />
     <Compile Include="EnvironmentConfigurationFactory.cs" />
     <Compile Include="DatabaseScripterSection.cs" />
-    <Compile Include="ExecutionPlanFactory.cs" />
     <Compile Include="ManifestFactory.cs" />
     <Compile Include="ManifestFactoryResult.cs" />
     <Compile Include="ManifestValidator.cs" />

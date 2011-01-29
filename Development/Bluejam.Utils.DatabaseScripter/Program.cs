@@ -4,9 +4,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+
 using Castle.Core.Resource;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
+
+using Microsoft.Practices.ServiceLocation;
 
 using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 using Services = Bluejam.Utils.DatabaseScripter.Services;
@@ -27,7 +30,8 @@ namespace Bluejam.Utils.DatabaseScripter
                 try
                 {
                     //test initialisation of IoC components. If any components cannot be found then report an error.
-                    new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+                    var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
+                    ServiceLocator.SetLocatorProvider(() => new CommonServiceLocator.WindsorAdapter.WindsorServiceLocator(container));
                 }
                 catch(System.Exception ex)
                 {
@@ -73,7 +77,7 @@ namespace Bluejam.Utils.DatabaseScripter
                 Services.ExecutionPlanResult executionPlanResult = null;
                 if (errorCode == Domain.ErrorCode.Ok)
                 {
-                    executionPlanResult = configService.GetExecutionPlan(configuration);
+                    executionPlanResult = scriptingService.GetExecutionPlan(configuration);
                     errorCode = executionPlanResult.ErrorCode;
                 }
 

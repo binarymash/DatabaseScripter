@@ -208,9 +208,9 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
         /// <param name="version">The version.</param>
         /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
         /// <returns></returns>
-        public override bool ConfirmVersion(string databaseName, Domain.Values.Version version, out bool confirmed)
+        public override bool GetVersion(string databaseName, out Domain.Values.Version currentVersion)
         {
-            confirmed = false;
+            currentVersion = null;
 
             try
             {
@@ -223,7 +223,7 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
 
                 var currentDatabaseVersion = new Domain.Values.Version(database.ExtendedProperties["SCHEMA_VERSION"].Value as string);
                 log.InfoFormat(CultureInfo.InvariantCulture, "Current database version is {0}", currentDatabaseVersion);
-                confirmed = (version == currentDatabaseVersion);
+                currentVersion = currentDatabaseVersion;
             }
             catch (ExecutionFailureException efeEx)
             {
@@ -238,6 +238,27 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.SqlServerSmo
 
             return true;
 
+        }
+
+        /// <summary>
+        /// Confirms the current version of the database matches the specified version.
+        /// </summary>
+        /// <param name="databaseName">Name of the database.</param>
+        /// <param name="version">The version.</param>
+        /// <param name="confirmed">if set to <c>true</c>, the database version has been confirmed.</param>
+        /// <returns></returns>
+        public override bool ConfirmVersion(string databaseName, Domain.Values.Version version, out bool confirmed)
+        {
+            confirmed = false;
+
+            Domain.Values.Version currentVersion;
+            if (!GetVersion(databaseName, out currentVersion))
+            {
+                return false;
+            };
+
+            confirmed = (version == currentVersion);
+            return true;
         }
 
         /// <summary>

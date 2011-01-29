@@ -86,13 +86,9 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptFactory));
 
-        private static Entities.Script CreateScript(
-
-            Entities.ScriptConfiguration scriptConfiguration,
-            Entities.ScriptManifest scriptManifest, 
-            Values.Configuration configuration, 
-            Strategies.ConfigInjector configInjector,
-            string connectionString)
+        private static Entities.Script CreateScript(Entities.ScriptConfiguration scriptConfiguration,
+            Entities.ScriptManifest scriptManifest, Values.Configuration configuration, 
+            Strategies.ConfigInjector configInjector, string connectionString)
         {
             var scriptFileName = Path.Combine(Path.GetDirectoryName(configuration.Manifest.FilePath), scriptManifest.Path);
             if (!File.Exists(scriptFileName))

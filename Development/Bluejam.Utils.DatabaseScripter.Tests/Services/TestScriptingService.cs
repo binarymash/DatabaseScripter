@@ -53,6 +53,25 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
                 Assert.Fail();
             }
         }
+
+        [Test]
+        public void WhenConfigurationParameterIsNull_GetExecutionPlanThrowsAnArgumentNullException()
+        {
+            try
+            {
+                var configurationResult = service.GetExecutionPlan(null);
+                Assert.Fail();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.That(ex.ParamName, Is.EqualTo("configuration"));
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+
     
     }
 }

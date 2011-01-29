@@ -120,6 +120,13 @@ namespace Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter
             return true;
         }
 
+        public override bool GetVersion(string databaseName, out Bluejam.Utils.DatabaseScripter.Domain.Values.Version currentVersion)
+        {
+            //Unable to determine the current version when using the FileWriter adapter
+            currentVersion = null;
+            return false;
+        }
+
         public override bool ConfirmVersion(string databaseName, Domain.Values.Version version, out bool confirmed)
         {
             confirmed = true;

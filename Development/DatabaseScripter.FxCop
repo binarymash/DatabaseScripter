@@ -419,19 +419,6 @@
            </Member>
           </Members>
          </Type>
-         <Type Name="ExecutionPlanFactory">
-          <Members>
-           <Member Name="#Create(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
-            <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2010-12-26 20:51:10Z" FixCategory="DependsOnFix">
-              <Issue>
-               <Item>'ExecutionPlanFactory.Create(Configuration)'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-          </Members>
-         </Type>
         </Types>
        </Namespace>
       </Namespaces>
@@ -676,6 +663,23 @@
          </Type>
         </Types>
        </Namespace>
+       <Namespace Name="Bluejam.Utils.DatabaseScripter.Domain.Factories">
+        <Types>
+         <Type Name="ExecutionPlanFactory">
+          <Members>
+           <Member Name="#Create(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 15:36:22Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'ExecutionPlanFactory.Create(Configuration)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+        </Types>
+       </Namespace>
        <Namespace Name="Bluejam.Utils.DatabaseScripter.Domain.Strategies">
         <Types>
          <Type Name="ConfigInjector">
@@ -703,6 +707,15 @@
              </Message>
             </Messages>
            </Member>
+           <Member Name="#GetVersion(System.String,Bluejam.Utils.DatabaseScripter.Domain.Values.Version&amp;)">
+            <Messages>
+             <Message Id="1#" TypeName="AvoidOutParameters" Category="Microsoft.Design" CheckId="CA1021" Status="Excluded" Created="2011-01-29 18:13:42Z">
+              <Issue>
+               <Item>'currentVersion'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
            <Member Name="#RollBackTransaction()">
             <Messages>
              <Message Id="RollBack" TypeName="CompoundWordsShouldBeCasedCorrectly" Category="Microsoft.Naming" CheckId="CA1702" Status="Excluded" Created="2010-12-26 12:21:14Z">
@@ -710,6 +723,41 @@
                <Item>RollBack</Item>
                <Item>'DatabaseAdapter.RollBackTransaction()'</Item>
                <Item>Rollback</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="NamedExecutionPlanStrategy">
+          <Members>
+           <Member Name="#Run(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 15:36:22Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'NamedExecutionPlanStrategy.Run(Configuration)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+          </Members>
+         </Type>
+         <Type Name="VersionedExecutionPlanStrategy">
+          <Members>
+           <Member Name="#GetCurrentVersion(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 18:13:42Z" FixCategory="NonBreaking">
+              <Issue>
+               <Item>'VersionedExecutionPlanStrategy.GetCurrentVersion(Configuration)'</Item>
+              </Issue>
+             </Message>
+            </Messages>
+           </Member>
+           <Member Name="#Run(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
+            <Messages>
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 15:36:22Z" FixCategory="DependsOnFix">
+              <Issue>
+               <Item>'VersionedExecutionPlanStrategy.Run(Configuration)'</Item>
               </Issue>
              </Message>
             </Messages>

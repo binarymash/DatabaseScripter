@@ -25,5 +25,29 @@ namespace Bluejam.Utils.DatabaseScripter.Test.Resources.Factories.Domain.Values
             }
         }
 
+        public static Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration Invalid_MixingNamedAndTargetVersion
+        {
+            get
+            {
+                var configuration = Development;
+                configuration.NameOfScriptsToRun.AddRange(Factories.Domain.Entities.ScriptCollectionFactory.Nominal.Select(item => item.Name).ToList<string>());
+                configuration.TargetVersion = VersionFactory.v0_0_0_2;
+
+                return configuration;
+            }
+        }
+
+        public static Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration DevelopmentWithOnlyTargetVersion
+        {
+            get
+            {
+                var configuration = Development;
+                configuration.NameOfScriptsToRun.Clear();
+                configuration.TargetVersion = VersionFactory.v0_0_0_2;
+
+                return configuration;
+            }
+        }
+
     }
 }

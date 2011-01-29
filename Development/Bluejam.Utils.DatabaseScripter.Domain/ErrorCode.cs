@@ -86,6 +86,10 @@ namespace Bluejam.Utils.DatabaseScripter.Domain
         /// No explicit upgrade path could be found for the specified target version
         /// </summary>
         NoExplicitUpgradePath = 15,
+        /// <summary>
+        /// An error ocurred when creating the execution plan
+        /// </summary>
+        FailedToCreateExecutionPlan = 16,
 
         /// <summary>
         /// The database adapter failed when connecting to the database

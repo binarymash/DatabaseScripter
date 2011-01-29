@@ -31,10 +31,40 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptingService));
         private Domain.Strategies.ConfigInjector configInjector;
 
+        //TODO: windsor
+        private Domain.Factories.ExecutionPlanFactory executionPlanFactory = new Domain.Factories.ExecutionPlanFactory();
+
+        public Domain.Factories.ExecutionPlanFactory ExecutionPlanFactory { get; set; }
+
+
         public ScriptingService()
         {
             var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
             configInjector = (Domain.Strategies.ConfigInjector)container["configInjector"];
+        }
+
+
+        public ExecutionPlanResult GetExecutionPlan(Domain.Values.Configuration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
+            var errorCode = Domain.ErrorCode.Ok;
+            Domain.Values.ExecutionPlan executionPlan = null;
+
+            try
+            {
+                executionPlan = executionPlanFactory.Create(configuration);
+            }
+            catch (Domain.DatabaseScripterException ex)
+            {
+                log.Error("An error occurred. Check the debug information that follows.", ex);
+                errorCode = ex.ErrorCode;
+            }
+
+            return new ExecutionPlanResult(errorCode, executionPlan);
         }
 
         public Domain.ErrorCode Execute(Domain.Values.Configuration configuration, Domain.Values.ExecutionPlan executionPlan)

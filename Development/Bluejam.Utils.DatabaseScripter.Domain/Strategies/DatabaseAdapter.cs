@@ -67,6 +67,15 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
         /// <returns></returns>
         public abstract bool RunCommand(string databaseName, string command);
 
+
+        /// <summary>
+        /// Gets the current version of the database.
+        /// </summary>
+        /// <param name="databaseName">Name of the database.</param>
+        /// <param name="currentversion">The current version.</param>
+        /// <returns></returns>
+        public abstract bool GetVersion(string databaseName, out Values.Version currentVersion);
+
         /// <summary>
         /// Confirms the current version of the database matches the specified version.
         /// </summary>

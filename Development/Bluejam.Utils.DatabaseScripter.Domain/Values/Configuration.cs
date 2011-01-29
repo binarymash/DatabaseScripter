@@ -24,6 +24,7 @@ using NHibernate.Validator.Constraints;
 namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 {
 
+    [Validators.ConfigurationExecutionStrategy]
     public sealed class Configuration : Core.DomainModel.ValidatableValueObject
     {
 
@@ -59,8 +60,6 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         /// <value>The file path.</value>
         [Valid]
         public Values.Manifest Manifest { get; set; }
-
-        public Domain.Values.Version CurrentVersion { get; set; }
         
         public Domain.Values.Version TargetVersion { get; set; }
 

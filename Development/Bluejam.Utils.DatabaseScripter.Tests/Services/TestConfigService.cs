@@ -38,24 +38,6 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
         }
         
         [Test]
-        public void WhenConfigurationParameterIsNull_GetExecutionPlanThrowsAnArgumentNullException()
-        {
-            try
-            {
-                var configurationResult = configService.GetExecutionPlan(null);
-                Assert.Fail();
-            }
-            catch (ArgumentNullException ex)
-            {
-                Assert.That(ex.ParamName, Is.EqualTo("configuration"));
-            }
-            catch
-            {
-                Assert.Fail();
-            }
-        }
-
-        [Test]
         public void ManifestSchema_ReturnsTheManifestSchema()
         {
             Assert.That(configService.ManifestSchema, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.ManifestSchema));
