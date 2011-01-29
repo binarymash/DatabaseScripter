@@ -36,13 +36,10 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
             }
             else if (configuration.TargetVersion != null)
             {
-                return new Strategies.VersionedExecutionPlanStrategy().Run(configuration);
+                return new Strategies.TargetVersionExecutionPlanStrategy().Run(configuration);
             }
 
-            //TODO: latest strategy
-
-            return null;
-
+            return new Strategies.LatestVersionExecutionPlanStrategy().Run(configuration);
         }
     }
 }

@@ -742,22 +742,13 @@
            </Member>
           </Members>
          </Type>
-         <Type Name="VersionedExecutionPlanStrategy">
+         <Type Name="VersionedExecutionPlanStrategyBase">
           <Members>
            <Member Name="#GetCurrentVersion(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
             <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 18:13:42Z" FixCategory="NonBreaking">
+             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 19:05:36Z" FixCategory="DependsOnFix">
               <Issue>
-               <Item>'VersionedExecutionPlanStrategy.GetCurrentVersion(Configuration)'</Item>
-              </Issue>
-             </Message>
-            </Messages>
-           </Member>
-           <Member Name="#Run(Bluejam.Utils.DatabaseScripter.Domain.Values.Configuration)">
-            <Messages>
-             <Message TypeName="MarkMembersAsStatic" Category="Microsoft.Performance" CheckId="CA1822" Status="Excluded" Created="2011-01-29 15:36:22Z" FixCategory="DependsOnFix">
-              <Issue>
-               <Item>'VersionedExecutionPlanStrategy.Run(Configuration)'</Item>
+               <Item>'VersionedExecutionPlanStrategyBase.GetCurrentVersion(Configuration)'</Item>
               </Issue>
              </Message>
             </Messages>

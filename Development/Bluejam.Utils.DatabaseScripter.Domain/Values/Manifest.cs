@@ -56,6 +56,25 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 
         #region Public
 
+        public Values.Version LatestVersion
+        {
+            get
+            {
+                Values.Version latestVersion = null;
+                foreach (var scriptManifest in ScriptManifests)
+                {
+                    if (!string.IsNullOrEmpty(scriptManifest.NewVersion))
+                    {
+                        var version = new Values.Version(scriptManifest.NewVersion);
+                        if ((latestVersion == null) || (version > latestVersion))
+                        {
+                            latestVersion = version;
+                        }
+                    }
+                }
+                return latestVersion;
+            }
+        }
 
         public List<Domain.Entities.ScriptManifest> GetConcurrentScripts(Domain.Values.Version startVersion, Domain.Values.Version endVersion)
         {            

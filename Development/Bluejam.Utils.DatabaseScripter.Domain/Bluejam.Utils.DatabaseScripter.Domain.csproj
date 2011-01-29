@@ -87,9 +87,11 @@
     <Compile Include="DatabaseScripterException.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="Factories\AdapterFactory.cs" />
+    <Compile Include="Strategies\VersionedExecutionPlanStrategyBase.cs" />
+    <Compile Include="Strategies\LatestVersionExecutionPlanStrategy.cs" />
     <Compile Include="Strategies\NamedExecutionPlanStrategy.cs" />
     <Compile Include="Factories\ExecutionPlanFactory.cs" />
-    <Compile Include="Strategies\VersionedExecutionPlanStrategy.cs" />
+    <Compile Include="Strategies\TargetVersionExecutionPlanStrategy.cs" />
     <Compile Include="Strategies\ConfigInjector.cs" />
     <Compile Include="Validators\ConfigurationExecutionStrategyAttribute.cs" />
     <Compile Include="Validators\ConfigurationExecutionStrategyValidator.cs" />

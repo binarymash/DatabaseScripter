@@ -15,23 +15,34 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
 {
-    public class NamedExecutionPlanStrategy
+    public class TargetVersionExecutionPlanStrategy : VersionedExecutionPlanStrategyBase
     {
-
-        public Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration)
+        public override Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration)
         {
             var executionPlan = new Domain.Values.ExecutionPlan();
 
             executionPlan.Environment = configuration.Environment;
             executionPlan.DatabaseAdapter = Factories.AdapterFactory.Create(configuration.Preview);
-            executionPlan.NameOfScriptsToRun.AddRange(configuration.NameOfScriptsToRun);
+            executionPlan.NameOfScriptsToRun.AddRange(GetScriptNames(configuration));
 
             return executionPlan;
+        }
+
+        private IEnumerable<string> GetScriptNames(Domain.Values.Configuration configuration)
+        {         
+            var currentVersion = GetCurrentVersion(configuration);
+            var scriptManifests = configuration.Manifest.GetConcurrentScripts(currentVersion, configuration.TargetVersion);
+            if (scriptManifests.Count == 0)
+            {
+                throw new Domain.DatabaseScripterException(Domain.ErrorCode.NoExplicitUpgradePath, string.Format(CultureInfo.InvariantCulture, "Could not find an explicit upgrade path from {0} to {1}", currentVersion, configuration.TargetVersion));
+            }
+            return scriptManifests.Select(s => s.Name);
         }
     }
 }

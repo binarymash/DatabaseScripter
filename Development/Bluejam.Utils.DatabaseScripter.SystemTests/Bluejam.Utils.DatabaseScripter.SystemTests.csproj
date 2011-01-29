@@ -56,6 +56,7 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="TestNominalWhenLatestVersion.cs" />
     <Compile Include="TestNominalWhenTargetedVersion.cs" />
     <Compile Include="TestWhenTargetedVersionAndNoExplicitUpgradePath.cs" />
     <Compile Include="DatabaseAsserter.cs" />

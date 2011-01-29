@@ -21,26 +21,11 @@ using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
 {
-    public class VersionedExecutionPlanStrategy
+    public abstract class VersionedExecutionPlanStrategyBase
     {
-        public Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration)
-        {
-            var executionPlan = new Domain.Values.ExecutionPlan();            
+        public abstract Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration);
 
-            executionPlan.Environment = configuration.Environment;
-            var currentVersion = GetCurrentVersion(configuration);
-            var scriptManifests = configuration.Manifest.GetConcurrentScripts(currentVersion, configuration.TargetVersion);
-            if (scriptManifests.Count == 0)
-            {
-                throw new Domain.DatabaseScripterException(Domain.ErrorCode.NoExplicitUpgradePath, string.Format(CultureInfo.InvariantCulture, "Could not find an explicit upgrade path from {0} to {1}", currentVersion, configuration.TargetVersion));
-            }
-            executionPlan.NameOfScriptsToRun.AddRange(scriptManifests.Select(item => item.Name));
-            executionPlan.DatabaseAdapter = Factories.AdapterFactory.Create(configuration.Preview);
-
-            return executionPlan;
-        }
-
-        private Values.Version GetCurrentVersion(Domain.Values.Configuration configuration)
+        protected Values.Version GetCurrentVersion(Domain.Values.Configuration configuration)
         {
             var environmentConfig = configuration.EnvironmentConfigurations.Find(configuration.Environment);
             var databaseName = environmentConfig.Properties.Find("databaseName").Value;
