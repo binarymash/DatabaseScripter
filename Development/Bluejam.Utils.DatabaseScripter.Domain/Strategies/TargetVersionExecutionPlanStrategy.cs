@@ -37,6 +37,11 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
         private IEnumerable<string> GetScriptNames(Domain.Values.Configuration configuration)
         {         
             var currentVersion = GetCurrentVersion(configuration);
+            if (currentVersion == configuration.TargetVersion)
+            {
+                return new List<string>();
+            }
+
             var scriptManifests = configuration.Manifest.GetConcurrentScripts(currentVersion, configuration.TargetVersion);
             if (scriptManifests.Count == 0)
             {

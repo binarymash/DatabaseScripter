@@ -88,7 +88,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
                 throw new ArgumentNullException("endVersion");
             }
 
-            if (!(endVersion > startVersion))
+            if (endVersion < startVersion)
             {
                 throw new ArgumentException("endVersion must be greater than startVersion", "endVersion");
             }

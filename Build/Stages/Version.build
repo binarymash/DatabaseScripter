@@ -15,7 +15,7 @@
       <echo>Current svn revision is ${svn.revision}</echo>         
       
       <xmlpoke file="Version.xml" xpath="/version/major" value="0" />
-      <xmlpoke file="Version.xml" xpath="/version/minor" value="10" />
+      <xmlpoke file="Version.xml" xpath="/version/minor" value="11" />
       <xmlpoke file="Version.xml" xpath="/version/build" value="0" />
       <xmlpoke file="Version.xml" xpath="/version/revision" value="${svn.revision}" />
     </if>
