@@ -55,21 +55,21 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.BasicConfigInjector
         [Test]
         public void Test_InjectConfig_WhenInScriptConfig()
         {
-            var command = "This is a {scriptkey1} command";
+            var command = "This is a ${scriptkey1} command";
             Assert.AreEqual("This is a scriptvalue1 command", _injector.InjectConfig(command, _properties));
         }
 
         [Test]
         public void Test_InjectConfig_WhenInGlobalConfig()
         {
-            var command = "This is a {globalkey1} command";
+            var command = "This is a ${globalkey1} command";
             Assert.AreEqual("This is a globalvalue1 command", _injector.InjectConfig(command, _properties));
         }
 
         [Test]
         public void Test_InjectConfig_WhenInNeitherScriptConfigNorGlobalConfig()
         {
-            var command = "This is a {blahblah} command";
+            var command = "This is a ${blahblah} command";
 
             try
             {
@@ -89,14 +89,14 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.BasicConfigInjector
         [Test]
         public void Test_InjectConfig_WhenInBothScriptConfigAndGlobalConfig()
         {
-            var command = "This is a {foo} command";
+            var command = "This is a ${foo} command";
             Assert.AreEqual("This is a scriptbar command", _injector.InjectConfig(command, _properties));
         }
 
         [Test]
         public void Test_InjectConfig_WhenNested()
         {
-            var command = "This is a {global{thing}} command";
+            var command = "This is a ${global${thing}} command";
             Assert.AreEqual("This is a globalvalue1 command", _injector.InjectConfig(command, _properties));
         }
 

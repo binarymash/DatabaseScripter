@@ -27,11 +27,11 @@ namespace Bluejam.Utils.DatabaseScripter.BasicConfigInjector
     {
         public override string InjectConfig(string command, Domain.Entities.PropertyCollection properties)
         {
-            var regex = new Regex(@"\x7B[a-zA-z0-9\-_]+\x7D");
+            var regex = new Regex(@"\x24\x7B[a-zA-z0-9\-_]+\x7D");
             var match = regex.Match(command);
             while (match.Success)
             {
-                var token = match.Value.Substring(1, match.Value.Length - 2);
+                var token = match.Value.Substring(2, match.Value.Length - 3);
                 var property = properties.Find(token);
                 if (property == null)
                 {

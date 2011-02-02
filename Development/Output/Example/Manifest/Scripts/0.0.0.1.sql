@@ -1,4 +1,4 @@
-﻿USE [{databaseName}]
+﻿USE [${databaseName}]
 GO
 
 CREATE TABLE [dbo].[CodecType]

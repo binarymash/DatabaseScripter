@@ -1,6 +1,6 @@
 ﻿USE [master]
 GO
 
-CREATE DATABASE [{databaseName}]
+CREATE DATABASE [${databaseName}]
 GO
 
