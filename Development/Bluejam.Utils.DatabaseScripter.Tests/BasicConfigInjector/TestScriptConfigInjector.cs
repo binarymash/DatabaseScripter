@@ -76,9 +76,9 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.BasicConfigInjector
                 _injector.InjectConfig(command, _properties);
                 Assert.Fail();
             }
-            catch (DatabaseScripterException exception)
+            catch (Bluejam.Utils.DatabaseScripter.Domain.Interfaces.DatabaseScripterException exception)
             {
-                Assert.AreEqual(ErrorCode.CouldNotFindPropertyForScriptInEnvironmentConfiguration, exception.ErrorCode);
+                Assert.AreEqual(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.CouldNotFindPropertyForScriptInEnvironmentConfiguration, exception.ErrorCode);
             }
             catch
             {

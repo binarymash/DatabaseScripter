@@ -27,7 +27,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class ConfigurationValidator : SchemaValidatorBase
+    public class ConfigurationValidator : SchemaValidatorBase, Interfaces.IConfigurationValidator
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationValidator));
@@ -38,7 +38,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         {
         }
 
-        public Domain.ErrorCode Validate(IXPathNavigable configSectionNode)
+        public Domain.Interfaces.ErrorCode Validate(IXPathNavigable configSectionNode)
         {
             log.Debug("Validating the configuration");
 
@@ -70,7 +70,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                     isValid = false;
                 }
 
-                return isValid ? Domain.ErrorCode.Ok : Domain.ErrorCode.InvalidConfig;
+                return isValid ? Domain.Interfaces.ErrorCode.Ok : Domain.Interfaces.ErrorCode.InvalidConfig;
             }
         }
 

@@ -21,7 +21,7 @@ using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class EnvironmentConfigurationFactoryResult : Result
+    public class EnvironmentConfigurationFactoryResult : Interfaces.Result
     {
 
         #region Constructors
@@ -31,7 +31,8 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="environmentConfiguration">The environment configuration.</param>
-        public EnvironmentConfigurationFactoryResult(Domain.ErrorCode errorCode, Domain.Entities.EnvironmentConfiguration environmentConfiguration) : base(errorCode)
+        public EnvironmentConfigurationFactoryResult(Domain.Interfaces.ErrorCode errorCode, Domain.Entities.EnvironmentConfiguration environmentConfiguration)
+            : base(errorCode)
         {
             EnvironmentConfiguration = environmentConfiguration;
         }

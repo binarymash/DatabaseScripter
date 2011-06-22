@@ -23,8 +23,9 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
     public class NamedExecutionPlanStrategy
     {
 
-        public Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration)
+        public Interfaces.IExecutionPlan Run(Interfaces.IConfiguration configuration)
         {
+            //TODO: abstract factory
             var executionPlan = new Domain.Values.ExecutionPlan();
 
             executionPlan.Environment = configuration.Environment;

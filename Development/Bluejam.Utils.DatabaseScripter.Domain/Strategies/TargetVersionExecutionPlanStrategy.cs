@@ -23,7 +23,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
 {
     public class TargetVersionExecutionPlanStrategy : VersionedExecutionPlanStrategyBase
     {
-        public override Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration)
+        public override Interfaces.IExecutionPlan Run(Interfaces.IConfiguration configuration)
         {
             var executionPlan = new Domain.Values.ExecutionPlan();
 
@@ -34,7 +34,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
             return executionPlan;
         }
 
-        private IEnumerable<string> GetScriptNames(Domain.Values.Configuration configuration)
+        private IEnumerable<string> GetScriptNames(Interfaces.IConfiguration configuration)
         {         
             var currentVersion = GetCurrentVersion(configuration);
             if (currentVersion == configuration.TargetVersion)
@@ -45,7 +45,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
             var scriptManifests = configuration.Manifest.GetConcurrentScripts(currentVersion, configuration.TargetVersion);
             if (scriptManifests.Count == 0)
             {
-                throw new Domain.DatabaseScripterException(Domain.ErrorCode.NoExplicitUpgradePath, string.Format(CultureInfo.InvariantCulture, "Could not find an explicit upgrade path from {0} to {1}", currentVersion, configuration.TargetVersion));
+                throw new Domain.Interfaces.DatabaseScripterException(Domain.Interfaces.ErrorCode.NoExplicitUpgradePath, string.Format(CultureInfo.InvariantCulture, "Could not find an explicit upgrade path from {0} to {1}", currentVersion, configuration.TargetVersion));
             }
             return scriptManifests.Select(s => s.Name);
         }

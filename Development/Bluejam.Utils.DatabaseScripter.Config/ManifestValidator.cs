@@ -27,7 +27,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class ManifestValidator : SchemaValidatorBase
+    public class ManifestValidator : SchemaValidatorBase, Interfaces.IManifestValidator
     {
 
         #region Non-public
@@ -42,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         {
         }
 
-        public Result Validate(string manifestFilePath)
+        public Interfaces.Result Validate(string manifestFilePath)
         {
             log.DebugFormat(CultureInfo.InvariantCulture, "Validating manifest file at {0}", manifestFilePath);
             lock (syncLock)
@@ -61,7 +61,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                     if (!File.Exists(manifestFilePath))
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", manifestFilePath);
-                        return new Result(Domain.ErrorCode.CouldNotFindManifest);
+                        return new Interfaces.Result(Domain.Interfaces.ErrorCode.CouldNotFindManifest);
                     }
 
                     var xmlReaderSettings = new XmlReaderSettings();
@@ -87,7 +87,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                     isValid = false;
                 }
 
-                return new Result(isValid ? Domain.ErrorCode.Ok : Domain.ErrorCode.InvalidManifest);
+                return new Interfaces.Result(isValid ? Domain.Interfaces.ErrorCode.Ok : Domain.Interfaces.ErrorCode.InvalidManifest);
             }
         }
 

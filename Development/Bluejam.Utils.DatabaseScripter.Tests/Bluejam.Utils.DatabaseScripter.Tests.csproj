@@ -119,6 +119,10 @@
       <Project>{E0F7CA0B-690D-4027-8168-6340F35AFF19}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.BasicConfigInjector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Config.Interfaces\Bluejam.Utils.DatabaseScripter.Config.Interfaces.csproj">
+      <Project>{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Config.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Config\Bluejam.Utils.DatabaseScripter.Config.csproj">
       <Project>{B944752F-9E25-4010-9892-54452FFFB892}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Config</Name>
@@ -131,9 +135,17 @@
       <Project>{550F30DF-BF78-4308-BFFC-F95E78605BF0}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.DbAdapter.FileWriter</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain.Interfaces\Bluejam.Utils.DatabaseScripter.Domain.Interfaces.csproj">
+      <Project>{080FAF17-5804-41BC-A03B-3171C4D57E5F}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
       <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Services.Interfaces\Bluejam.Utils.DatabaseScripter.Services.Interfaces.csproj">
+      <Project>{4DCDBD04-C8CA-4C64-B5F6-364428876E30}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Services.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Services\Bluejam.Utils.DatabaseScripter.Services.csproj">
       <Project>{DC3C4437-46AE-4790-86EB-E23432806A60}</Project>

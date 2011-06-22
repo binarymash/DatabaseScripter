@@ -30,7 +30,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
 {
     [Serializable]
     [XmlRoot(Namespace = "http://code.google.com/p/databasescripter/2010/08/29/EnvironmentConfigurationSchema")]
-    public class EnvironmentConfiguration : Entity
+    public class EnvironmentConfiguration : Entity, Interfaces.IEnvironmentConfiguration
     {
 
         //private static readonly ILog log = LogManager.GetLogger(typeof(EnvironmentConfiguration));
@@ -51,7 +51,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
         /// <value>The properties.</value>
         [Valid]
         [Validators.UniqueMembers(Message = "There is more than one property with the same name")]
-        public PropertyCollection Properties { get; set; }
+        public Interfaces.IPropertyCollection Properties { get; set; }
 
         /// <summary>
         /// Gets or sets the environment's collection of script configurations.
@@ -59,13 +59,13 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
         /// <value>The script configurations.</value>
         [Valid]
         [Validators.UniqueMembers(Message = "There is more than one script configuration with the same name")]
-        public ScriptConfigurationCollection ScriptConfigurations { get; set; }
+        public Interfaces.IScriptConfigurationCollection ScriptConfigurations { get; set; }
 
         #endregion
 
         #region Public methods
 
-        public ScriptConfiguration GetFlatConfigurationForScript(string scriptName)
+        public Interfaces.IScriptConfiguration GetFlatConfigurationForScript(string scriptName)
         {
             if (scriptName == null)
             {
@@ -94,10 +94,10 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
 
         #region Constructors
 
-        public EnvironmentConfiguration()
+        public EnvironmentConfiguration(Interfaces.IPropertyCollection propertyCollection, Interfaces.IScriptConfigurationCollection scriptConfigurationCollection)
         {
-            Properties = new PropertyCollection();
-            ScriptConfigurations = new ScriptConfigurationCollection();
+            Properties = propertyCollection;
+            ScriptConfigurations = scriptConfigurationCollection;
         }
 
         #endregion

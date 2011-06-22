@@ -49,15 +49,15 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 if (!File.Exists(path))
                 {
                     log.ErrorFormat(CultureInfo.InvariantCulture, "The environment configuration file could not be found at {0}", path);
-                    return new EnvironmentConfigurationFactoryResult(Domain.ErrorCode.CouldNotFindEnvironmentConfiguration, null);
+                    return new EnvironmentConfigurationFactoryResult(Domain.Interfaces.ErrorCode.CouldNotFindEnvironmentConfiguration, null);
                 }
 
                 var environmentConfigurationValidator = new EnvironmentConfigurationValidator();
                 var result = environmentConfigurationValidator.Validate(path);
-                if (result.ErrorCode != Domain.ErrorCode.Ok)
+                if (result.ErrorCode != Domain.Interfaces.ErrorCode.Ok)
                 {
                     log.Error("The environment configuration file is invalid");
-                    return new EnvironmentConfigurationFactoryResult(Domain.ErrorCode.InvalidEnvironmentConfiguration, null);
+                    return new EnvironmentConfigurationFactoryResult(Domain.Interfaces.ErrorCode.InvalidEnvironmentConfiguration, null);
                 }
 
                 //deserialize
@@ -65,12 +65,12 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 var xmlSerializer = new XmlSerializer(typeof(Domain.Entities.EnvironmentConfiguration));
                 var environmentConfiguration = (Domain.Entities.EnvironmentConfiguration)xmlSerializer.Deserialize(xmlReader);
 
-                return new EnvironmentConfigurationFactoryResult(Domain.ErrorCode.Ok, environmentConfiguration);
+                return new EnvironmentConfigurationFactoryResult(Domain.Interfaces.ErrorCode.Ok, environmentConfiguration);
             }
-            catch (Domain.DatabaseScripterException ex)
+            catch (Domain.Interfaces.DatabaseScripterException ex)
             {
                 log.Error("An unexpected error occurred when reading the environment configuration file.", ex);
-                return new EnvironmentConfigurationFactoryResult(Domain.ErrorCode.UnknownError, null);
+                return new EnvironmentConfigurationFactoryResult(Domain.Interfaces.ErrorCode.UnknownError, null);
             }
         }
 
@@ -82,72 +82,6 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
         #endregion
 
-        //case "globalScriptProperties":
-        //    configuration.GlobalScriptProperties = GetScriptProperties(child);
-        //    break;
-
-        //private static Dictionary<string, string> GetScriptProperties(XmlNode node)
-        //{
-        //    var properties = new Dictionary<string, string>();
-
-        //    foreach (XmlNode child in node.ChildNodes)
-        //    {
-        //        switch (child.Name)
-        //        {
-        //            case "property":
-        //                var property = GetProperty(child);
-        //                properties.Add(property.Key, property.Value);
-        //                break;
-        //        }
-        //    }
-
-        //    return properties;
-        //}
-
-        //private static Domain.ScriptConfig GetScript(XmlNode node)
-        //{
-        //    var script = new Domain.ScriptConfig();
-        //    foreach (XmlAttribute attribute in node.Attributes)
-        //    {
-        //        switch (attribute.Name)
-        //        {
-        //            case "name":
-        //                script.Name = attribute.Value;
-        //                break;
-        //        }
-        //    }
-        //    foreach (XmlNode child in node.ChildNodes)
-        //    {
-        //        switch (child.Name)
-        //        {
-        //            case "properties":
-        //                script.Properties = GetScriptProperties(child);
-        //                break;
-        //        }
-        //    }
-
-        //    return script;
-        //}
-
-        //private static KeyValuePair<string, string> GetProperty(XmlNode node)
-        //{
-        //    string name = null;
-        //    string value = null;
-
-        //    foreach (XmlAttribute attribute in node.Attributes)
-        //    {
-        //        switch (attribute.Name)
-        //        {
-        //            case "name":
-        //                name = attribute.Value;
-        //                break;
-        //        }
-        //    }
-
-        //    value = node.InnerText;
-
-        //    return new KeyValuePair<string, string>(name, value);
-        //}
 
     }
 }

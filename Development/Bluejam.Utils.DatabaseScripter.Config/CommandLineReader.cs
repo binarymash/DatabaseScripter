@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class CommandLineReader
+    public class CommandLineReader : Interfaces.ICommandLineReader
     {
         public Domain.Values.Configuration Interpret(List<string> arguments, Domain.Values.Configuration configuration)
         {

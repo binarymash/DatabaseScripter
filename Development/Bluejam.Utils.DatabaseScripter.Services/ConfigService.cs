@@ -18,26 +18,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Config = Bluejam.Utils.DatabaseScripter.Config;
+using Bluejam.Utils.DatabaseScripter.Config.Interfaces;
+
 using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class ConfigService
+    public class ConfigService : Interfaces.IConfigService
     {
 
-        private Config.ConfigurationFactory configurationFactory = new Config.ConfigurationFactory();
+        public ConfigService(IConfigurationFactory configurationFactory, IManifestValidator manifestValidator, IConfigurationValidator configValidator, IEnvironmentConfigurationValidator environmentConfigValidator)
+        {
+            this.configurationFactory = configurationFactory;
+            this.manifestValidator = manifestValidator;
+            this.configValidator = configValidator;
+            this.environmentConfigValidator = environmentConfigValidator;
+        }
 
-        private Config.ManifestValidator manifestValidator = new Config.ManifestValidator();
-        private Config.ConfigurationValidator configValidator = new Config.ConfigurationValidator();
-        private Config.EnvironmentConfigurationValidator environmentConfigValidator = new Config.EnvironmentConfigurationValidator();
+        private IConfigurationFactory configurationFactory;
+        private IManifestValidator manifestValidator;
+        private IConfigurationValidator configValidator;
+        private IEnvironmentConfigurationValidator environmentConfigValidator;
 
+        //TODO: windsor
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigService));
-
-        public Config.ConfigurationFactory ConfigurationFactory { get; set; }
-        public Config.ManifestValidator ManifestValidator { get; set; }
-        public Config.ConfigurationValidator ConfigValidator { get; set; }
-        public Config.EnvironmentConfigurationValidator EnvironmentConfigValidator { get; set; }
 
         public string ManifestSchema
         {
@@ -54,21 +58,21 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             get { return environmentConfigValidator.SchemaString; }
         }
 
-        public ConfigurationResult GetConfiguration(string[] args)
+        public Interfaces.IConfigurationResult GetConfiguration(string[] args)
         {
             if (args == null)
             {
                 throw new ArgumentNullException("args");
             } 
             
-            var errorCode = Domain.ErrorCode.Ok;
+            var errorCode = Domain.Interfaces.ErrorCode.Ok;
             Domain.Values.Configuration configuration = null;
 
             try
             {
                 configuration = configurationFactory.Create(args);
             }
-            catch (Domain.DatabaseScripterException ex)
+            catch (Domain.Interfaces.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 errorCode = ex.ErrorCode;

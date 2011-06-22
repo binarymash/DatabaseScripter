@@ -34,7 +34,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         /// Initializes a new instance of the <see cref="Result"/> class.
         /// </summary>
         /// <param name="errorCode">The error code.</param>
-        public Result(Domain.ErrorCode errorCode)
+        public Result(Domain.Interfaces.ErrorCode errorCode)
         {
             ErrorCode = errorCode;
         }
@@ -47,7 +47,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         /// Gets or sets the error code.
         /// </summary>
         /// <value>The error code.</value>
-        public Domain.ErrorCode ErrorCode { get; protected set; }
+        public Domain.Interfaces.ErrorCode ErrorCode { get; protected set; }
 
         #endregion
 

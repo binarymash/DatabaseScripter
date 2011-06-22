@@ -5,10 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 
-using Castle.Core.Resource;
-using Castle.Windsor;
-using Castle.Windsor.Configuration.Interpreters;
-
 using Microsoft.Practices.ServiceLocation;
 
 using Domain = Bluejam.Utils.DatabaseScripter.Domain;
@@ -24,75 +20,14 @@ namespace Bluejam.Utils.DatabaseScripter
 
         static int Main(string[] args)
         {
-            Domain.ErrorCode errorCode = Domain.ErrorCode.Ok;
-            try
+            var errorCode = InitialiseServiceLocator();
+
+            if (errorCode == Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.Ok)
             {
-                try
-                {
-                    //test initialisation of IoC components. If any components cannot be found then report an error.
-                    var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-                    ServiceLocator.SetLocatorProvider(() => new CommonServiceLocator.WindsorAdapter.WindsorServiceLocator(container));
-                }
-                catch(System.Exception ex)
-                {
-                    throw new Domain.DatabaseScripterException(Domain.ErrorCode.FailedToInitialiseComponents, ex.Message);
-                }
-
-                var licenseService = new Services.LicenceService();
-                var configService = new Services.ConfigService();
-                var scriptingService = new Services.ScriptingService();
-
-                Console.WriteLine(licenseService.LicenceSplash);
-
-                var configResult = configService.GetConfiguration(args);
-                errorCode = configResult.ErrorCode;
-                var configuration = configResult.Configuration;
-                if (errorCode == Domain.ErrorCode.Ok)
-                {
-                    if (configuration.Pause)
-                    {
-                        System.Console.WriteLine("Paused - press any key to run execution plan...");
-                        System.Console.ReadLine();
-                    }
-
-                    if (configuration.ManifestSchema)
-                    {
-                        Console.WriteLine(configService.ManifestSchema);
-                        return (int)Domain.ErrorCode.Ok;
-                    }
-
-                    if (configuration.EnvironmentConfigSchema)
-                    {
-                        Console.WriteLine(configService.EnvironmentConfigSchema);
-                        return (int)Domain.ErrorCode.Ok;
-                    }
-
-                    if (configuration.ConfigSchema)
-                    {
-                        Console.WriteLine(configService.ConfigSchema);
-                        return (int)Domain.ErrorCode.Ok;
-                    }
-                }
-
-                Services.ExecutionPlanResult executionPlanResult = null;
-                if (errorCode == Domain.ErrorCode.Ok)
-                {
-                    executionPlanResult = scriptingService.GetExecutionPlan(configuration);
-                    errorCode = executionPlanResult.ErrorCode;
-                }
-
-                if (errorCode == Domain.ErrorCode.Ok)
-                {
-                    errorCode = scriptingService.Execute(configResult.Configuration, executionPlanResult.ExecutionPlan);
-                }
-            }
-            catch (Domain.DatabaseScripterException ex)
-            {
-                log.Error("An unexpected error occurred", ex);
-                errorCode = ex.ErrorCode;
+                errorCode = ServiceLocator.Current.GetInstance<Host>().Run(args);
             }
 
-            if (errorCode == Domain.ErrorCode.Ok)
+            if (errorCode == Domain.Interfaces.ErrorCode.Ok)
             {
                 log.InfoFormat(CultureInfo.InvariantCulture, "The database scripter exited with code {0} ({1})", (int)errorCode, errorCode);
             }
@@ -102,6 +37,21 @@ namespace Bluejam.Utils.DatabaseScripter
             }
 
             return (int)errorCode;
+        }
+
+        private static Domain.Interfaces.ErrorCode InitialiseServiceLocator()
+        {
+            try
+            {
+                ServiceLocator.SetLocatorProvider(() => ServiceLocatorBootStrapper.Run());
+            }
+            catch (System.Exception ex)
+            {
+                log.ErrorFormat(CultureInfo.InvariantCulture, "Failed to initialise the database scripter components: {0} ", ex.Message);
+                return Domain.Interfaces.ErrorCode.FailedToInitialiseComponents;
+            }
+
+            return Domain.Interfaces.ErrorCode.Ok;
         }
 
     }

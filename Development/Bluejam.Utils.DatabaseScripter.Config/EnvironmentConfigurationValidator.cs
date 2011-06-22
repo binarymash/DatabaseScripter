@@ -27,7 +27,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class EnvironmentConfigurationValidator : SchemaValidatorBase
+    public class EnvironmentConfigurationValidator : SchemaValidatorBase, Interfaces.IEnvironmentConfigurationValidator
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationValidator));
@@ -38,7 +38,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         {
         }
 
-        public Result Validate(string environmentConfigurationFilePath)
+        public Interfaces.Result Validate(string environmentConfigurationFilePath)
         {
             log.Debug(string.Format(CultureInfo.InvariantCulture, "Validating the environment configuration {0}", environmentConfigurationFilePath));
             lock (syncLock)
@@ -57,7 +57,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                     if (!File.Exists(environmentConfigurationFilePath))
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "The environment configuration file could not be found at {0}", environmentConfigurationFilePath);
-                        return new Result(Domain.ErrorCode.CouldNotFindEnvironmentConfiguration);
+                        return new Interfaces.Result(Domain.Interfaces.ErrorCode.CouldNotFindEnvironmentConfiguration);
                     }
 
                     var xmlReaderSettings = new XmlReaderSettings();
@@ -84,7 +84,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                     isValid = false;
                 }
 
-                return new Result(isValid ? Domain.ErrorCode.Ok : Domain.ErrorCode.InvalidEnvironmentConfiguration);
+                return new Interfaces.Result(isValid ? Domain.Interfaces.ErrorCode.Ok : Domain.Interfaces.ErrorCode.InvalidEnvironmentConfiguration);
             }
         }
 

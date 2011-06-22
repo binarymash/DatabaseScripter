@@ -23,28 +23,28 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Strategies
 {
     public abstract class VersionedExecutionPlanStrategyBase
     {
-        public abstract Domain.Values.ExecutionPlan Run(Domain.Values.Configuration configuration);
+        public abstract Interfaces.IExecutionPlan Run(Interfaces.IConfiguration configuration);
 
-        protected Values.Version GetCurrentVersion(Domain.Values.Configuration configuration)
+        protected Interfaces.IVersion GetCurrentVersion(Interfaces.IConfiguration configuration)
         {
             var environmentConfig = configuration.EnvironmentConfigurations.Find(configuration.Environment);
             var databaseName = environmentConfig.Properties.Find("databaseName").Value;
             var connectionString = configuration.ConnectionStrings[environmentConfig.Properties.Find("connection").Value].ConnectionString;
-            Values.Version currentVersion;
+            Interfaces.IVersion currentVersion;
 
             using (var databaseAdapter = Factories.AdapterFactory.Create(false))
             {
                 if (!databaseAdapter.Initialize())
                 {
-                    throw new DatabaseScripterException(ErrorCode.FailedToCreateExecutionPlan, "Failed to initialise the database adapter when getting current version");
+                    throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.FailedToCreateExecutionPlan, "Failed to initialise the database adapter when getting current version");
                 }
                 if (!databaseAdapter.Connect(connectionString))
                 {
-                    throw new DatabaseScripterException(ErrorCode.FailedToCreateExecutionPlan, "Failed to connect to the database when getting current version");
+                    throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.FailedToCreateExecutionPlan, "Failed to connect to the database when getting current version");
                 }
                 if (!databaseAdapter.GetVersion(databaseName, out currentVersion))
                 {
-                    throw new DatabaseScripterException(ErrorCode.FailedToCreateExecutionPlan, "Failed to get the current version of the database");
+                    throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.FailedToCreateExecutionPlan, "Failed to get the current version of the database");
                 }
             }
 

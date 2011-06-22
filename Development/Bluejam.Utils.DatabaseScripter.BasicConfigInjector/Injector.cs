@@ -35,7 +35,7 @@ namespace Bluejam.Utils.DatabaseScripter.BasicConfigInjector
                 var property = properties.Find(token);
                 if (property == null)
                 {
-                    throw new Domain.DatabaseScripterException(Domain.ErrorCode.CouldNotFindPropertyForScriptInEnvironmentConfiguration, "token");
+                    throw new Domain.Interfaces.DatabaseScripterException(Domain.Interfaces.ErrorCode.CouldNotFindPropertyForScriptInEnvironmentConfiguration, "token");
                 }
 
                 command = command.Replace(match.Value, property.Value);

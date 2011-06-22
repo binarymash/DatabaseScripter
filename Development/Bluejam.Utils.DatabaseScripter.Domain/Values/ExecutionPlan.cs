@@ -24,7 +24,7 @@ using Bluejam.Utils.DatabaseScripter.Domain.Validators;
 
 namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 {
-    public class ExecutionPlan : Core.DomainModel.ValidatableValueObject
+    public class ExecutionPlan : Core.DomainModel.ValidatableValueObject, Interfaces.IExecutionPlan
     {
 
         public ExecutionPlan()

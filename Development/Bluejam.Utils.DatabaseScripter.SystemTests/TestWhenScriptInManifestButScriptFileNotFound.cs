@@ -42,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
 
-            Assert.AreEqual(Domain.ErrorCode.ScriptFileDoesNotExist, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
+            Assert.AreEqual(Domain.Interfaces.ErrorCode.ScriptFileDoesNotExist, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\""));
             dbAsserter.AssertThatDatabaseDoesNotExist();
         }
     }

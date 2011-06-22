@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Bluejam.Utils.DatabaseScripter.Services;
+using Config = Bluejam.Utils.DatabaseScripter.Config;
+
 using NUnit.Framework;
 
 namespace Bluejam.Utils.DatabaseScripter.Tests.Services
@@ -11,12 +14,22 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
     public class TestConfigService
     {
 
-        Bluejam.Utils.DatabaseScripter.Services.ConfigService configService;
+        ConfigService configService;
+        Moq.Mock<Config.Interfaces.IConfigurationFactory> mockConfigurationFactory;
+        Moq.Mock<Config.Interfaces.IManifestValidator> mockManifestValidator;
+        Moq.Mock<Config.Interfaces.IConfigurationValidator> mockConfigValidator;
+        Moq.Mock<Config.Interfaces.IEnvironmentConfigurationValidator> mockEnvironmentConfigValidator;
 
         [SetUp]
         public void SetUp()
         {
-            configService = new Bluejam.Utils.DatabaseScripter.Services.ConfigService();
+            mockConfigurationFactory = new Moq.Mock<Config.Interfaces.IConfigurationFactory>();
+            mockManifestValidator = new Moq.Mock<Config.Interfaces.IManifestValidator>();
+            mockConfigValidator = new Moq.Mock<Config.Interfaces.IConfigurationValidator>();
+            mockEnvironmentConfigValidator = new Moq.Mock<Config.Interfaces.IEnvironmentConfigurationValidator>();
+
+            configService = new ConfigService(mockConfigurationFactory.Object, 
+                mockManifestValidator.Object, mockConfigValidator.Object, mockEnvironmentConfigValidator.Object);
         }
 
         [Test]
@@ -40,22 +53,26 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
         [Test]
         public void ManifestSchema_ReturnsTheManifestSchema()
         {
-            Assert.That(configService.ManifestSchema, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.ManifestSchema));
+            var schema = Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.ManifestSchema;
+            mockManifestValidator.Setup(mock => mock.SchemaString).Returns(schema);
+            Assert.That(configService.ManifestSchema, Is.EqualTo(schema));
         }
 
         [Test]
         public void ConfigSchema_ReturnsTheConfigSchema()
         {
-            Assert.That(configService.ConfigSchema, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.ConfigSchema));
+            var schema = Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.ConfigSchema;
+            mockConfigValidator.Setup(mock => mock.SchemaString).Returns(schema);
+            Assert.That(configService.ConfigSchema, Is.EqualTo(schema));
         }
 
         [Test]
         public void EnvironmentConfigSchema_ReturnsTheEnvironmentConfigSchema()
         {
+            var schema = Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.EnvironmentConfigSchema;
+            mockEnvironmentConfigValidator.Setup(mock => mock.SchemaString).Returns(schema); 
             Assert.That(configService.EnvironmentConfigSchema, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Test.Resources.EmbeddedResourceReader.EnvironmentConfigSchema));
         }
-
-
     
     }
 }

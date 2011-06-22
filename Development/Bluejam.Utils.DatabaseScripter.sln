@@ -49,6 +49,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{5051
 		Output\Example\Manifest\Scripts\sampleData.sql = Output\Example\Manifest\Scripts\sampleData.sql
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Services.Interfaces", "Bluejam.Utils.DatabaseScripter.Services.Interfaces\Bluejam.Utils.DatabaseScripter.Services.Interfaces.csproj", "{4DCDBD04-C8CA-4C64-B5F6-364428876E30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Domain.Interfaces", "Bluejam.Utils.DatabaseScripter.Domain.Interfaces\Bluejam.Utils.DatabaseScripter.Domain.Interfaces.csproj", "{080FAF17-5804-41BC-A03B-3171C4D57E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.Config.Interfaces", "Bluejam.Utils.DatabaseScripter.Config.Interfaces\Bluejam.Utils.DatabaseScripter.Config.Interfaces.csproj", "{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluejam.Utils.DatabaseScripter.WindsorInstallers.Runtime", "Bluejam.Utils.DatabaseScripter.WindsorInstallers.Runtime\Bluejam.Utils.DatabaseScripter.WindsorInstallers.Runtime.csproj", "{380BC8E1-C254-4FBA-B6CE-6176C4B39065}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +107,22 @@ Global
 		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C90713C-9E9D-47F1-9118-00CBBE7713DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DCDBD04-C8CA-4C64-B5F6-364428876E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCDBD04-C8CA-4C64-B5F6-364428876E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCDBD04-C8CA-4C64-B5F6-364428876E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCDBD04-C8CA-4C64-B5F6-364428876E30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{080FAF17-5804-41BC-A03B-3171C4D57E5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{080FAF17-5804-41BC-A03B-3171C4D57E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{080FAF17-5804-41BC-A03B-3171C4D57E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{080FAF17-5804-41BC-A03B-3171C4D57E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{380BC8E1-C254-4FBA-B6CE-6176C4B39065}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{380BC8E1-C254-4FBA-B6CE-6176C4B39065}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{380BC8E1-C254-4FBA-B6CE-6176C4B39065}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{380BC8E1-C254-4FBA-B6CE-6176C4B39065}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

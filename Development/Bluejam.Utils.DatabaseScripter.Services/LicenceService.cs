@@ -21,7 +21,7 @@ using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class LicenceService
+    public class LicenceService : Interfaces.ILicenceService
     {
         public string LicenceSplash
         {

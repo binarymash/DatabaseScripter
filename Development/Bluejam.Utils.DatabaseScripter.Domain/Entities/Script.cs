@@ -106,25 +106,25 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        public ErrorCode Run(Strategies.DatabaseAdapter databaseAdapter)
+        public Interfaces.ErrorCode Run(Strategies.DatabaseAdapter databaseAdapter)
         {
             log.InfoFormat(CultureInfo.InvariantCulture, "{0} : running...", this);
 
-            var errorCode = ErrorCode.Ok;
+            var errorCode = Interfaces.ErrorCode.Ok;
 
             if (!databaseAdapter.Connect(ConnectionString))
             {
                 log.Error("Failed to connect to the database");
-                errorCode = ErrorCode.DatabaseAdapterFailureAtConnect;
+                errorCode = Interfaces.ErrorCode.DatabaseAdapterFailureAtConnect;
             }
 
-            if (errorCode == ErrorCode.Ok)
+            if (errorCode == Interfaces.ErrorCode.Ok)
             {
                 errorCode = RunImplementation(databaseAdapter);
                 databaseAdapter.Disconnect();
             }
 
-            if (errorCode == ErrorCode.Ok)
+            if (errorCode == Interfaces.ErrorCode.Ok)
             {
                 log.InfoFormat(CultureInfo.InvariantCulture, "{0} : succeeded", this);
             }
@@ -160,16 +160,16 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
         /// </summary>
         /// <param name="databaseAdapter">The database adapter.</param>
         /// <returns></returns>
-        private ErrorCode RunImplementation(Strategies.DatabaseAdapter databaseAdapter)
+        private Interfaces.ErrorCode RunImplementation(Strategies.DatabaseAdapter databaseAdapter)
         {
-            var errorCode = ErrorCode.Ok;
+            var errorCode = Interfaces.ErrorCode.Ok;
 
             if (WrapInTransaction)
             {
                 if (!databaseAdapter.BeginTransaction())
                 {
                     log.Error("Failed to begin the transaction on the database.");
-                    return ErrorCode.DatabaseAdapterFailureAtBeginTransaction;
+                    return Interfaces.ErrorCode.DatabaseAdapterFailureAtBeginTransaction;
                 }
             }
 
@@ -179,7 +179,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
                 if (!databaseAdapter.ConfirmVersion(DatabaseName, CurrentVersion, out versionConfirmed))
                 {
                     log.Error("Failed to check the current version of the database.");
-                    return ErrorCode.DatabaseAdapterFailureAtConfirmVersion;
+                    return Interfaces.ErrorCode.DatabaseAdapterFailureAtConfirmVersion;
                 }
 
                 if (versionConfirmed)
@@ -189,35 +189,35 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
                 else
                 {
                     log.Error("The current version of the database is not compatible with the script.");
-                    return ErrorCode.IncorrectCurrentVersion;
+                    return Interfaces.ErrorCode.IncorrectCurrentVersion;
                 }
             };
 
             if (!databaseAdapter.RunCommand(DatabaseName, Command))
             {
                 log.Error("Failed to execute the command on the database.");
-                errorCode = ErrorCode.DatabaseAdapterFailureAtRunCommand;
+                errorCode = Interfaces.ErrorCode.DatabaseAdapterFailureAtRunCommand;
             }
 
-            if ((errorCode == ErrorCode.Ok) && (NewVersion != null))
+            if ((errorCode == Interfaces.ErrorCode.Ok) && (NewVersion != null))
             {
                 if (!databaseAdapter.SetVersion(DatabaseName, NewVersion))
                 {
                     log.Error("Failed to set the new version on the database.");
-                    errorCode = ErrorCode.DatabaseAdapterFailureAtSetVersion;
+                    errorCode = Interfaces.ErrorCode.DatabaseAdapterFailureAtSetVersion;
                 }
             }
 
-            if ((errorCode == ErrorCode.Ok) && WrapInTransaction)
+            if ((errorCode == Interfaces.ErrorCode.Ok) && WrapInTransaction)
             {
                 if (!databaseAdapter.CommitTransaction())
                 {
                     log.Error("Failed to commit the transaction on the database.");
-                    errorCode = ErrorCode.DatabaseAdapterFailureAtCommitTransaction;
+                    errorCode = Interfaces.ErrorCode.DatabaseAdapterFailureAtCommitTransaction;
                 }
             }
 
-            if (errorCode != ErrorCode.Ok)
+            if (errorCode != Interfaces.ErrorCode.Ok)
             {
                 if (WrapInTransaction)
                 {
@@ -226,7 +226,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
                     if (!databaseAdapter.RollBackTransaction())
                     {
                         log.Error("An error occurred when rolling back the script transaction. You must check the database is in the correct state.");
-                        errorCode = ErrorCode.DatabaseAdapterFailureAtRollbackTransaction;
+                        errorCode = Interfaces.ErrorCode.DatabaseAdapterFailureAtRollbackTransaction;
                     }
 
                     log.Warn("The script transaction rolled back successfully");

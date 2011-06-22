@@ -69,7 +69,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.Connect(It.Is<string>(str => str == script.ConnectionString))).Returns(false);
             
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtConnect));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtConnect));
 
             databaseAdapter.VerifyAll();
         }
@@ -85,7 +85,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.ConfirmVersion(script.DatabaseName, script.CurrentVersion, out confirmedVersion)).Returns(false);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtConfirmVersion));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtConfirmVersion));
 
             databaseAdapter.VerifyAll();
         }
@@ -101,7 +101,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.ConfirmVersion(script.DatabaseName, script.CurrentVersion, out confirmedVersion)).Returns(true);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.IncorrectCurrentVersion));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.IncorrectCurrentVersion));
 
             databaseAdapter.VerifyAll();
         }
@@ -118,7 +118,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.RunCommand(script.DatabaseName, script.Command)).Returns(false);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtRunCommand));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtRunCommand));
 
             databaseAdapter.VerifyAll();
         }
@@ -136,7 +136,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.SetVersion(script.DatabaseName, script.NewVersion)).Returns(false);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtSetVersion));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtSetVersion));
 
             databaseAdapter.VerifyAll();
         }
@@ -154,7 +154,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.SetVersion(script.DatabaseName, script.NewVersion)).Returns(true);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.Ok));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.Ok));
 
             databaseAdapter.VerifyAll();
         }
@@ -169,7 +169,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.RunCommand(script.DatabaseName, script.Command)).Returns(true);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.Ok));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.Ok));
 
             databaseAdapter.VerifyAll();
         }
@@ -184,7 +184,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.BeginTransaction()).Returns(false);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtBeginTransaction));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtBeginTransaction));
 
             databaseAdapter.VerifyAll();
         }
@@ -205,7 +205,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.RollBackTransaction()).Returns(true);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtCommitTransaction));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtCommitTransaction));
 
             databaseAdapter.VerifyAll();
         }
@@ -224,7 +224,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.RollBackTransaction()).Returns(true);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtRunCommand));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtRunCommand));
 
             databaseAdapter.VerifyAll();
         }
@@ -243,7 +243,7 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Domain.Entities
             databaseAdapter.Setup(call => call.RollBackTransaction()).Returns(false);
 
             var errorCode = script.Run(databaseAdapter.Object);
-            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.ErrorCode.DatabaseAdapterFailureAtRollbackTransaction));
+            Assert.That(errorCode, Is.EqualTo(Bluejam.Utils.DatabaseScripter.Domain.Interfaces.ErrorCode.DatabaseAdapterFailureAtRollbackTransaction));
 
             databaseAdapter.VerifyAll();
         }

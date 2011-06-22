@@ -11,11 +11,12 @@ namespace Bluejam.Utils.DatabaseScripter.Tests.Services
     public class TestScriptingService
     {
         Bluejam.Utils.DatabaseScripter.Services.ScriptingService service;
+        Moq.Mock<Bluejam.Utils.DatabaseScripter.Domain.Strategies.ConfigInjector> mockConfigInjector = new Moq.Mock<Bluejam.Utils.DatabaseScripter.Domain.Strategies.ConfigInjector>();
 
         [SetUp]
         public void SetUp()
         {
-            service = new Bluejam.Utils.DatabaseScripter.Services.ScriptingService();
+            service = new Bluejam.Utils.DatabaseScripter.Services.ScriptingService(mockConfigInjector.Object);
         }
 
         [Test]

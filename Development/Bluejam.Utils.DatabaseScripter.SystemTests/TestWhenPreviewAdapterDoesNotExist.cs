@@ -42,7 +42,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var directoryInfo = new DirectoryInfo(Directory.GetCurrentDirectory());
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
-            Assert.AreEqual(Domain.ErrorCode.FailedToInitialiseComponents, RunApplication(exeFile.FullName, "--preview --environment=SystemTest --scripts=create"));
+            Assert.AreEqual(Domain.Interfaces.ErrorCode.FailedToInitialiseComponents, RunApplication(exeFile.FullName, "--preview --environment=SystemTest --scripts=create"));
             dbAsserter.AssertThatDatabaseDoesNotExist();
         }
 

@@ -21,7 +21,7 @@ using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class ExecutionPlanResult : Result
+    public class ExecutionPlanResult : Result, Interfaces.IExecutionPlanResult
     {
 
         #region Constructors
@@ -31,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="executionPlan">The execution plan.</param>
-        public ExecutionPlanResult(Domain.ErrorCode errorCode, Domain.Values.ExecutionPlan executionPlan)
+        public ExecutionPlanResult(Domain.Interfaces.ErrorCode errorCode, Domain.Values.ExecutionPlan executionPlan)
             : base(errorCode)
         {
             ExecutionPlan = executionPlan;

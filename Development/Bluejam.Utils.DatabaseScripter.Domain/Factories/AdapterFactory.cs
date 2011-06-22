@@ -57,7 +57,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
             catch (Exception ex)
             {
                 log.Error("An error occurred when creating the preview adapter.", ex);
-                throw new Domain.DatabaseScripterException(Domain.ErrorCode.FailedToCreatePreviewAdapter, "The preview adapter could not be created", ex);
+                throw new Domain.Interfaces.DatabaseScripterException(Domain.Interfaces.ErrorCode.FailedToCreatePreviewAdapter, "The preview adapter could not be created", ex);
             }
 
             log.Debug("Preview adapter created");
@@ -76,7 +76,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
             catch (Exception ex)
             {
                 log.Error("An error occurred when creating the database adapter", ex);
-                throw new Domain.DatabaseScripterException(Domain.ErrorCode.FailedToCreateDatabaseAdapter, "The database adapter could not be created", ex);
+                throw new Domain.Interfaces.DatabaseScripterException(Domain.Interfaces.ErrorCode.FailedToCreateDatabaseAdapter, "The database adapter could not be created", ex);
             }
 
             log.Debug("Database adapter created");

@@ -25,7 +25,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 {
 
     [Validators.ConfigurationExecutionStrategy]
-    public sealed class Configuration : Core.DomainModel.ValidatableValueObject
+    public sealed class Configuration : Core.DomainModel.ValidatableValueObject, Interfaces.IConfiguration
     {
 
         #region Constructors
@@ -52,16 +52,16 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         [Valid]
         [NotEmpty(Message = "There are no environment configurations")]
         [Validators.UniqueMembers(Message = "There is more than one environment configuration with the same name")]
-        public Entities.EnvironmentConfigurationCollection EnvironmentConfigurations { get; private set; }
+        public Interfaces.IEnvironmentConfigurationCollection EnvironmentConfigurations { get; private set; }
 
         /// <summary>
         /// Gets or sets the manifest file.
         /// </summary>
         /// <value>The file path.</value>
         [Valid]
-        public Values.Manifest Manifest { get; set; }
+        public Interfaces.IManifest Manifest { get; set; }
         
-        public Domain.Values.Version TargetVersion { get; set; }
+        public Interfaces.IVersion TargetVersion { get; set; }
 
         public bool Pause { get; set; }
 

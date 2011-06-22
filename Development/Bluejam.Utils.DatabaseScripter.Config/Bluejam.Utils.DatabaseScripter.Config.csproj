@@ -84,13 +84,20 @@
     <Compile Include="ManifestFactoryResult.cs" />
     <Compile Include="ManifestValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Result.cs" />
     <Compile Include="SchemaValidatorBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Config.Interfaces\Bluejam.Utils.DatabaseScripter.Config.Interfaces.csproj">
+      <Project>{E22D7601-5D84-4223-8CD7-D6D71E8D2E2E}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Config.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
       <Project>{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain.Interfaces\Bluejam.Utils.DatabaseScripter.Domain.Interfaces.csproj">
+      <Project>{080FAF17-5804-41BC-A03B-3171C4D57E5F}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
       <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>

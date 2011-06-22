@@ -36,20 +36,20 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
             var exeFile = directoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
             Assert.IsNotNull(exeFile);
 
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create"));
+            Assert.AreEqual(Domain.Interfaces.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create"));
             dbAsserter.AssertThatDatabaseExists();
             dbAsserter.AssertThatIncrement0_0_0_1HasNotBeenApplied();
             dbAsserter.AssertThatIncrement0_0_0_2HasNotBeenApplied();
             dbAsserter.AssertThatSchemaVersionIs0_0_0_0();
             
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest"));
+            Assert.AreEqual(Domain.Interfaces.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest"));
             dbAsserter.AssertThatDatabaseExists();
             dbAsserter.AssertThatIncrement0_0_0_1HasBeenApplied();
             dbAsserter.AssertThatIncrement0_0_0_2HasBeenApplied();
             dbAsserter.AssertThatSchemaVersionIs0_0_0_2();
             dbAsserter.AssertThatSampleDataHasNotBeenInserted();
 
-            Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest"));
+            Assert.AreEqual(Domain.Interfaces.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest"));
             dbAsserter.AssertThatDatabaseExists();
             dbAsserter.AssertThatIncrement0_0_0_1HasBeenApplied();
             dbAsserter.AssertThatIncrement0_0_0_2HasBeenApplied();

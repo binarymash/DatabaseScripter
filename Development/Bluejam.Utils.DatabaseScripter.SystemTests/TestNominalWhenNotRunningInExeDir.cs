@@ -39,7 +39,7 @@ namespace Bluejam.Utils.DatabaseScripter.SystemTests
                 Assert.IsNull(newDirectoryInfo.GetFiles().ToList().Find(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe")));
                 var exeFile = originalDirectoryInfo.GetFiles().First(fileInfo => fileInfo.Name.Equals("DatabaseScripter.exe"));
 
-                Assert.AreEqual(Domain.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\",\"insert sample data\""));
+                Assert.AreEqual(Domain.Interfaces.ErrorCode.Ok, RunApplication(exeFile.FullName, "--environment=SystemTest --scripts=create,\"increment to 0.0.0.1\",\"insert sample data\""));
                 dbAsserter.AssertNominal();
             }
             finally

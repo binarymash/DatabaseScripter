@@ -20,14 +20,14 @@ using System.Text;
 
 namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
 {
-    public class ExecutionPlanFactory
+    public class ExecutionPlanFactory : Interfaces.IExecutionPlanFactory
     {
 
-        public Domain.Values.ExecutionPlan Create(Domain.Values.Configuration configuration)
+        public Interfaces.IExecutionPlan Create(Interfaces.IConfiguration configuration)
         {
             if (!configuration.IsValid())
             {
-                throw new DatabaseScripterException(ErrorCode.InvalidConfig);
+                throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.InvalidConfig);
             }
 
             if (configuration.NameOfScriptsToRun.Count > 0)

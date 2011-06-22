@@ -84,8 +84,6 @@
     <Compile Include="..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DatabaseScripterException.cs" />
-    <Compile Include="ErrorCode.cs" />
     <Compile Include="Factories\AdapterFactory.cs" />
     <Compile Include="Strategies\VersionedExecutionPlanStrategyBase.cs" />
     <Compile Include="Strategies\LatestVersionExecutionPlanStrategy.cs" />
@@ -120,6 +118,10 @@
     <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Core\Bluejam.Utils.DatabaseScripter.Core.csproj">
       <Project>{2BA1C661-8E5F-4761-B3C5-5C09CECE5334}</Project>
       <Name>Bluejam.Utils.DatabaseScripter.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain.Interfaces\Bluejam.Utils.DatabaseScripter.Domain.Interfaces.csproj">
+      <Project>{080FAF17-5804-41BC-A03B-3171C4D57E5F}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

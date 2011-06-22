@@ -18,47 +18,50 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using Castle.Core.Resource;
-using Castle.Windsor;
-using Castle.Windsor.Configuration.Interpreters;
+
+using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class ScriptingService
+    public class ScriptingService : Interfaces.IScriptingService
     {
+
+        #region Non-public
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ScriptingService));
         private Domain.Strategies.ConfigInjector configInjector;
+        private Domain.Interfaces.IExecutionPlanFactory executionPlanFactory;
 
-        //TODO: windsor
-        private Domain.Factories.ExecutionPlanFactory executionPlanFactory = new Domain.Factories.ExecutionPlanFactory();
+        #endregion
 
-        public Domain.Factories.ExecutionPlanFactory ExecutionPlanFactory { get; set; }
+        #region Constructors
 
-
-        public ScriptingService()
+        public ScriptingService(Domain.Strategies.ConfigInjector configInjector, Domain.Interfaces.IExecutionPlanFactory executionPlanFactory)
         {
-            var container = new WindsorContainer(new XmlInterpreter(new ConfigResource("castle")));
-            configInjector = (Domain.Strategies.ConfigInjector)container["configInjector"];
+            this.configInjector = configInjector;
+            this.executionPlanFactory = executionPlanFactory;
         }
 
+        #endregion
 
-        public ExecutionPlanResult GetExecutionPlan(Domain.Values.Configuration configuration)
+        #region Public methods
+
+        public Interfaces.IExecutionPlanResult GetExecutionPlan(Domain.Values.Configuration configuration)
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
             }
 
-            var errorCode = Domain.ErrorCode.Ok;
+            var errorCode = Domain.Interfaces.ErrorCode.Ok;
             Domain.Values.ExecutionPlan executionPlan = null;
 
             try
             {
                 executionPlan = executionPlanFactory.Create(configuration);
             }
-            catch (Domain.DatabaseScripterException ex)
+            catch (Domain.Interfaces.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 errorCode = ex.ErrorCode;
@@ -67,7 +70,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
             return new ExecutionPlanResult(errorCode, executionPlan);
         }
 
-        public Domain.ErrorCode Execute(Domain.Values.Configuration configuration, Domain.Values.ExecutionPlan executionPlan)
+        public Domain.Interfaces.ErrorCode Execute(Domain.Values.Configuration configuration, Domain.Values.ExecutionPlan executionPlan)
         {
             if (configuration == null)
             {
@@ -86,20 +89,23 @@ namespace Bluejam.Utils.DatabaseScripter.Services
                 foreach(var script in scripts)
                 {
                     var errorCode = script.Run(executionPlan.DatabaseAdapter);
-                    if (Domain.ErrorCode.Ok != errorCode)
+                    if (Domain.Interfaces.ErrorCode.Ok != errorCode)
                     {
                         log.ErrorFormat(CultureInfo.InvariantCulture, "Script \"{0}\" failed; subsequent scripts will not run.", script.Name);
                         return errorCode;
                     }
                 }
 
-                return Domain.ErrorCode.Ok;
+                return Domain.Interfaces.ErrorCode.Ok;
             }
-            catch (Domain.DatabaseScripterException ex)
+            catch (Domain.Interfaces.DatabaseScripterException ex)
             {
                 log.Error("An error occurred. Check the debug information that follows.", ex);
                 return ex.ErrorCode;
             }
         }
+
+        #endregion
+
     }
 }

@@ -17,11 +17,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Domain = Bluejam.Utils.DatabaseScripter.Domain;
+using Bluejam.Utils.DatabaseScripter.Domain;
+using Bluejam.Utils.DatabaseScripter.Domain.Interfaces;
 
 namespace Bluejam.Utils.DatabaseScripter.Services
 {
-    public class ConfigurationResult : Result
+    public class ConfigurationResult : Result, Interfaces.IConfigurationResult
     {
 
         #region Constructors
@@ -32,7 +33,7 @@ namespace Bluejam.Utils.DatabaseScripter.Services
         /// <param name="errorCode">The error code.</param>
         /// <param name="configuration">The configuration.</param>
         /// <param name="executionPlan">The execution plan.</param>
-        public ConfigurationResult(Domain.ErrorCode errorCode, Domain.Values.Configuration configuration)
+        public ConfigurationResult(Domain.Interfaces.ErrorCode errorCode, Domain.Values.Configuration configuration)
             : base(errorCode)
         {
             Configuration = configuration;

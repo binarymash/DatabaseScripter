@@ -96,9 +96,9 @@
     <EmbeddedResource Include="Files\Config\ManifestNotFound.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain\Bluejam.Utils.DatabaseScripter.Domain.csproj">
-      <Project>{846A9DED-703C-4860-967D-5FEDA9707A86}</Project>
-      <Name>Bluejam.Utils.DatabaseScripter.Domain</Name>
+    <ProjectReference Include="..\Bluejam.Utils.DatabaseScripter.Domain.Interfaces\Bluejam.Utils.DatabaseScripter.Domain.Interfaces.csproj">
+      <Project>{080FAF17-5804-41BC-A03B-3171C4D57E5F}</Project>
+      <Name>Bluejam.Utils.DatabaseScripter.Domain.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

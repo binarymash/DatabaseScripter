@@ -23,7 +23,7 @@ using log4net;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class ConfigurationFactory
+    public class ConfigurationFactory : Interfaces.IConfigurationFactory
     {
 
         private static readonly ILog log = LogManager.GetLogger(typeof(ConfigurationFactory));
@@ -45,7 +45,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 log.Error("An unexpected error occurred when reading the configuration", ex);
                 if (ex.InnerException != null)
                 {
-                    if (ex.InnerException is Domain.DatabaseScripterException)
+                    if (ex.InnerException is Domain.Interfaces.DatabaseScripterException)
                     {
                         //we do this so that we can get a better error code to return to the user
                         throw ex.InnerException;
@@ -55,7 +55,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 }
                 else
                 {
-                    throw new Domain.DatabaseScripterException(Domain.ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
+                    throw new Domain.Interfaces.DatabaseScripterException(Domain.Interfaces.ErrorCode.InvalidConfig, "The configuration contains errors.", ex);
                 }
             }
         }

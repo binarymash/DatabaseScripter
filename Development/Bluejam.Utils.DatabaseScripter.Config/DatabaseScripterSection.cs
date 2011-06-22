@@ -39,10 +39,10 @@ namespace Bluejam.Utils.DatabaseScripter.Config
 
             var configurationValidator = new ConfigurationValidator();
             var result = configurationValidator.Validate(section);
-            if (result != Domain.ErrorCode.Ok)
+            if (result != Domain.Interfaces.ErrorCode.Ok)
             {
                 log.Error("The configuration contains errors.");
-                throw new Domain.DatabaseScripterException(result, "The configuration is invalid.");
+                throw new Domain.Interfaces.DatabaseScripterException(result, "The configuration is invalid.");
             }
 
             // Gets the child element names and attributes.
@@ -55,9 +55,9 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                         break;
                     case "manifestPath":
                         var manifestFactoryResult = ManifestFactory.Create(child.InnerText);
-                        if (manifestFactoryResult.ErrorCode != Domain.ErrorCode.Ok)
+                        if (manifestFactoryResult.ErrorCode != Domain.Interfaces.ErrorCode.Ok)
                         {
-                            throw new Domain.DatabaseScripterException(manifestFactoryResult.ErrorCode, "Failed to read manifest");
+                            throw new Domain.Interfaces.DatabaseScripterException(manifestFactoryResult.ErrorCode, "Failed to read manifest");
                         }
                         configuration.Manifest = manifestFactoryResult.Manifest;
                         break;
@@ -84,9 +84,9 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 {                    
                     case "environmentConfigurationPath":
                         var result = EnvironmentConfigurationFactory.Create(child.InnerText);
-                        if (result.ErrorCode != Domain.ErrorCode.Ok)
+                        if (result.ErrorCode != Domain.Interfaces.ErrorCode.Ok)
                         {
-                            throw new Domain.DatabaseScripterException(result.ErrorCode, "Failed to read environment configuration");
+                            throw new Domain.Interfaces.DatabaseScripterException(result.ErrorCode, "Failed to read environment configuration");
                         }
 
                         environmentConfigurations.Add(result.EnvironmentConfiguration);

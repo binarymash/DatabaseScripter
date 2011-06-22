@@ -59,7 +59,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
                     //TODO: add errors to scripts
                     var message = string.Format(CultureInfo.InvariantCulture, "Could not find script \"{0}\" in the manifest file.", scriptName);
                     log.Error(message);
-                    throw new DatabaseScripterException(ErrorCode.CouldNotFindScriptInManifest, message);
+                    throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.CouldNotFindScriptInManifest, message);
                 }
 
                 var environmentConfiguration = configuration.EnvironmentConfigurations.Find(executionPlan.Environment);
@@ -68,7 +68,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
                     //TODO: add errors to scripts
                     var message = string.Format(CultureInfo.InvariantCulture, "Could not find environment configuration \"{0}\"", executionPlan.Environment);
                     log.Error(message);
-                    throw new DatabaseScripterException(ErrorCode.CouldNotFindEnvironmentConfiguration, message);
+                    throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.CouldNotFindEnvironmentConfiguration, message);
                 }
 
                 var flatScriptConfiguration = environmentConfiguration.GetFlatConfigurationForScript(scriptName);
@@ -93,7 +93,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Factories
             var scriptFileName = Path.Combine(Path.GetDirectoryName(configuration.Manifest.FilePath), scriptManifest.Path);
             if (!File.Exists(scriptFileName))
             {
-                throw new DatabaseScripterException(ErrorCode.ScriptFileDoesNotExist, scriptFileName);
+                throw new Interfaces.DatabaseScripterException(Interfaces.ErrorCode.ScriptFileDoesNotExist, scriptFileName);
             }
 
             var command = File.ReadAllText(scriptFileName);

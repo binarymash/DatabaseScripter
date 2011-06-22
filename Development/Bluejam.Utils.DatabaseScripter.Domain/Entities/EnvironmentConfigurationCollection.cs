@@ -23,7 +23,7 @@ using log4net;
 namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
 {
     [Serializable]
-    public class EnvironmentConfigurationCollection : Core.DomainModel.EntityCollection<EnvironmentConfiguration>
+    public class EnvironmentConfigurationCollection : Core.DomainModel.EntityCollection<EnvironmentConfiguration>, Interfaces.IEnvironmentConfigurationCollection
     {
         //private static readonly ILog log = LogManager.GetLogger(typeof(EnvironmentConfigurationCollection));
 

@@ -24,8 +24,14 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
 {
     [Serializable]
     [XmlRoot(Namespace = "http://code.google.com/p/databasescripter/2010/04/25/ManifestSchema")]
-    public class Manifest : Core.DomainModel.ValidatableValueObject
+    public class Manifest : Core.DomainModel.ValidatableValueObject, Interfaces.IManifest
     {
+
+        #region Non-public
+
+        Interfaces.IVersionFactory versionFactory;
+
+        #endregion
 
         #region Properties
 
@@ -40,23 +46,19 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
         /// Gets or sets the scripts.
         /// </summary>
         /// <value>The scripts.</value>
-        public List<Entities.ScriptManifest> ScriptManifests { get; set; }
+        public List<Interfaces.IScriptManifest> ScriptManifests { get; set; }
 
         /// <summary>
         /// Gets the manifest.
         /// </summary>
         /// <param name="name">The name of the script.</param>
         /// <returns></returns>
-        public Entities.ScriptManifest GetManifest(string name)
+        public Interfaces.IScriptManifest GetManifest(string name)
         {
             return ScriptManifests.Find(item => string.Equals(item.Name, name, StringComparison.OrdinalIgnoreCase));
         }
 
-        #endregion
-
-        #region Public
-
-        public Values.Version LatestVersion
+        public Interfaces.IVersion LatestVersion
         {
             get
             {
@@ -76,7 +78,7 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
             }
         }
 
-        public List<Domain.Entities.ScriptManifest> GetConcurrentScripts(Domain.Values.Version startVersion, Domain.Values.Version endVersion)
+        public List<Interfaces.IScriptManifest> GetConcurrentScripts(Interfaces.IVersion startVersion, Interfaces.IVersion endVersion)
         {            
             if (startVersion == null)
             {
@@ -107,11 +109,18 @@ namespace Bluejam.Utils.DatabaseScripter.Domain.Values
                 scriptManifest = versionedScriptManifests.Find(item => new Domain.Values.Version(item.CurrentVersion) == new Domain.Values.Version(scriptManifest.NewVersion));
             }
 
-            return new List<Bluejam.Utils.DatabaseScripter.Domain.Entities.ScriptManifest>();
+            return new List<Interfaces.IScriptManifest>();
         }
 
         #endregion
 
+        #region Constructors
 
+        public Manifest(Interfaces.IVersionFactory versionFactory)
+        {
+            this.versionFactory = versionFactory;
+        }
+
+        #endregion
     }
 }

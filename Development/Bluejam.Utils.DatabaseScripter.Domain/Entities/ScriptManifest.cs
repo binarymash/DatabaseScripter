@@ -24,7 +24,7 @@ using SharpArch.Core.DomainModel;
 namespace Bluejam.Utils.DatabaseScripter.Domain.Entities
 {
     [Serializable]
-    public class ScriptManifest : Entity
+    public class ScriptManifest : Entity, Interfaces.IScriptManifest
     {
 
         #region Properties

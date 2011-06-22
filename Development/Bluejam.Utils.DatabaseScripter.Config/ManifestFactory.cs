@@ -49,15 +49,15 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 if (!File.Exists(path))
                 {
                     log.ErrorFormat(CultureInfo.InvariantCulture, "The manifest file could not be found at {0}", path);
-                    return new ManifestFactoryResult(Domain.ErrorCode.CouldNotFindManifest, null);
+                    return new ManifestFactoryResult(Domain.Interfaces.ErrorCode.CouldNotFindManifest, null);
                 }
 
                 var manifestValidator = new ManifestValidator();
                 var result = manifestValidator.Validate(path);
-                if (result.ErrorCode != Domain.ErrorCode.Ok)
+                if (result.ErrorCode != Domain.Interfaces.ErrorCode.Ok)
                 {
                     log.Error("The manifest file is invalid");
-                    return new ManifestFactoryResult(Domain.ErrorCode.InvalidManifest, null);
+                    return new ManifestFactoryResult(Domain.Interfaces.ErrorCode.InvalidManifest, null);
                 }
 
                 //deserialize
@@ -66,12 +66,12 @@ namespace Bluejam.Utils.DatabaseScripter.Config
                 var manifest = (Domain.Values.Manifest)xmlSerializer.Deserialize(xmlReader);
                 manifest.FilePath = path;
 
-                return new ManifestFactoryResult(Domain.ErrorCode.Ok, manifest);
+                return new ManifestFactoryResult(Domain.Interfaces.ErrorCode.Ok, manifest);
             }
-            catch (Domain.DatabaseScripterException ex)
+            catch (Domain.Interfaces.DatabaseScripterException ex)
             {
                 log.Error("An unexpected error occurred when reading the manifest file.", ex);
-                return new ManifestFactoryResult(Domain.ErrorCode.UnknownError, null);
+                return new ManifestFactoryResult(Domain.Interfaces.ErrorCode.UnknownError, null);
             }
         }
 

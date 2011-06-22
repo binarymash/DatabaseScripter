@@ -21,7 +21,7 @@ using Domain = Bluejam.Utils.DatabaseScripter.Domain;
 
 namespace Bluejam.Utils.DatabaseScripter.Config
 {
-    public class ManifestFactoryResult : Result
+    public class ManifestFactoryResult : Interfaces.Result
     {
 
         #region Constructors
@@ -31,7 +31,7 @@ namespace Bluejam.Utils.DatabaseScripter.Config
         /// </summary>
         /// <param name="errorCode">The error code.</param>
         /// <param name="manifest">The manifest.</param>
-        public ManifestFactoryResult(Domain.ErrorCode errorCode, Domain.Values.Manifest manifest)
+        public ManifestFactoryResult(Domain.Interfaces.ErrorCode errorCode, Domain.Values.Manifest manifest)
             : base(errorCode)
         {
             Manifest = manifest;
