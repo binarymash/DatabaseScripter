@@ -21,9 +21,6 @@
     <echo>Platform config: ${base.dir}Config${dir.slash}platform${dir.slash}${platform}.config</echo>
     <echo />
     <echo />
-
-    <!-- svn -->
-    <property name="svn.repo" value="https://databasescripter.googlecode.com/svn/trunk" />
       
     <!-- build inputs path configuration -->
     <property name="build.dir" value="${base.dir}Build${dir.slash}" />

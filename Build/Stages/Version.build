@@ -3,21 +3,11 @@
   <target name="Version" failonerror="true" if="${property::exists('IncrementVersion')}">
 
     <if test="${bool::parse(IncrementVersion)}"> 
-      <echo>Getting current revision from ${svn.repo}</echo>    
-      
-		  <exec program="svn.exe" output="svninfo.xml">
-			  <arg value="info" />
-			  <arg value="--xml" />
-		  	<arg value="${svn.repo}" />
-	  	</exec>
-
-      <xmlpeek file="svninfo.xml" xpath="/info/entry/commit/@revision" property="svn.revision"/>
-      <echo>Current svn revision is ${svn.revision}</echo>         
       
       <xmlpoke file="Version.xml" xpath="/version/major" value="0" />
       <xmlpoke file="Version.xml" xpath="/version/minor" value="11" />
-      <xmlpoke file="Version.xml" xpath="/version/build" value="0" />
-      <xmlpoke file="Version.xml" xpath="/version/revision" value="${svn.revision}" />
+      <xmlpoke file="Version.xml" xpath="/version/build" value="${environment::get-variable('BUILD_NUMBER')}" />
+      <xmlpoke file="Version.xml" xpath="/version/revision" value="0" />
     </if>
   
   </target>
