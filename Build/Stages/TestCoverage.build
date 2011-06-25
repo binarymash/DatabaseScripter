@@ -2,26 +2,23 @@
 
   <property name="module.bin.dir" value="${buildarea.output.dir}\" />
   <property name="artifacts.coverage.dir" value="${artifacts.dir}\testcoverage\" overwrite="false"/>
-  <property name="artifacts.coverage.partcover.output" value="${artifacts.coverage.dir}coverage.xml" />
+  <property name="artifacts.coverage.opencover.output" value="${artifacts.coverage.dir}coverage.xml" />
   
-  <target name="TestCoverage" if="${property::exists('partcover.exe')}">
+  <target name="TestCoverage" if="${property::exists('opencover.exe')}">
 
     <mkdir dir="${artifacts.dir}/testcoverage/" failonerror="true" />
   
-    <exec program="${partcover.exe}" failonerror="true">
-      <arg value='--target "${nunit.exe}"' />
-      <arg value='--target-work-dir "${module.bin.dir}"'/>
-      <arg value='--target-args "Bluejam.Utils.DatabaseScripter.Tests.dll"' />
-      <arg value='--include "[Bluejam.Utils.DatabaseScripter*]*"' />
-      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.Tests]*"' />
-      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.Test.Resources]*"' />
-      <arg value='--exclude "[Bluejam.Utils.DatabaseScripter.SystemTests]*"' />
-      <arg value='--output "${artifacts.coverage.partcover.output}"' />      
+    <exec program="${opencover.exe}" failonerror="true">
+      <arg value='-target:"${nunit.exe}"' />
+      <arg value='-targetdir:"${module.bin.dir}"'/>
+      <arg value='-targetargs:Bluejam.Utils.DatabaseScripter.Tests.dll' />
+      <arg value='-filter:"+[Bluejam.Utils.DatabaseScripter*]* -[Bluejam.Utils.DatabaseScripter.Tests]* -[Bluejam.Utils.DatabaseScripter.Test.Resources]* -[Bluejam.Utils.DatabaseScripter.SystemTests]*"' />
+      <arg value='-output:"${artifacts.coverage.opencover.output}"' />      
     </exec>
  
  <!--  seems to be broken with the current version of partcover
     <exec program="${reportgenerator.exe}" failonerror="false">
-      <arg value='"${artifacts.coverage.partcover.output}"' />
+      <arg value='"${artifacts.coverage.opencover.output}"' />
       <arg value='"${artifacts.coverage.dir}\"' />
     </exec>
  -->   
