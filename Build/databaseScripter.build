@@ -33,7 +33,7 @@
     <property name="FxCopExe" value="${ThirdPartyDir}Fxcop${dir.slash}FxCopCmd.exe" />
     <property name="ZipExe" value="${ThirdPartyDir}7-Zip${dir.slash}7z.exe" />   
     <property name="nunit.exe" value="${ThirdPartyDir}NUnit-2.5.9.10348\bin\net-2.0\nunit-console.exe" />
-    <property name="reportgenerator.exe" value="${ThirdPartyDir}ReportGenerator\ReportGenerator_0.7.1.0\bin\ReportGenerator" />
+    <property name="reportgenerator.exe" value="${ThirdPartyDir}ReportGenerator\59777\ReportGenerator.exe" />
     
     <!-- build output path configuration-->
     <property name="buildarea.dir" value="${base.dir}BuildWorkspace${dir.slash}" />

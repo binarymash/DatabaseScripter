@@ -16,12 +16,10 @@
       <arg value='-output:"${artifacts.coverage.opencover.output}"' />      
     </exec>
  
- <!--  seems to be broken with the current version of partcover
     <exec program="${reportgenerator.exe}" failonerror="false">
       <arg value='"${artifacts.coverage.opencover.output}"' />
       <arg value='"${artifacts.coverage.dir}\"' />
     </exec>
- -->   
  
   </target>
 </project>
